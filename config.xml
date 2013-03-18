@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id        = "com.nuevalgo.taskforce"
+    version   = "1.0.0">
+
+<name>TaskForceERP</name>
+<description>
+Enterprise resource planning (ERP) integrates internal and external management information across an entire organization, embracing finance/accounting, manufacturing, sales and service, customer relationship management, etc. ERP systems automate this activity with an integrated software application. Its purpose is to facilitate the flow of information between all business functions inside the boundaries of the organization and manage the connections to outside stakeholders.
+</description>
+
+<author href="https://nuevalgo.com" email="rahmath.m1@gmail.com">
+Rahmathullah M
+Nuevalgo Solutions Private Limited.
+</author>
+
+<icon src="icon.png" />
+<!-- Android -->
+<icon src="icons/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+<icon src="icons/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+<icon src="icons/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+<icon src="icons/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+
+<!-- Ios -->
+<icon src="icons/ios/icon.png" gap:platform="ios" width="57" height="57" />
+<icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+<icon src="icons/ios/icon_at_2x.png" gap:platform="ios" width="114" height="114" />
+<!-- BB -->
+<icon src="icons/bb/icon.png" gap:platform="blackberry" />
+<icon src="icons/bb/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>
+
+<gap:splash src="splash.png" />
+
+<gap:splash src="splash/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+<gap:splash src="splash/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+<gap:splash src="splash/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+<gap:splash src="splash/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+
+<!-- Ios -->
+<gap:splash src="splash/ios/Default.png" width="320" height="480" />
+<gap:splash src="splash/ios/Default_at_2x.png" width="640" height="960" />
+<gap:splash src="splash/ios/Default_iphone5.png" width="640" height="1136" />
+<gap:splash src="splash/ios/Default-Landscape.png" width="1024" height="768" />
+<gap:splash src="splash/ios/Default-Portrait.png" width="768" height="1024" />
+
+	<!-- 	If you do not want any permissions to be added to your app, add the
+    		following tag to your config.xml; you will still have the INTERNET
+    		permission on your app, which PhoneGap requires. 	-->
+
+<feature name="http://api.phonegap.com/1.0/network"/>
+			
+			
+<preference name="orientation" value="portrait" />
+<preference name="fullscreen" value="true" />
+<preference name="exit-on-suspend" value="true" />
+<preference name="load-url-timeout" value="15000" />
+<preference name="splash-screen-duration" value="3000" />
+<preference name="auto-hide-splash-screen" value="true" />
+
+<plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
+
+
+</widget>

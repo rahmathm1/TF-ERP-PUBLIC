@@ -1,0 +1,119 @@
+<!-- Copyright (c) 2012 Mobile Developer Solutions -->
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    <title>NAF</title>
+	<link rel="stylesheet" href="styles/taskforce.css" />
+    <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile.structure-1.3.0.min.css" /> -->
+	<link rel="stylesheet" href="styles/jquery.mobile.structure-1.3.0.css" /> 
+	<link rel="stylesheet" href="styles/index.css" /> 
+	<script src="scripts/jquery-1.9.1.min.js"></script> 
+	<script src="scripts/jquery.mobile-1.3.0.min.js"></script> 
+	<script src="scripts/cordova-1.9.0.js"></script>
+	<script src="scripts/index.js"></script>
+    <script type="text/javascript">
+
+
+
+
+    </script>
+    
+  	<!--<script src="phonegap.js"></script>-->
+	</head>
+  
+<body>
+<!-- 
+        Login
+-->
+<div data-role="page" data-theme="a" id="pageLogin">
+	<div data-role="header">
+		<h1>Login</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+    	<div class="logo"></div>
+        <input type="text" placeholder="User ID" data-clear-btn="true"  id="txtUserId" value="">
+    	<input type="text" placeholder="User Name" data-clear-btn="true"  id="txtUserName" value="">
+     	<input type="password" placeholder="Password" data-clear-btn="true"  id="txtPassword" value="">
+        <select><option>Branch</option><option>Jeddah</option></select>
+        <input type="button" data-icon="arrow-r" data-iconpos="right" value="Login" />
+        
+	</div><!-- /content -->
+</div>
+<!-- 
+        Home
+-->
+<div data-role="page" data-theme="a" id="pageHome">
+	<div data-role="header">
+		<h1><img src="images/logo-small.png"  alt="ERP"></h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+    	<table data-role="table" id="table-custom-2" data-mode="normal" class="ui-body-d ui-shadow table-stripe ui-responsive" >
+    <tr class="ui-bar-d">
+             <th data-priority="1">Rank</th>
+             <th>Movie Title</th>
+             <th data-priority="1">Year</th>
+             <th data-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+           </tr>
+         </thead>	
+         <tbody>
+           <tr>
+             <th>1</th>
+             <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+             <td>1941</td>
+             <td>100%</td>
+           </tr>
+           <tr>
+             <th>2</th>
+             <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+             <td>1942</td>
+             <td>97%</td>
+           </tr>
+           <tr>
+             <th>3</th>
+             <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
+             <td>1972</td>
+             <td>97%</td>
+           </tr>
+           <tr>
+             <th>4</th>
+             <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
+             <td>1939</td>
+             <td>96%</td>
+           </tr>
+           <tr>
+             <th>5</th>
+             <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external">Lawrence of Arabia</a></td>
+             <td>1962</td>
+             <td>94%</td>
+           </tr>
+           <tr>
+             <th>6</th>
+             <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external">Dr. Strangelove Or How I Learned</a></td>
+             <td>1964</td>
+             <td>92%</td>
+           </tr>
+           <tr>
+             <th>7</th>
+             <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
+             <td>1967</td>
+             <td>91%</td>
+           </tr>
+           <tr>
+             <th>8</th>
+             <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external">The Wizard of Oz</a></td>
+             <td>1939</td>
+             <td>90%</td>
+           </tr>          
+           
+         </tbody>
+       </table>        
+	</div><!-- /content -->
+    <div data-role="footer">
+		<h1>Home</h1>
+	</div><!-- /header -->
+</div>
+</body>
+</html>
