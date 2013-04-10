@@ -12,7 +12,7 @@
 	var API			= 	"http://192.168.1.155:88/taskforces/api/";
 	
 	var BALANCE_SHEET = "BALANCE_SHEET";
-	var ACC_LEVELS = "ACC_LEVELS";
+	var ACC_LEVELS 	= "ACC_LEVELS";
 	var BRANCHES = "BRANCHES";
 	
 	var dateToDate = true;
