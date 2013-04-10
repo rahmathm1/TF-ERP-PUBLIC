@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
-    id        = "com.nuevalgo.taskforce"
-    version   = "1.0.0">
+    id        = "com.nuevalgo.taskforces"
+	versionCode="1" 
+    version   = "1.0">
 
-<name>TaskForceERP</name>
+<name>NAF Properties</name>
 <description>
 Enterprise resource planning (ERP) integrates internal and external management information across an entire organization, embracing finance/accounting, manufacturing, sales and service, customer relationship management, etc. ERP systems automate this activity with an integrated software application. Its purpose is to facilitate the flow of information between all business functions inside the boundaries of the organization and manage the connections to outside stakeholders.
 </description>
 
-<author href="https://nuevalgo.com" email="rahmath.m1@gmail.com">
+<author href="https://nuevalgo.com" email="rahmathullah@nuevalgo.com">
 Rahmathullah M
-Nuevalgo Solutions Private Limited.
+Nuevalgo Solutions
 </author>
 
 <icon src="icon.png" />
@@ -25,9 +26,9 @@ Nuevalgo Solutions Private Limited.
 <icon src="icons/ios/icon.png" gap:platform="ios" width="57" height="57" />
 <icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
 <icon src="icons/ios/icon_at_2x.png" gap:platform="ios" width="114" height="114" />
-<!-- BB -->
+<!-- BB 
 <icon src="icons/bb/icon.png" gap:platform="blackberry" />
-<icon src="icons/bb/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>
+<icon src="icons/bb/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>-->
 
 <gap:splash src="splash.png" />
 
@@ -52,10 +53,10 @@ Nuevalgo Solutions Private Limited.
 			
 <preference name="orientation" value="portrait" />
 <preference name="fullscreen" value="true" />
-<preference name="exit-on-suspend" value="true" />
-<preference name="load-url-timeout" value="15000" />
-<preference name="splash-screen-duration" value="3000" />
-<preference name="auto-hide-splash-screen" value="true" />
+<preference name="exit-on-suspend" value="false" />
+<preference name="auto-hide-splash-screen" value="false" />
+<!--<preference name="splash-screen-duration" value="2000" />-->
+<preference name="load-url-timeout" value="20000" />
 
 <plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
 

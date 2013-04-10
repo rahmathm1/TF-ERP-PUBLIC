@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* CSS Document */
+
+#pageLogin .logo {
+	height:200px;
+	background-image:url(../../images/logo.png);
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:80%;
+	max-width:400px;
+	margin:auto;
+}
+#pageLogin .login-wrap {
+	width:150px;
+	margin:auto;
+}
+
+#pageLogin .login-footer {
+	color:#FFF;
+	text-shadow:0px 1px 1px #333;
+	margin:10px 0;
+	text-align:center;
+	padding:0 20px;
+}
+#pageLogin .login-footer a {
+	color:#FFF;
+	font-weight:normal;
+	text-decoration:none;
+	font-size:11px;
+}
+#pageLogin .footer-bg {
+	background-image:url(../../images/bg-login-bottom-bar.png);
+	background-size:auto 100%;
+	background-repeat:repeat-x;
+}
+
+#pageLogin .cybosol-logo {
+	overflow:hidden;
+	background-image:url(../../images/cybosol-logo.png);
+	background-size:auto auto;
+	background-repeat:no-repeat;
+	background-position:top center;
+}
+#pageLogin .login-controls {
+	padding:0 10px;
+	
+}
+
+
+

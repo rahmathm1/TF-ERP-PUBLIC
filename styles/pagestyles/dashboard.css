@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.user-info {
+	padding:10px;
+	background-image:url(../../images/bg-info.png);
+	background-repeat:repeat-x;
+	background-size:auto 100%;
+	text-align:left;
+	font-size:14px;
+	overflow:hidden;
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+}
+.user-info .ico {
+	width:30px;
+	height:auto;
+	float:left;
+	margin-left:10px;
+}
+.user-info .text {
+	
+}
+.user-info .text  .user-name{
+	font-size:16px;
+	margin-top:5px;
+	font-weight:bold;
+}
+.user-info .text .bus-unit {
+	font-size:12px;
+}
+.user-info #btnLogout {
+	position:absolute;
+	right:10px;
+	top:10px;
+}
