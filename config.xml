@@ -5,7 +5,7 @@
 	versionCode="1" 
     version   = "1.0">
 
-<name>NAF Properties</name>
+<name>Taskforces ERP</name>
 <description>
 Enterprise resource planning (ERP) integrates internal and external management information across an entire organization, embracing finance/accounting, manufacturing, sales and service, customer relationship management, etc. ERP systems automate this activity with an integrated software application. Its purpose is to facilitate the flow of information between all business functions inside the boundaries of the organization and manage the connections to outside stakeholders.
 </description>
@@ -54,6 +54,7 @@ Nuevalgo Solutions
 <preference name="orientation" value="portrait" />
 <preference name="fullscreen" value="true" />
 <preference name="exit-on-suspend" value="false" />
+<preference name="prerendered-icon" value="true" />
 <preference name="auto-hide-splash-screen" value="false" />
 <!--<preference name="splash-screen-duration" value="2000" />-->
 <preference name="load-url-timeout" value="20000" />

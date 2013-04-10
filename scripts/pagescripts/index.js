@@ -30,6 +30,7 @@
         document.addEventListener("menubutton", onMenuKeyDown, false);
 		getBusinessUnits();
 		bindEvents();
+		navigator.splashscreen.hide();
 	}
 	
 	/* search button press */
