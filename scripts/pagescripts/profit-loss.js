@@ -7,14 +7,17 @@
 *	TO DO:-	 
 *			-	
 */
-	var ALERT_TITLE	=	"Taskforces ERP";
+	var ALERT_TITLE	 =	"Taskforces ERP";
 	//var API			= 	"http://192.168.1.188/taskforces/api/";
-	//var API			= 	"http://192.168.1.155:88/taskforces/api/";
+	//var API			 = 	"http://192.168.1.155:88/taskforces/api/";
 	var API			= 	"http://192.168.31.17/taskforces/api/";
 	
-	var BALANCE_SHEET = "BALANCE_SHEET";
-	var ACC_LEVELS 	= "ACC_LEVELS";
-	var BRANCHES = "BRANCHES";
+	var BALANCE_SHEET	 = "BALANCE_SHEET";
+	var ACC_LEVELS		= "ACC_LEVELS";
+	var BRANCHES		  = "BRANCHES";
+	var BUSINESS_UNITS	= "BUSINESS_UNITS";
+	var COST_CENTERS	= "COST_CENTERS";
+	var PROFIT_LOSS	= "PROFIT_LOSS";
 	
 	var dateToDate = true;
 	//var 
@@ -31,7 +34,9 @@
 		document.addEventListener("searchbutton", onSearchKeyDown, false);
         document.addEventListener("menubutton", onMenuKeyDown, false);
 		getAccLevels();
+		getCostCenters();
 		getBraches();
+		getBusinessUnits();
 		bindEvents();
 	}
 	
@@ -39,9 +44,8 @@
     function onSearchKeyDown() {
         // do something
     }
-	$("#pageBalanceSheet").on("pageinit",function(event){
-			console.log("pageinit : pageIncHome");
-			
+	$("#pageProfitLossDetails").on("pageinit",function(event){
+			console.log("pageinit : pageIncHome");			
 	});
     /* menu button press */
     function onMenuKeyDown() {
@@ -52,7 +56,15 @@
     }
 	/* back button press */
     function onBackKeyDown() {
-		history.go(-1);
+		//history.go(-1);
+		if ($('.menu-button').css('display') == 'none'){			
+			console.log("hidden, goin back");
+			history.go(-1);
+		}
+		else {
+			console.log("visible, hiding");
+			$('.menu-button').fadeOut();
+		}
     }
 	
 	
@@ -62,7 +74,7 @@
 	var bindEvents = function() {
 		
 		/* Page : Balance Sheet Home */
-		$("#btnDisplay").on("click",displayBalanceSheet);
+		$("#btnDisplay").on("click",displayProfitLoss);
 
 		$(function(){
 			$("input[name=datePicker]").mobiscroll().date({
@@ -74,12 +86,33 @@
 		
 		$(".radio-tab").on("click",toggleTabs);
 		
+		$("#selDisplayBy").change(function(){
+			if( $(this).val() == "BRANCH" ){
+				$("#selDisplayCriteriaWrapper").show();
+				bindSelect("#selDisplayCriteria",JSON.parse(localStorage.branches ));
+			}else if( $(this).val() == "BUSINESS_UNIT" ){
+				$("#selDisplayCriteriaWrapper").show();
+				bindSelect("#selDisplayCriteria",JSON.parse(localStorage.businessUnits ));
+			}else if( $(this).val() == "ALL" ){
+				$("#selDisplayCriteriaWrapper").hide();
+			} 
+		});
+		
+		$("#chkCostCenter").change(function(){
+			if($('#chkCostCenter').is(':checked') == true)
+			 	$("#selCostCentersWrapper").show();
+			else
+				$("#selCostCentersWrapper").hide();
+			
+		});
+		
 		$("#menuLogout").on('click', function(e, ui){  
 			console.log("clicked menu>logout");
 			showSpinner();
 			logout();
 		});
 		$("#menuExit").on('click', exitApplication);
+		
 	};
 	
 	var toggleTabs = function() {
@@ -99,35 +132,46 @@
 	*	Name	:	displayBalanceSheet
 	*	Desc	:	to display balance sheet.
 	*/
-	var displayBalanceSheet = function() {
+	var displayProfitLoss = function() {
 		showSpinner();
-		console.log("Method : displayBalanceSheet");
+		console.log("Method : displayProfitLoss");
 		var level = $("#selLevel option:selected").text();
-		var branch = $("#selBranch").val().trim();
+		var displayCriteria = $("#selDisplayCriteria").val().trim();
 		var type = $("#selType").val().trim();
+		var costCenter = $("#selCostCenters").val().trim();
+		var displayBy = $("#selDisplayBy").val().trim();
+		
+		var withOutZero = $('#chkWithOutZero').is(':checked') + "";
+		
 		data = new Object();
-		data.module = BALANCE_SHEET;
-		data.type=type;
-		data.level=level;
-		if(branch != "NULL") 
-			data.branch=branch;
-		getResponse(data,parseBalanceSheet);
+		data.module = PROFIT_LOSS;
+		data.type = type;
+		data.level = level;
+		
+		data.withOutZero = withOutZero;
+		if(displayBy != "ALL")
+			if(displayCriteria != "NULL") {
+				data.displayCriteria = displayCriteria;
+				data.displayBy = displayBy;
+			}
+		getResponse(data,parseProfitLoss);
 	}
-	var parseBalanceSheet = function(response) {
+	var parseProfitLoss = function(response) {
 		if(response.status == 1) {			
-			var tblBalanceSheet = $("#tblBalanceSheet");
-			tblBalanceSheet.html(" ");
-			$.each(response.balanceSheet,function(index,value){
+			var tblProfitLoss = $("#tblProfitLoss");
+			tblProfitLoss.html("");
+			console.log("here 1");
+			$.each(response.profitAndLoss,function(index,value){
 				var tr = $("<tr/>");
 				var td1 = $("<td/>");
 				var td2 = $("<td/>");
 				var td3 = $("<td/>");
 				var td4 = $("<td/>");
 				var td5 = $("<td/>");
-					
+					console.log("here 2");
 				td1.text(value.Accode);		
 				td2.text(value.DESC_ENG);	
-				if(value.Accode != "Asset" && value.Accode != "Liability")	{					
+				if(value.Accode != "Income" && value.Accode != "Expense")	{					
 					td3.text(parseFloat(value.Debit).toFixed(2));	
 					td4.text(parseFloat(value.Credit).toFixed(2));	
 				}
@@ -142,18 +186,18 @@
 				td4.appendTo(tr);
 				//td5.appendTo(tr);		
 				
-				if(value.Accode == "Asset" || value.Accode == "Liability")
+				if(value.Accode == "Income" || value.Accode == "Expense")
 					tr.addClass("highlighted1");
-				else if(value.DESC_ENG == "Asset Total" || value.DESC_ENG == "Liability Total")
+				else if(value.DESC_ENG == "Income Total" || value.DESC_ENG == "Expense Total")
 					tr.addClass("highlighted2");
 				else  if(value.DESC_ENG == "Profit")
 					tr.addClass("profit");
 				else  if( value.DESC_ENG == "Loss")
 					tr.addClass("loss");
 						
-				tr.appendTo(tblBalanceSheet);				
+				tr.appendTo(tblProfitLoss);				
 			});
-			changePageID("#pageBalanceSheetDetails");
+			changePageID("#pageProfitLossDetails");
 			hideSpinner();
 		} else {
 			hideSpinner();
@@ -192,8 +236,44 @@
 	}; 
 	var parseBranches = function(response) {
 		if(response.status==1) {
-			localStorage.branches = JSON.stringify(response.business_units);
-			bindSelect("#selBranch",response.branches);
+			localStorage.branches = JSON.stringify(response.branches);
+			bindSelect("#selDisplayCriteria",response.branches);
+		} else {
+			ajaxFailed();
+		}
+	};
+	/**
+	*	Name	:	getCostCenters
+	*	Desc	:	fetch branches
+	**/
+	var getCostCenters = function () {
+		console.log("Method : getBraches");
+		data = new Object();
+		data.module = COST_CENTERS;
+		getResponse(data,parseCostCenters);
+	}; 
+	var parseCostCenters = function(response) {
+		if(response.status==1) {
+			localStorage.costCenters = JSON.stringify(response.costCenters);
+			bindSelect("#selCostCenters",response.costCenters);
+		} else {
+			ajaxFailed();
+		}
+	};
+	/**
+	*	Name	:	getBusinessUnits
+	*	Desc	:	Check network connectivity
+	**/
+	var getBusinessUnits = function () {
+		console.log("Method : getBusinessUnits");
+		data = new Object();
+		data.module = BUSINESS_UNITS;
+		getResponse(data,parseBusinessUnits);
+	};
+	var parseBusinessUnits = function(response) {
+		if(response.status==1) {
+			localStorage.businessUnits = JSON.stringify(response.businessUnits);
+			//bindSelect("#selDisplayCriteria",response.businessUnits);
 		} else {
 			ajaxFailed();
 		}

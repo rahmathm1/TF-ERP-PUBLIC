@@ -506,7 +506,7 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 .ui-btn-active {
 	border: 1px solid #377754 /*{global-active-border}*/;
-	background: #4ea978 /*{global-active-background-color}*/;
+	background: #rgba(61, 173, 248, 0.7) /*{global-active-background-color}*/;
 	font-weight: bold;
 	color: #ffffff /*{global-active-color}*/;
 	cursor: pointer;
@@ -664,9 +664,11 @@ a.ui-link-inherit {
 /* checkbox radio */
 .ui-icon-checkbox-on {
 	background-position: 	-647px -1px;
+		float: left;
 }
 .ui-icon-checkbox-off {
 	background-position: 	-683px -1px;
+	float: left;
 }
 .ui-icon-radio-on {
 	background-position: 	-718px -1px;
@@ -794,7 +796,7 @@ a.ui-link-inherit {
 }
 .ui-checkbox-on .ui-icon,
 .ui-radio-on .ui-icon {
-	background-color: #4ea978 /*{global-active-background-color}*/; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
+	background-color: #rgba(61, 173, 248, 0.7) /*{global-active-background-color}*/; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
 }
 
 /* loading icon */

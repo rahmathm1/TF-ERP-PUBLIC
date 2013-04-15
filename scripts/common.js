@@ -80,7 +80,8 @@
 	}
 		/* bind drop down */
 	var bindSelect = function(selectId,data) {
-		var sel = $(selectId);		
+		var sel = $(selectId);	
+		sel.html("");	
 		$.each(data, function(index,value) {
 			var option =  $("<option/>")
 				.attr("value",value.id)
@@ -88,5 +89,18 @@
 			option.appendTo(sel);
 		});	
 		sel.selectmenu("refresh");
+	};
+	/*  log out */
+	var logout = function() {
+		localStorage.clear();
+		localStorage.isLoggedIn = "false";	
+		
+		data = new Object();		
+		data.module = "LOGOUT";
+		getResponse(data,parseLogout);
+	}
+	var parseLogout = function(response) {
+		showAlert("You've been logged out.");
+		window.location = "index.html"
 	};
 	

@@ -9,11 +9,11 @@
 */
 	var ALERT_TITLE	=	"Taskforces ERP";
 	//var API			= 	"http://192.168.1.188/taskforces/api/";
-	var API			= 	"http://192.168.1.155:88/taskforces/api/";
+	//var API			= 	"http://192.168.1.155:88/taskforces/api/";
+	var API			= 	"http://192.168.31.17/taskforces/api/";
 	
 	var BUSINESS_UNITS 	= "BUSINESS_UNITS";
 	var LOGIN 			 = "LOGIN";
-	var ACC_LEVELS 		= "ACC_LEVELS";
 	//var 
 
 	/** event that fires when document is loaded & ready **/
@@ -40,10 +40,12 @@
 
     /* menu button press */
     function onMenuKeyDown() {
-		if ($('.menu-button').css('display') == 'none')
-			$('.menu-button').fadeIn();
-		else
-			$('.menu-button').fadeOut();
+		//if($.mobile.activePage.attr("id")!= "pageLogin"){
+			if ($('.menu-button').css('display') == 'none')
+				$('.menu-button').fadeIn();
+			else
+				$('.menu-button').fadeOut();
+		//}
     }
 	
 	
@@ -60,6 +62,9 @@
 		$("#btnBalanceSheet").on("click",function() {
 			changePage("balance-sheet.html");
 		});
+		$("#btnProfitLoss").on("click",function() {
+			changePage("profit-loss.html");
+		});
 		
 		
 		$("#pageDashboard").on('pagebeforehide', function(e, ui){  
@@ -68,13 +73,6 @@
 				if( localStorage.isLoggedIn == "true" )
 				{			
 					exitApplication();		
-					/*e.preventDefault();
-					e.stopPropagation();			
-					if (from === '#pageDashboard' ) {			
-						exitApplication();
-					} else {
-						$.mobile.changePage("#pageDashboard");
-					} */ 
 				}
 			}
 		});
@@ -86,6 +84,12 @@
 				changePageID("#pageDashboard");
 			}
 		});
+		$("#menuLogout").on('click', function(e, ui){  
+			console.log("clicked menu>logout");
+			showSpinner();
+			logout();
+		});
+		$("#menuExit").on('click', exitApplication);
 	};
 	$("#pageLogin").on("pageinit",function(event){
 		console.log("pageshow : pageLogin");
@@ -147,8 +151,8 @@
 	};
 	var parseBusinessUnits = function(response) {
 		if(response.status==1) {
-			localStorage.branches = JSON.stringify(response.business_units);
-			bindSelect("#selLoginBUnit",response.business_units);
+			localStorage.businessUnits = JSON.stringify(response.businessUnits);
+			bindSelect("#selLoginBUnit",response.businessUnits);
 		} else {
 			ajaxFailed();
 		}

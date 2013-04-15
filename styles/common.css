@@ -38,7 +38,7 @@
 		line-height:10px;
 	}
 	.table-font-size td,.table-font-size th {
-		font-size:11px;
+		font-size:10px;
 	}
 }
 @media screen and (min-width: 320px) and (max-width: 479px) {
@@ -58,7 +58,7 @@
 		line-height:13px;
 	}
 	.table-font-size td,.table-font-size th {
-		font-size:12px;
+		font-size:11px;
 	}
 }
 @media screen and (min-width: 480px) and (max-width: 600px){
@@ -78,7 +78,7 @@
 		line-height:12px;
 	}
 	.table-font-size td,.table-font-size th {
-		font-size:13px;
+		font-size:12px;
 	}
 }
 @media screen and (min-width: 601px){
@@ -270,6 +270,7 @@ h1,h2,h3,h4,h5,h6 {
 	bottom:10px;
 	left:10px;
 	right:40%;
+	z-index:10000;
 }
 .menu-button .menu-item {
 	margin-top:5px;
