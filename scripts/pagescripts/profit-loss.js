@@ -102,12 +102,12 @@
 			
 		});
 		
-		$("#menuLogout").on('click', function(e, ui){  
+		$(".menuLogout").on('click', function(e, ui){  
 			console.log("clicked menu>logout");
 			showSpinner();
 			logout();
 		});
-		$("#menuExit").on('click', exitApplication);
+		$(".menuExit").on('click', exitApplication);
 		
 	};
 	
