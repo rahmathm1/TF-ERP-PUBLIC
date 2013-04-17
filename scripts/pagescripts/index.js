@@ -28,13 +28,14 @@
 				changePageID("#pageDashboard");
 			}		
 			showSpinner();
-			/* clear history after log out */ 
-			$.mobile.urlHistory.clearForward() 
+			
 			 
 			document.addEventListener("searchbutton", onSearchKeyDown, false);
 			document.addEventListener("menubutton", onMenuKeyDown, false);
 			getBusinessUnits();
 						
+			/* clear history after log out */ 
+			$.mobile.urlHistory.clearForward() 			
 			navigator.splashscreen.hide();
 		}		
 	}
