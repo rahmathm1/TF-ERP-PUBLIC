@@ -1,5 +1,10 @@
 // JavaScript Document
 
+	var ALERT_TITLE	=	"Taskforces ERP";
+	//var API			= 	"http://192.168.1.188/taskforces/api/";
+	var API			= 	"http://192.168.1.155:88/taskforces/api/";
+	//var API			= 	"http://192.168.31.17/taskforces/api/";
+	
 	/**************************************************************
 	*			GENERAL FUNCTIONS	
 	**************************************************************/
@@ -11,7 +16,8 @@
 		var networkState = navigator.network.connection.type;	
 		console.log("Connection type:  " + navigator.network.connection.type);		
 		if(networkState == Connection.NONE) {
-			navigator.notification.alert("Please check network connection.", exitApplication, "Task Force ERP","OK");					
+			showAlert("Unable to connect to TaskForces™ ERP server");
+			//navigator.notification.alert("Please check network connection.", exitApplication, "Task Force ERP","OK");					
 		}		
 	};
 	var exitApplication=function() {
@@ -76,7 +82,7 @@
 	var ajaxFailed = function(res) {		
 		console.error("Network error. Please try again. Result : "+JSON.stringify(res));
 		showAlert("Network error, please try again.");
-		exitApplication();
+		//exitApplication();
 	}
 		/* bind drop down */
 	var bindSelect = function(selectId,data) {

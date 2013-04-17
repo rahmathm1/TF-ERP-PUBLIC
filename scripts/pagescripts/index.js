@@ -7,10 +7,7 @@
 *	TO DO:-	 
 *			-	
 */
-	var ALERT_TITLE	=	"Taskforces ERP";
-	//var API			= 	"http://192.168.1.188/taskforces/api/";
-	//var API			= 	"http://192.168.1.155:88/taskforces/api/";
-	var API			= 	"http://192.168.31.17/taskforces/api/";
+	
 	
 	var BUSINESS_UNITS 	= "BUSINESS_UNITS";
 	var LOGIN 			 = "LOGIN";
@@ -21,6 +18,7 @@
 		
 	function onDeviceReady() {
 		console.log("Invoked: onDeviceReady");
+		checkConnection();
 		
 		if(localStorage.isLoggedIn == "true") {
 			changePageID("#pageDashboard");
@@ -141,7 +139,7 @@
 	
 	/**
 	*	Name	:	getBusinessUnits
-	*	Desc	:	Check network connectivity
+	*	Desc	:	Fetch the business units from the server
 	**/
 	var getBusinessUnits = function () {
 		console.log("Method : getBusinessUnits");
