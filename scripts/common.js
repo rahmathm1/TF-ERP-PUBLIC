@@ -16,9 +16,12 @@
 		var networkState = navigator.network.connection.type;	
 		console.log("Connection type:  " + navigator.network.connection.type);		
 		if(networkState == Connection.NONE) {
-			showAlert("Unable to connect to TaskForces™ ERP server");
-			//navigator.notification.alert("Please check network connection.", exitApplication, "Task Force ERP","OK");					
-		}		
+			showAlert("Unable to connect to TaskForces™ ERP server");	
+			return false;				
+		}
+		else {
+			return true;
+		}
 	};
 	var exitApplication=function() {
 		navigator.app.exitApp();
@@ -82,7 +85,7 @@
 	var ajaxFailed = function(res) {		
 		console.error("Network error. Please try again. Result : "+JSON.stringify(res));
 		showAlert("Network error, please try again.");
-		//exitApplication();
+		hideSpinner();
 	}
 		/* bind drop down */
 	var bindSelect = function(selectId,data) {
@@ -107,6 +110,6 @@
 	}
 	var parseLogout = function(response) {
 		showAlert("You've been logged out.");
-		window.location = "index.html"
+		window.location = "index.html";
 	};
 	

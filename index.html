@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="styles/jquery.mobile.structure-1.3.0.css" />
 <link rel="stylesheet" href="styles/common.css" />
 <link rel="stylesheet" href="styles/pagestyles/index.css" />
-<!--<script src="scripts/cordova-1.9.0.js" charset="utf-8"></script>-->
+<script src="scripts/cordova-1.9.0.js" charset="utf-8"></script>
 <script src="phonegap.js"></script>
 <script src="scripts/jquery-1.9.1.min" charset="utf-8"></script>
 <script src="scripts/jquery.mobile-1.3.0.min" charset="utf-8"></script>
@@ -24,15 +24,26 @@
   <div data-role="content">
     <div class="logo"></div>
     <div class="login-controls">
-      <select id="selLoginBUnit" >
-        <option value="NULL">Business Unit</option>
-      </select>
-      <div class="cybosol-logo">
-        <input type="tel"  placeholder="User ID"   id="txtUserId" value="">
-        <input type="password" placeholder="Password"   id="txtPassword" value="">
+      <div id="divLogin">
+        <select id="selLoginBUnit" >
+          <option value="NULL" >Business Unit</option>
+        </select>
+        <br />
+        <input type="text"  placeholder="User ID"   id="txtUserId" />
+        <input type="password" placeholder="Password"   id="txtPassword"  />
         <br />
         <div class="login-wrap">
           <input type="button" id="btnLogin"  value="Login" />
+          
+        </div>
+      </div>
+      <div id="divRetry"><br />
+      	<div class="no-network">
+        	Unable to connect to TastForces ERP server. Please try again.
+            <div class="login-wrap">
+      <input type="button" id="btnRetry" value="Retry" />
+      </div>
+          
         </div>
       </div>
     </div>

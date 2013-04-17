@@ -47,4 +47,17 @@
 }
 
 
+#divRetry {
+	text-align:center;
+	overflow:hidden;
+}
+.no-network  {
+	padding:10px;
+	background:#CCC;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	overflow:hidden;
+}
+
 

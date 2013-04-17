@@ -18,17 +18,25 @@
 		
 	function onDeviceReady() {
 		console.log("Invoked: onDeviceReady");
-		checkConnection();
-		
-		if(localStorage.isLoggedIn == "true") {
-			changePageID("#pageDashboard");
-		}		
-		 
-		document.addEventListener("searchbutton", onSearchKeyDown, false);
-        document.addEventListener("menubutton", onMenuKeyDown, false);
-		getBusinessUnits();
 		bindEvents();
-		navigator.splashscreen.hide();
+		if(!checkConnection()){
+			disableLogin();
+			//return;
+		}else {
+			enableLogin();
+			if(localStorage.isLoggedIn == "true") {
+				changePageID("#pageDashboard");
+			}		
+			showSpinner();
+			/* clear history after log out */ 
+			$.mobile.urlHistory.clearForward() 
+			 
+			document.addEventListener("searchbutton", onSearchKeyDown, false);
+			document.addEventListener("menubutton", onMenuKeyDown, false);
+			getBusinessUnits();
+						
+			navigator.splashscreen.hide();
+		}		
 	}
 	
 	/* search button press */
@@ -63,7 +71,11 @@
 		$("#btnProfitLoss").on("click",function() {
 			changePage("profit-loss.html");
 		});
-		
+		$("#btnRetry").on("click",function() {
+			console.log("Retrying");
+			showSpinner();
+			getBusinessUnits();
+		});
 		
 		$("#pageDashboard").on('pagebeforehide', function(e, ui){  
 			console.log("Hiding page");
@@ -75,14 +87,15 @@
 			}
 		});
 		$("#pageLogin").on('pagebeforeshow', function(e, ui){  
-			console.log("page before show");
+			console.log("login : page before show");
 			if(localStorage.isLoggedIn == "true") {
 				e.preventDefault();
 				e.stopPropagation();			
 				changePageID("#pageDashboard");
 			}
 		});
-		$(".menuLogout").on('click', function(e, ui){  
+		
+		$(".menuLogout").on('click', function(){  
 			console.log("clicked menu>logout");
 			showSpinner();
 			logout();
@@ -93,6 +106,17 @@
 		console.log("pageshow : pageLogin");
 	});
 	
+	
+	/* disable login controls */
+	var disableLogin = function () {
+		$("#divLogin").hide();
+		$("#divRetry").show();	
+	}
+	/* enable login controls */
+	var enableLogin = function () {
+		$("#divLogin").show();
+		$("#divRetry").hide();	
+	}
 	/**
 	*	Name	:	login
 	*	Desc	:	login to the system
@@ -150,9 +174,12 @@
 	var parseBusinessUnits = function(response) {
 		if(response.status==1) {
 			localStorage.businessUnits = JSON.stringify(response.businessUnits);
+			enableLogin();
 			bindSelect("#selLoginBUnit",response.businessUnits);
+			
 		} else {
 			ajaxFailed();
 		}
+		hideSpinner();
 	};
 	
