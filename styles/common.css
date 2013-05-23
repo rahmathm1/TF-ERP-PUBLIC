@@ -467,12 +467,12 @@ ul.sub-options li:active {
 }
 
 .inner-page .content .head .square-buttons#btn-fav{
-	background-image:url(../images/btn-back.png);
-	float:left;
-}
-.inner-page .content .head .square-buttons#btn-back{
 	background-image:url(../images/btn-favourite.png);
 	float:right;
+}
+.inner-page .content .head .square-buttons#btn-back{
+	background-image:url(../images/btn-back.png);
+	float:left;
 }
 .inner-page .content .side-content-body .sub-menu-head {
 	font-size:15px;
