@@ -102,6 +102,19 @@
 			logout();
 		});
 		$(".menuExit").on('click', exitApplication);
+		
+		/* dashboard buttons */
+		$(".buttons").on("click",function() {
+			var id = $(this).attr("id");
+			if($("#subOptions"+id).css("display") == "none" ) {
+				$(".sub-button-wrapper").slideUp();
+				$("#subOptions"+id).slideToggle();
+			} else {
+				$("#subOptions"+id).slideUp();
+			}
+		});
+		
+		
 	};
 	$("#pageLogin").on("pageinit",function(event){
 		console.log("pageshow : pageLogin");

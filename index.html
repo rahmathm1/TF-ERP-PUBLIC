@@ -34,16 +34,13 @@
         <br />
         <div class="login-wrap">
           <input type="button" id="btnLogin"  value="Login" />
-          
         </div>
       </div>
       <div id="divRetry"><br />
-      	<div class="no-network">
-        	Unable to connect to TastForces ERP server. Please try again.
-            <div class="login-wrap">
-      <input type="button" id="btnRetry" value="Retry" />
-      </div>
-          
+        <div class="no-network"> Unable to connect to TastForces ERP server. Please try again.
+          <div class="login-wrap">
+            <input type="button" id="btnRetry" value="Retry" />
+          </div>
         </div>
       </div>
     </div>
@@ -72,7 +69,7 @@
     <div class="w25">
       <div class="tabs" id="tabNoti">
         <div class="caption">Notifications</div>
-        <!--<div class="noti-count">3</div>-->
+        <!--<div class="noti-count">3</div>--> 
       </div>
     </div>
     <div class="w25">
@@ -91,29 +88,111 @@
   <div data-role="content">
     <div class="buttons-wrapper">
       <div class="row">
-        <div class="w50">
-          <div class="buttons profile">
+        <div class="w60">
+          <div class="buttons bg-red" id="Hr">
+            <div class="icon hr" id="btnHr"></div>
+            <div class="caption" id="btnCaption">HR</div>
+          </div>
+        </div>
+        <div class="w40">
+          <div class="buttons bg-purple" id="Sales">
+            <div class="icon sales"></div>
+            <div class="caption">Sales</div>
+          </div>
+        </div>
+      </div>
+      <!-- sub menu -->
+      <div id="subOptionsHr" class="sub-button-wrapper">
+        <div class="arrow" id="left"></div>
+        <div class="sub-btn-ul-wrapper">
+          <ul class="sub-options">
+            <li class="sub-option">Salary Summary</li>
+            <li class="sub-option">HR Notifications</li>
+          </ul>
+        </div>
+      </div>
+      <div id="subOptionsSales" class="sub-button-wrapper">
+        <div class="arrow" id="right"></div>
+        <div class="sub-btn-ul-wrapper">
+          <ul class="sub-options">
+            <li class="sub-option"><a href="#pageSales">Top 10 Selling items</a></li>
+            <li class="sub-option">Top 10 Non-selling items</li>
+            <li class="sub-option">Top 10 Customers</li>
+          </ul>
+        </div>
+      </div>
+      <!--  / sub menu -->
+      <div class="row">
+        <div class="w40">
+          <div class="buttons bg-blue" id="Purchase">
+            <div class="icon purchase"></div>
+            <div class="caption">Purchase</div>
+          </div>
+        </div>
+        <div class="w60">
+          <div class="buttons bg-green" id="Finance">
+            <div class="icon finance"></div>
+            <div class="caption">Finance</div>
+          </div>
+        </div>
+      </div>
+      <!-- sub menu -->
+      <div id="subOptionsPurchase" class="sub-button-wrapper">
+        <div class="arrow" id="left"></div>
+        <div class="sub-btn-ul-wrapper">
+          <ul class="sub-options">
+            <li class="sub-option">Upcoming shipments Amounts</li>
+          </ul>
+        </div>
+      </div>
+      <div id="subOptionsFinance" class="sub-button-wrapper">
+        <div class="arrow" id="right"></div>
+        <div class="sub-btn-ul-wrapper">
+          <ul class="sub-options">
+            <li class="sub-option">Top 10 Accounts Receivable</li>
+            <li class="sub-option">Top 10 Accounts Payable</li>
+          </ul>
+        </div>
+      </div>
+      <!--  / sub menu -->
+      <div class="row">
+        <div class="w60">
+          <div class="buttons bg-orange" id="Notifications">
+            <div class="icon notifications"></div>
+            <div class="caption">Notifications</div>
+          </div>
+        </div>
+        <div class="w40">
+          <div class="buttons bg-red" id="Profile">
+            <div class="icon profile"></div>
             <div class="caption">My Profile</div>
           </div>
         </div>
-        <div class="w50">
-          <div class="buttons language">
-            <div class="caption">Language</div>
-          </div>
+      </div>
+      <!-- sub menu -->
+      <div id="subOptionsNotifications" class="sub-button-wrapper">
+        <div class="arrow" id="left"></div>
+        <div class="sub-btn-ul-wrapper">
+          <ul class="sub-options">
+            <li class="sub-option">All notifications for approval</li>
+            <li class="sub-option">All pending notifications</li>
+          </ul>
         </div>
       </div>
-      <div class="row">
-        <div class="w50" id="btnBalanceSheet">
-          <div class="buttons income">
-            <div class="caption">Balance Sheet</div>
-          </div>
-        </div>
-        <div class="w50" id="btnProfitLoss">
-          <div class="buttons profit">
-            <div class="caption">Profit &amp; Loss</div>
-          </div>
+      <div id="subOptionsProfile" class="sub-button-wrapper">
+        <div class="arrow" id="right"></div>
+        <div class="sub-btn-ul-wrapper">
+          <ul class="sub-options">
+            <li class="sub-option">Change password</li>
+            <li class="sub-option">Edit profile</li>
+          </ul>
         </div>
       </div>
+      <!--  / sub menu -->
+      <div style="height:40px;"></div>
+    </div>
+    <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
+      <div class="log-out">Logout</div>
     </div>
     <!--<div class="user-info ui-shadow">
       <div id="btnLogout"><img src="images/btn-logout.png" width="60" height="20" alt="Logout"></div>
@@ -122,14 +201,158 @@
         <div class="user-name">Administrator</div>
         <div class="bus-unit">Jeddah  | Version 1.0 | Registered to: Nuevalgo</div>
       </div> 
-    </div>-->
+    </div>--> 
   </div>
-  <!-- /content -->
-  <div class="menu-button">
-    <div class="menu-item menuLogout">Logout</div>
-    <div class="menu-item menuExit">Exit App</div>
+  <!-- /content -->  
+</div>
+
+<!-- 
+
+	Sales
+
+-->
+<div data-role="page" data-theme="a" id="pageSales">
+  <div data-role="header" data-theme="none" class="header-bg">
+    <div class="w25">
+      <div class="tabs selected" id="tabDash">
+        <div class="caption">Dashboard</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabNoti">
+        <div class="caption">Notifications</div>
+        <!--<div class="noti-count">3</div>--> 
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabReq">
+        <div class="caption">Service Request</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabMore">
+        <div class="caption">More</div>
+      </div>
+    </div>
   </div>
-  <!-- /menu button -->
+  <!-- /header  -->
+  
+  <div data-role="content">
+    <div class="inner-page">
+    	<div class="side-tabs">
+        	<div class="sidetab">
+       	    <img src="images/ico_side_finance.png"  alt="FInance"> </div>
+            <div class="sidetab">
+       	    <img src="images/ico_side_HR.png"  alt="HR"> </div>
+            <div class="sidetab">
+       	    <img src="images/ico_side_sales.png"  alt="Sales"> </div>
+            <div class="sidetab">
+       	    <img src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
+            <div class="sidetab">
+       	    <img src="images/ico_side_noti.png"  alt="Notification"> </div>
+        </div>
+            
+        <div class="content">
+        	<div class="gradient">
+                <div class="head sales">
+                    <div class="square-buttons" id="btn-fav"></div>
+                    <div class="square-buttons" id="btn-back"></div>
+                    <div class="title">Sales</div>
+                </div>
+                <div class="side-content-body">
+                	<div class="sub-menu-head">Top 10 Selling items</div>
+                    <div class="sub-menu-content">
+                    	<ul data-role="listview" data-inset="true" data-theme="a">
+                            <li><a href="acura.html">Acura</a></li>
+                            <li><a href="audi.html">Audi</a></li>
+                            <li><a href="acura.html">Acura</a></li>
+                            <li><a href="audi.html">Audi</a></li>
+                            <li><a href="bmw.html">BMW</a></li>
+                             <li><a href="audi.html">Audi</a></li>
+                            <li><a href="bmw.html">BMW</a></li>
+                             <li><a href="audi.html">Audi</a></li>
+                            <li><a href="bmw.html">BMW</a></li>
+                             <li><a href="audi.html">Audi</a></li>
+
+                        </ul>
+                    	
+                    </div>
+                   <!-- <div class="sub-menu-head">Top 10 Non-Selling items</div>
+                    <div class="sub-menu-head">Top 10 Customers</div>            -->        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
+      <div class="log-out">Logout</div>
+    </div>    
+  </div>
+  <!-- /content --> 
+</div>
+<!-- 
+
+	Notificaitn
+
+-->
+<div data-role="page" data-theme="a" id="pageNotifications">
+  <div data-role="header" data-theme="none" class="header-bg">
+    <div class="w25">
+      <div class="tabs selected" id="tabDash">
+        <div class="caption">Dashboard</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabNoti">
+        <div class="caption">Notifications</div>
+        <!--<div class="noti-count">3</div>--> 
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabReq">
+        <div class="caption">Service Request</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabMore">
+        <div class="caption">More</div>
+      </div>
+    </div>
+  </div>
+  <!-- /header  -->
+  
+  <div data-role="content">
+    <div class="inner-page">
+    	<div class="side-tabs">
+        	<div class="sidetab">
+       	    <img src="images/ico_side_finance.png"  alt="FInance"> </div>
+            <div class="sidetab">
+       	    <img src="images/ico_side_HR.png"  alt="HR"> </div>
+            <div class="sidetab">
+       	    <img src="images/ico_side_sales.png"  alt="Sales"> </div>
+            <div class="sidetab">
+       	    <img src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
+            <div class="sidetab">
+       	    <img src="images/ico_side_noti.png"  alt="Notification"> </div>
+        </div>
+            
+        <div class="content">
+        	<div class="gradient">
+                <div class="head sales">
+                    <div class="square-buttons" id="btn-fav"></div>
+                    <div class="square-buttons" id="btn-back"></div>
+                    <div class="title">Sales</div>
+                </div>
+                <div class="side-content-body">asdf
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
+      <div class="log-out menuLogout">Logout</div>
+    </div>
+    
+  </div>
+  <!-- /content -->  
 </div>
 </body>
 </html>
