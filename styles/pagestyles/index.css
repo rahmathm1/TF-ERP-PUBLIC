@@ -71,6 +71,21 @@
 }
 
 
-#pageNotifications .table-notifications {
+
+#pageNotifications .notificaiton-block {
+	display:none;
+	margin:5px 0;
+}
+#pageNotifications .notificaiton-head {
+	background-image:url(../../images/ico_notification.png);
+	background-repeat:no-repeat;
+	background-position:5px 5px;
+	padding:6px 4px 6px 30px;	
+	border-bottom:1px solid #ccc;
+	color:#000;
+}
+#pageNotifications .notificaiton-rows {
+	padding:4px 4px 4px 30px;
+	font-size:14px;
 	display:none;
 }

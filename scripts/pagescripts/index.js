@@ -123,10 +123,20 @@
 		});
 		$("#subMenuPendingNotifications").on("click",function() {
 			showSpinner();
-			getNotifications();
-			
+			getNotifications();			
 		});
-		
+		$(".tabNoti").on("click",function() {
+			showSpinner();
+			getNotifications();
+		});
+		$(".tabDash").on("click",function() {
+			changePageID('#pageDashboard');
+		});
+		$(".notificaiton-head").on("click",function() {			
+			var parent = $(this).parent();
+			var block = parent.children('.notificaiton-rows');
+			block.slideToggle();
+		});
 		
 	};
 	$("#pageLogin").on("pageinit",function(event){
@@ -219,28 +229,27 @@
 		vacation_notifications = response.vacation_notifications;
 		vacation_request_notifications = response.vacation_request_notifications;
 			
-		displayOneSetNotification(absent_notifications,'#tblNotiAbsent');
-		displayOneSetNotification(delivery_notifications,'#tblNotiDeli');
-		displayOneSetNotification(glvoucher_notifications,'#tblNotiGosi');
-		displayOneSetNotification(gosi_notifications,'#tblNotiInc');
-		displayOneSetNotification(increment_notifications,'#tblNotiIqama');
-		displayOneSetNotification(iqama_notifications,'#tblNotiLoan');
-		displayOneSetNotification(loan_notifications,'#tblNotiVac');
-		displayOneSetNotification(vacation_notifications,'#tblNotiVacReq');
-		displayOneSetNotification(vacation_request_notifications,'#tblNotiVoucher');
+		displayOneSetNotification(absent_notifications,'#divNotiAbsent');
+		displayOneSetNotification(delivery_notifications,'#divNotiDeli');
+		displayOneSetNotification(glvoucher_notifications,'#divNotiGosi');
+		displayOneSetNotification(gosi_notifications,'#divNotiInc');
+		displayOneSetNotification(increment_notifications,'#divNotiIqama');
+		displayOneSetNotification(iqama_notifications,'#divNotiLoan');
+		displayOneSetNotification(loan_notifications,'#divNotiVac');
+		displayOneSetNotification(vacation_notifications,'#divNotiVacReq');
+		displayOneSetNotification(vacation_request_notifications,'#divNotiVoucher');
 		
 		changePageID('#pageNotifications');
 	}
 	var displayOneSetNotification = function(notifications,id){
 		if(notifications.length > 0) {
-			$(id).show();
-			var tbody = $(id+' tbody');
-			$.each(notifications, function(index,value) {
-				var tr =  $("<tr/>");
-				var td =  $("<td/>")
+			var parentDiv = $(id);
+			parentDiv.show();
+			$.each(notifications, function(index,value) {				
+				var div =  $("<div/>")
+					.attr('class','notificaiton-rows')
 					.text(value.data);
-				td.appendTo(tr);
-				tr.appendTo(tbody);				
+				div.appendTo(parentDiv);			
 			});	
 		}
 	}

@@ -434,10 +434,13 @@ ul.sub-options li:active {
 	padding:10px 0px 10px 10px;
 }
 .inner-page .content .gradient {
-	background:url(../images/bg-inner-content.png) repeat-x;
+	background-image:url(../images/bg-inner-content.png);
+	background-repeat:repeat-x;
+	background-size:auto 100%;
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;
 	border-radius: 7px;
+	overflow:hidden;
 }
 .inner-page .content .head {
 	background-image:url(../images/bg-side-head.png);
@@ -486,7 +489,7 @@ ul.sub-options li:active {
 	padding:10px 10px 0 0;
 }
 .inner-page .content .side-content-body .sub-menu-content {
-
+	overflow:hidden;
 }
 /*.inner-page .content .side-content-body .sub-menu-head {
 	font-size:15px;

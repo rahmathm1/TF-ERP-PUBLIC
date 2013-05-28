@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="styles/jquery.mobile.structure-1.3.0.css" />
 <link rel="stylesheet" href="styles/common.css" />
 <link rel="stylesheet" href="styles/pagestyles/index.css" />
+
 <script src="phonegap.js"></script>
 <script src="scripts/jquery-1.9.1.min" charset="utf-8"></script>
 <script src="scripts/jquery.mobile-1.3.0.min" charset="utf-8"></script>
@@ -66,7 +67,7 @@
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabNoti">
+      <div class="tabs tabNoti" id="tabNoti">
         <div class="caption">Notifications</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
@@ -205,12 +206,12 @@
 <div data-role="page" data-theme="a" id="pageSales">
   <div data-role="header" data-theme="none" class="header-bg">
     <div class="w25">
-      <div class="tabs selected" id="tabDash">
+      <div class="tabs tabDash" id="tabDash">
         <div class="caption">Dashboard</div>
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabNoti">
+      <div class="tabs tabNoti" id="tabNoti">
         <div class="caption">Notifications</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
@@ -248,7 +249,7 @@
           </div>
           <div class="side-content-body">
             <div class="sub-menu-head">Top 10 Selling items</div>
-            <div class="dateSaleFromTo">Period:From <span id="dateFrom"></span> to <span id="dateTo"></span></div>
+            <div class="dateSaleFromTo">Period : From <span id="dateFrom">Apr 2012</span> to <span id="dateTo">Apr 2013</span></div>
             <div class="sub-menu-content">
               <table data-role="table"  data-mode="normal" class="ui-body-d ui-shadow table-stripe table-font-size" >
                 <thead>
@@ -285,12 +286,12 @@
 <div data-role="page" data-theme="a" id="pageNotifications">
   <div data-role="header" data-theme="none" class="header-bg">
     <div class="w25">
-      <div class="tabs selected" id="tabDash">
+      <div class="tabs tabDash" id="tabDash">
         <div class="caption">Dashboard</div>
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabNoti">
+      <div class="tabs selected" id="tabNoti">
         <div class="caption">Notifications</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
@@ -319,7 +320,7 @@
       </div>
       <div class="content">
         <div class="gradient">
-          <div class="head notifications">
+          <div class="head notifications"> 
             <div class="square-buttons" id="btn-fav"></div>
             <a  data-rel="back" href="#">
             <div class="square-buttons" id="btn-back"></div>
@@ -329,120 +330,54 @@
           <div class="side-content-body">
            <!-- <div class="sub-menu-head">Top 10 Selling items</div>     -->      
             <div class="sub-menu-content">
-             <table data-role="table"  data-mode="normal" id="tblNotiAbsent" class="ui-body-d ui-shadow table-notifications table-font-size" >
-                <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">Absent Notifications</th>
-                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                 	
-                </tbody>
-               </table>
-              <table data-role="table"  data-mode="normal" id="tblNotiDeli" class="ui-body-d ui-shadow table-notifications table-font-size" >
-                <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">Delivery Notifications</th>
-                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
-                  </tr>
-                </thead>
-                <tbody >
-                  
-                </tbody>
-               </table>
-			   <table data-role="table" id="tblNotiVoucher"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >
-            
-				<thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">GL Voucher notifications</th>
-                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                </tbody>
-                 </table>
-			   <table data-role="table" id="tblNotiGosi"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >
-                <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">Gosi Notifications</th>
-                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                </tbody>
-                 </table>
-			   <table data-role="table" id="tblNotiInc"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >
-                <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">Increment Notifications</th>
-                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                </tbody>
-                 </table>
-			   <table data-role="table" id="tblNotiIqama"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >   
-                 <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">Iqama Notifications</th>
-                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                </tbody>  
-                 </table>
-			   <table data-role="table" id="tblNotiLoan"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" > 
-                 <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">Loan Notifications</th>
-                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                </tbody> 
-                 </table>
-			   <!--<table data-role="table" id="tblNotiShip"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >  
-                 <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">Shipment Notifications</th>
-                    <th data-priority="1" width="30%" >Expiry Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Iten name 1</td>
-                  <td>170</td>
-                  </tr>
-                </tbody>  
-                 </table>-->
-			   <table data-role="table" id="tblNotiVac"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >
-                <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">Vacation Notifications</th>
-                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                </tbody> 
-                 </table>
-			   <table data-role="table" id="tblNotiVacReq"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" > 
-                <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1">Vacation Request Notifications</th>
-                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                </tbody>               
-              </table>
+             	<div class="notificaiton-block" id="divNotiAbsent">
+                    <div class="notificaiton-head">
+                    	Absent Notifications                    
+                    </div> 
+                                       
+                    <!-- <div class="notificaiton-rows"> 
+                    </div> -->                   
+                </div>
+                <div class="notificaiton-block" id="divNotiDeli">
+                    <div class="notificaiton-head">
+                    	Delivery Notifications                    
+                    </div>                  
+                </div>
+                <div class="notificaiton-block" id="divNotiVoucher">
+                    <div class="notificaiton-head">
+                    	GL Voucher notifications                 
+                    </div>                    
+                </div>
+                <div class="notificaiton-block" id="divNotiGosi">
+                    <div class="notificaiton-head">
+                    	Gosi Notifications                   
+                    </div>                   
+                </div>
+                <div class="notificaiton-block" id="divNotiInc">
+                    <div class="notificaiton-head">
+                    	Increment Notifications                 
+                    </div>                   
+                </div>
+                <div class="notificaiton-block" id="divNotiIqama">
+                    <div class="notificaiton-head">
+                    	Iqama Notifications                    
+                    </div>                   
+                </div>
+                <div class="notificaiton-block" id="divNotiLoan">
+                    <div class="notificaiton-head">
+                    	Loan Notifications                    
+                    </div>                   
+                </div>
+                <div class="notificaiton-block" id="divNotiVac">
+                    <div class="notificaiton-head">
+                    	Vacation Notifications                   
+                    </div>                   
+                </div>
+                <div class="notificaiton-block" id="divNotiVacReq">
+                    <div class="notificaiton-head">
+                    	Vacation Request Notifications                   
+                    </div>                   
+                </div>  
             </div>
             <!-- <div class="sub-menu-head">Top 10 Non-Selling items</div>
                     <div class="sub-menu-head">Top 10 Customers</div>            --> 
