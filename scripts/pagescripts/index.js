@@ -10,6 +10,7 @@
 	
 	
 	var BUSINESS_UNITS 	= "BUSINESS_UNITS";
+	var NOTIFICATIONS 	= "NOTIFICATIONS";
 	var LOGIN 			 = "LOGIN";
 	//var 
 
@@ -96,7 +97,7 @@
 			}
 		});
 		
-		$(".menuLogout").on('click', function(){  
+		$("#menuLogout").on('click', function(){  
 			console.log("clicked menu>logout");
 			showSpinner();
 			logout();
@@ -112,6 +113,18 @@
 			} else {
 				$("#subOptions"+id).slideUp();
 			}
+		});
+		/*$("#pageNotifications").on("pageshow",function(event){
+			showSpinner();
+		});*/
+		$("#subMenuAllNotifications").on("click",function() {
+			showSpinner();
+			getNotifications();
+		});
+		$("#subMenuPendingNotifications").on("click",function() {
+			showSpinner();
+			getNotifications();
+			
 		});
 		
 		
@@ -166,6 +179,7 @@
 	var parseLogin = function(response) {
 		if(response.status == 1) {	
 			localStorage.isLoggedIn = "true";		
+			localStorage.branchFilter = response.userInfo.branch_filter;
 			changePageID("#pageDashboard");
 		} else if(response.status == 2){
 			showAlert("Invalid user id or password");
@@ -174,7 +188,62 @@
 		}
 		hideSpinner();
 	};
+	/**
+	*	Name	:	getNotifications
+	*	Desc	:	Fetch notifications from the server
+	**/
+	var getNotifications = function () {
+		console.log("Method : getNotifications");
+		data = new Object();
+		data.module = NOTIFICATIONS;
+		data.branchFilter = localStorage.branchFilter;
+		getResponse(data,parseNotifications);
+	};
+	var parseNotifications = function(response) {
+		if(response.status==1) {
+			displayNotifications(response);			
+		} else {
+			ajaxFailed();
+		}
+	};
 	
+	var displayNotifications = function(response) {
+		
+		absent_notifications = response.absent_notifications;
+		delivery_notifications = response.delivery_notifications;
+		glvoucher_notifications = response.glvoucher_notifications;
+		gosi_notifications = response.gosi_notifications;
+		increment_notifications = response.increment_notifications;
+		iqama_notifications = response.iqama_notifications;
+		loan_notifications = response.loan_notifications;
+		vacation_notifications = response.vacation_notifications;
+		vacation_request_notifications = response.vacation_request_notifications;
+			
+		displayOneSetNotification(absent_notifications,'#tblNotiAbsent');
+		displayOneSetNotification(delivery_notifications,'#tblNotiDeli');
+		displayOneSetNotification(glvoucher_notifications,'#tblNotiGosi');
+		displayOneSetNotification(gosi_notifications,'#tblNotiInc');
+		displayOneSetNotification(increment_notifications,'#tblNotiIqama');
+		displayOneSetNotification(iqama_notifications,'#tblNotiLoan');
+		displayOneSetNotification(loan_notifications,'#tblNotiVac');
+		displayOneSetNotification(vacation_notifications,'#tblNotiVacReq');
+		displayOneSetNotification(vacation_request_notifications,'#tblNotiVoucher');
+		
+		changePageID('#pageNotifications');
+	}
+	var displayOneSetNotification = function(notifications,id){
+		if(notifications.length > 0) {
+			$(id).show();
+			var tbody = $(id+' tbody');
+			$.each(notifications, function(index,value) {
+				var tr =  $("<tr/>");
+				var td =  $("<td/>")
+					.text(value.data);
+				td.appendTo(tr);
+				tr.appendTo(tbody);				
+			});	
+		}
+	}
 	/**
 	*	Name	:	getBusinessUnits
 	*	Desc	:	Fetch the business units from the server

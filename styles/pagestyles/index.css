@@ -59,5 +59,18 @@
 	border-radius: 5px;
 	overflow:hidden;
 }
+/* Sales */
+#pageSales .dateSaleFromTo{
+	margin:10px 0;
+	font-size:14px;
+}
+/* Notifications */
+#pageNotifications .dateSaleFromTo{
+	margin:10px 0;
+	font-size:14px;
+}
 
 
+#pageNotifications .table-notifications {
+	display:none;
+}

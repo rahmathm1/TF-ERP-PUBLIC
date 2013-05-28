@@ -146,6 +146,8 @@ ul.sub-options li {
 	background-image:url(../images/bg-sub-opt.png);
 	background-repeat:repeat-x;
 	background-size:auto 100%;
+	color:#111;
+	font-weight:bold;
 }
 ul.sub-options li:active {
 	background-color:#2DBBFF;
@@ -451,6 +453,9 @@ ul.sub-options li:active {
 }
 .inner-page .content .sales {
 	background-color:#8b53a6;
+}
+.inner-page .content .notifications {
+	background-color:#c22d2d;
 }
 
 .inner-page .content .head .title{

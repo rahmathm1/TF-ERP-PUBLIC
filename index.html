@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="styles/jquery.mobile.structure-1.3.0.css" />
 <link rel="stylesheet" href="styles/common.css" />
 <link rel="stylesheet" href="styles/pagestyles/index.css" />
-<!--<script src="scripts/cordova-1.9.0.js" charset="utf-8"></script>-->
 <script src="phonegap.js"></script>
 <script src="scripts/jquery-1.9.1.min" charset="utf-8"></script>
 <script src="scripts/jquery.mobile-1.3.0.min" charset="utf-8"></script>
@@ -89,7 +88,7 @@
     <div class="buttons-wrapper">
       <div class="row">
         <div class="w60">
-          <div class="buttons bg-red" id="Hr">
+          <div class="buttons  bg-orange" id="Hr">
             <div class="icon hr" id="btnHr"></div>
             <div class="caption" id="btnCaption">HR</div>
           </div>
@@ -116,8 +115,8 @@
         <div class="sub-btn-ul-wrapper">
           <ul class="sub-options">
             <li class="sub-option"><a href="#pageSales">Top 10 Selling items</a></li>
-            <li class="sub-option">Top 10 Non-selling items</li>
-            <li class="sub-option">Top 10 Customers</li>
+            <li class="sub-option"><a href="#pageSales">Top 10 Non-selling items</a></li>
+            <li class="sub-option"><a href="#pageSales">Top 10 Customers</a></li>
           </ul>
         </div>
       </div>
@@ -157,13 +156,13 @@
       <!--  / sub menu -->
       <div class="row">
         <div class="w60">
-          <div class="buttons bg-orange" id="Notifications">
+          <div class="buttons bg-red" id="Notifications">
             <div class="icon notifications"></div>
             <div class="caption">Notifications</div>
           </div>
         </div>
         <div class="w40">
-          <div class="buttons bg-red" id="Profile">
+          <div class="buttons bg-orange" id="Profile">
             <div class="icon profile"></div>
             <div class="caption">My Profile</div>
           </div>
@@ -174,8 +173,8 @@
         <div class="arrow" id="left"></div>
         <div class="sub-btn-ul-wrapper">
           <ul class="sub-options">
-            <li class="sub-option">All notifications for approval</li>
-            <li class="sub-option">All pending notifications</li>
+            <li id="subMenuAllNotifications">All notifications for approval</li>
+            <li id="subMenuPendingNotifications">All pending notifications</li>
           </ul>
         </div>
       </div>
@@ -183,8 +182,8 @@
         <div class="arrow" id="right"></div>
         <div class="sub-btn-ul-wrapper">
           <ul class="sub-options">
-            <li class="sub-option">Change password</li>
-            <li class="sub-option">Edit profile</li>
+            <li>Change password</li>
+            <li>Edit profile</li>
           </ul>
         </div>
       </div>
@@ -192,18 +191,10 @@
       <div style="height:40px;"></div>
     </div>
     <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
-      <div class="log-out">Logout</div>
+      <div class="log-out" id="menuLogout">Logout</div>
     </div>
-    <!--<div class="user-info ui-shadow">
-      <div id="btnLogout"><img src="images/btn-logout.png" width="60" height="20" alt="Logout"></div>
-      <div class="ico"> <img src="images/ico-user.png" alt="User"> </div>
-      <div class="text"> Logged in as,<br>
-        <div class="user-name">Administrator</div>
-        <div class="bus-unit">Jeddah  | Version 1.0 | Registered to: Nuevalgo</div>
-      </div> 
-    </div>--> 
   </div>
-  <!-- /content -->  
+  <!-- /content --> 
 </div>
 
 <!-- 
@@ -239,53 +230,50 @@
   
   <div data-role="content">
     <div class="inner-page">
-    	<div class="side-tabs">
-        	<div class="sidetab">
-       	    <img src="images/ico_side_finance.png"  alt="FInance"> </div>
-            <div class="sidetab">
-       	    <img src="images/ico_side_HR.png"  alt="HR"> </div>
-            <div class="sidetab">
-       	    <img src="images/ico_side_sales.png"  alt="Sales"> </div>
-            <div class="sidetab">
-       	    <img src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-            <div class="sidetab">
-       	    <img src="images/ico_side_noti.png"  alt="Notification"> </div>
-        </div>
-            
-        <div class="content">
-        	<div class="gradient">
-                <div class="head sales">
-                    <div class="square-buttons" id="btn-fav"></div>
-                    <a  data-rel="back" href="#"><div class="square-buttons" id="btn-back"></div></a>
-                    <div class="title">Sales</div>
-                </div>
-                <div class="side-content-body">
-                	<div class="sub-menu-head">Top 10 Selling items</div>
-                    <div class="sub-menu-content">
-                    	<ul data-role="listview" data-inset="true" data-theme="a">
-                            <li><a href="acura.html">Acura</a></li>
-                            <li><a href="audi.html">Audi</a></li>
-                            <li><a href="acura.html">Acura</a></li>
-                            <li><a href="audi.html">Audi</a></li>
-                            <li><a href="bmw.html">BMW</a></li>
-                             <li><a href="audi.html">Audi</a></li>
-                            <li><a href="bmw.html">BMW</a></li>
-                             <li><a href="audi.html">Audi</a></li>
-                            <li><a href="bmw.html">BMW</a></li>
-                             <li><a href="audi.html">Audi</a></li>
-
-                        </ul>
-                    	
-                    </div>
-                   <!-- <div class="sub-menu-head">Top 10 Non-Selling items</div>
-                    <div class="sub-menu-head">Top 10 Customers</div>            -->        
-                </div>
+      <div class="side-tabs">
+        <div class="sidetab"> <img src="images/ico_side_finance.png"  alt="FInance"> </div>
+        <div class="sidetab"> <img src="images/ico_side_HR.png"  alt="HR"> </div>
+        <div class="sidetab"> <img src="images/ico_side_sales.png"  alt="Sales"> </div>
+        <div class="sidetab"> <img src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
+        <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"> </div>
+      </div>
+      <div class="content">
+        <div class="gradient">
+          <div class="head sales">
+            <div class="square-buttons" id="btn-fav"></div>
+            <a  data-rel="back" href="#">
+            <div class="square-buttons" id="btn-back"></div>
+            </a>
+            <div class="title">Sales</div>
+          </div>
+          <div class="side-content-body">
+            <div class="sub-menu-head">Top 10 Selling items</div>
+            <div class="dateSaleFromTo">Period:From <span id="dateFrom"></span> to <span id="dateTo"></span></div>
+            <div class="sub-menu-content">
+              <table data-role="table"  data-mode="normal" class="ui-body-d ui-shadow table-stripe table-font-size" >
+                <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1" width="70%">Item name</th>
+                    <th data-priority="1" width="30%">Value</th>
+                  </tr>
+                </thead>
+                <tbody id="tblSales">
+                  <tr>
+                    <td>Iten name 1</td>
+                    <td>170</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+            <!-- <div class="sub-menu-head">Top 10 Non-Selling items</div>
+                    <div class="sub-menu-head">Top 10 Customers</div>            --> 
+          </div>
         </div>
+      </div>
     </div>
     <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
       <div class="log-out">Logout</div>
-    </div>    
+    </div>
   </div>
   <!-- /content --> 
 </div>
@@ -322,37 +310,151 @@
   
   <div data-role="content">
     <div class="inner-page">
-    	<div class="side-tabs">
-        	<div class="sidetab">
-       	    <img src="images/ico_side_finance.png"  alt="FInance"> </div>
-            <div class="sidetab">
-       	    <img src="images/ico_side_HR.png"  alt="HR"> </div>
-            <div class="sidetab">
-       	    <img src="images/ico_side_sales.png"  alt="Sales"> </div>
-            <div class="sidetab">
-       	    <img src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-            <div class="sidetab">
-       	    <img src="images/ico_side_noti.png"  alt="Notification"> </div>
-        </div>
+      <div class="side-tabs">
+        <div class="sidetab"> <img src="images/ico_side_finance.png"  alt="FInance"> </div>
+        <div class="sidetab"> <img src="images/ico_side_HR.png"  alt="HR"> </div>
+        <div class="sidetab"> <img src="images/ico_side_sales.png"  alt="Sales"> </div>
+        <div class="sidetab"> <img src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
+        <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"> </div>
+      </div>
+      <div class="content">
+        <div class="gradient">
+          <div class="head notifications">
+            <div class="square-buttons" id="btn-fav"></div>
+            <a  data-rel="back" href="#">
+            <div class="square-buttons" id="btn-back"></div>
+            </a>
+            <div class="title">Notifications</div>
+          </div>
+          <div class="side-content-body">
+           <!-- <div class="sub-menu-head">Top 10 Selling items</div>     -->      
+            <div class="sub-menu-content">
+             <table data-role="table"  data-mode="normal" id="tblNotiAbsent" class="ui-body-d ui-shadow table-notifications table-font-size" >
+                <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">Absent Notifications</th>
+                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                 	
+                </tbody>
+               </table>
+              <table data-role="table"  data-mode="normal" id="tblNotiDeli" class="ui-body-d ui-shadow table-notifications table-font-size" >
+                <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">Delivery Notifications</th>
+                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
+                  </tr>
+                </thead>
+                <tbody >
+                  
+                </tbody>
+               </table>
+			   <table data-role="table" id="tblNotiVoucher"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >
             
-        <div class="content">
-        	<div class="gradient">
-                <div class="head sales">
-                    <div class="square-buttons" id="btn-fav"></div>
-                    <div class="square-buttons" id="btn-back"></div>
-                    <div class="title">Sales</div>
-                </div>
-                <div class="side-content-body">asdf
-                </div>
+				<thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">GL Voucher notifications</th>
+                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+                 </table>
+			   <table data-role="table" id="tblNotiGosi"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >
+                <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">Gosi Notifications</th>
+                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+                 </table>
+			   <table data-role="table" id="tblNotiInc"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >
+                <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">Increment Notifications</th>
+                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>
+                 </table>
+			   <table data-role="table" id="tblNotiIqama"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >   
+                 <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">Iqama Notifications</th>
+                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>  
+                 </table>
+			   <table data-role="table" id="tblNotiLoan"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" > 
+                 <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">Loan Notifications</th>
+                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody> 
+                 </table>
+			   <!--<table data-role="table" id="tblNotiShip"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >  
+                 <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">Shipment Notifications</th>
+                    <th data-priority="1" width="30%" >Expiry Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Iten name 1</td>
+                  <td>170</td>
+                  </tr>
+                </tbody>  
+                 </table>-->
+			   <table data-role="table" id="tblNotiVac"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" >
+                <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">Vacation Notifications</th>
+                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody> 
+                 </table>
+			   <table data-role="table" id="tblNotiVacReq"  data-mode="normal" class="ui-body-d ui-shadow table-notifications table-font-size" > 
+                <thead>
+                  <tr class="ui-bar-d">
+                    <th data-priority="1">Vacation Request Notifications</th>
+                    <!-- <th data-priority="1" width="30%" >Expiry Date</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>               
+              </table>
             </div>
+            <!-- <div class="sub-menu-head">Top 10 Non-Selling items</div>
+                    <div class="sub-menu-head">Top 10 Customers</div>            --> 
+          </div>
         </div>
+      </div>
     </div>
-    <div class="logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
+    <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
       <div class="log-out menuLogout">Logout</div>
     </div>
-    
   </div>
-  <!-- /content -->  
+  <!-- /content --> 
 </div>
 </body>
 </html>

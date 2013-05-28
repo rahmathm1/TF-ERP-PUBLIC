@@ -1811,6 +1811,8 @@ div.ui-slider-switch.ui-mini {
    border-collapse: collapse;
    padding: 0;
    width: 100%;
+   font-size: 14px;
+   margin:10px 0;
 }
 .ui-table th,
 .ui-table td {
@@ -1846,12 +1848,14 @@ div.ui-slider-switch.ui-mini {
 }
 .ui-table th {
   font-weight: bold;
+  background-color: #ccc;
 }
 .ui-table caption {
   text-align:left;
   margin-bottom:1.4em;
   opacity: .5;
 }
+
 .table-stroke thead th {
   border-bottom: 1px solid #d6d6d6; 
   border-bottom: 1px solid rgba(0, 0, 0, .1);
@@ -2014,6 +2018,24 @@ div.ui-slider-switch.ui-mini {
 		clear: left;
 	}
 }
+
+.table-notifications {
+	border:none;
+	box-shadow:none;
+}
+.table-notifications th {
+	border:none;
+	border-bottom:none;
+}
+.table-notifications tr {
+	border:none;
+	border-bottom:1px solid #ccc;
+}
+.table-notifications td {
+	border:none;
+	border-bottom:none;
+}
+
 .ui-panel {
 	width: 17em;
 	min-height: 100%;
