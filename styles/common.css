@@ -7,7 +7,6 @@
 		font-size:10px;
 		height:50px;
 	}
-	
 }
 @media screen and (min-width: 240px) and (max-width: 319px) { 
 	.tabs {
@@ -42,6 +41,10 @@
 	
 }
 
+
+.display-none {
+	display:none;
+}
 h1,h2,h3,h4,h5,h6 {
 	margin:5px 5px 0px 5px;
 }
@@ -446,7 +449,7 @@ ul.sub-options li:active {
 	background-image:url(../images/bg-side-head.png);
 	background-repeat:repeat-x;
 	background-size:auto 50%;
-	padding:2px;
+	padding:4px;
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;
 	border-radius: 7px;
@@ -462,21 +465,27 @@ ul.sub-options li:active {
 }
 
 .inner-page .content .head .title{
-	padding:5px;
+	padding:3px;
 	font-size:20px;
 	float:left;
 	color:#eee;
 }
 .inner-page .content .head .square-buttons {
 	overflow:hidden;
-	height:34px;
-	width:34px;
+	height:30px;
+	width:30px;
 	background-size:100% 100%;
 }
 
 .inner-page .content .head .square-buttons#btn-fav{
 	background-image:url(../images/btn-favourite.png);
 	float:right;
+	margin-left:5px;
+}
+.inner-page .content .head .square-buttons#btn-reload{
+	background-image:url(../images/btn-reload.png);
+	float:right;
+	margin-left:5px;
 }
 .inner-page .content .head .square-buttons#btn-back{
 	background-image:url(../images/btn-back.png);

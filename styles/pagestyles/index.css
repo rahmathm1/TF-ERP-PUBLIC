@@ -73,8 +73,8 @@
 
 
 #pageNotifications .notificaiton-block {
-	display:none;
 	margin:5px 0;
+	display:none;
 }
 #pageNotifications .notificaiton-head {
 	background-image:url(../../images/ico_notification.png);
@@ -84,8 +84,14 @@
 	border-bottom:1px solid #ccc;
 	color:#000;
 }
+#pageNotifications .notificaiton-head  .count {
+	float:right;
+	font-weight:bold;
+}
 #pageNotifications .notificaiton-rows {
 	padding:4px 4px 4px 30px;
 	font-size:14px;
+}
+#pageNotifications .notificaiton-sub {
 	display:none;
 }

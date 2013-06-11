@@ -2,8 +2,8 @@
 
 	var ALERT_TITLE	=	"Taskforces ERP";
 	//var API			= 	"http://192.168.1.188/taskforces/api/";
-	//var API			= 	"http://192.168.2.8:88//taskforces/api/";
-	var API			= 	"http://203.124.121.150:88/taskforces/api/";
+	var API			= 	"http://192.168.2.20:88//taskforces/api/";
+	//var API			= 	"http://203.124.121.150:88/taskforces/api/";
 	
 	/**************************************************************
 	*			GENERAL FUNCTIONS	
@@ -47,7 +47,7 @@
 	}
 	/* change Page */
 	var changePageID = function(pageId) { 
-		showSpinner();
+		//showSpinner();
 		$.mobile.changePage(pageId,{transition: "none"});
 	}		
 	

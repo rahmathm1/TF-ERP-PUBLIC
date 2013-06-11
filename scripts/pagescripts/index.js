@@ -9,9 +9,11 @@
 */
 	
 	
-	var BUSINESS_UNITS 	= "BUSINESS_UNITS";
-	var NOTIFICATIONS 	= "NOTIFICATIONS";
-	var LOGIN 			 = "LOGIN";
+	var BUSINESS_UNITS		= "BUSINESS_UNITS";
+	var NOTIFICATIONS		= "NOTIFICATIONS";
+	var LOGIN				= "LOGIN";
+	
+	var NOTIFICATIONS_LOADED = false;
 	//var 
 
 	/** event that fires when document is loaded & ready **/
@@ -129,14 +131,28 @@
 			showSpinner();
 			getNotifications();
 		});
+		$(".sideMenuNotificaitons").on("click",function() {
+			showSpinner();
+			getNotifications();
+		});
 		$(".tabDash").on("click",function() {
 			changePageID('#pageDashboard');
 		});
-		$(".notificaiton-head").on("click",function() {			
+		$(".notificaiton-head").on("click",function() {
+			$(".notificaiton-sub").slideUp();			
 			var parent = $(this).parent();
-			var block = parent.children('.notificaiton-rows');
-			block.slideToggle();
+			var block = parent.children('.notificaiton-sub');
+			if(block.css("display") == "none" )
+				block.slideDown();
 		});
+		$(".sideMenuNotificaitons").on("click",function() {
+			changePageID("#pageNotifications");
+		});
+		$(".sideMenuSales").on("click",function() {
+			changePageID("#pageSales");
+		});
+		
+		
 		
 	};
 	$("#pageLogin").on("pageinit",function(event){
@@ -204,14 +220,24 @@
 	**/
 	var getNotifications = function () {
 		console.log("Method : getNotifications");
-		data = new Object();
-		data.module = NOTIFICATIONS;
-		data.branchFilter = localStorage.branchFilter;
-		getResponse(data,parseNotifications);
-	};
+		if (localStorage.getItem("notification") === null) {
+			data = new Object();
+			data.module = NOTIFICATIONS;
+			data.branchFilter = localStorage.branchFilter;
+			getResponse(data,parseNotifications);
+		}else{
+			if(NOTIFICATIONS_LOADED == false) {
+				var response = JSON.parse(localStorage.notification);
+				parseNotifications(response);	
+			}else{
+				changePageID('#pageNotifications');
+			}
+		}
+	}; 
 	var parseNotifications = function(response) {
 		if(response.status==1) {
-			displayNotifications(response);			
+			displayNotifications(response);	
+			localStorage.notification = JSON.stringify(response);		
 		} else {
 			ajaxFailed();
 		}
@@ -231,25 +257,41 @@
 			
 		displayOneSetNotification(absent_notifications,'#divNotiAbsent');
 		displayOneSetNotification(delivery_notifications,'#divNotiDeli');
-		displayOneSetNotification(glvoucher_notifications,'#divNotiGosi');
-		displayOneSetNotification(gosi_notifications,'#divNotiInc');
-		displayOneSetNotification(increment_notifications,'#divNotiIqama');
-		displayOneSetNotification(iqama_notifications,'#divNotiLoan');
-		displayOneSetNotification(loan_notifications,'#divNotiVac');
-		displayOneSetNotification(vacation_notifications,'#divNotiVacReq');
-		displayOneSetNotification(vacation_request_notifications,'#divNotiVoucher');
+		displayOneSetNotification(glvoucher_notifications,'#divNotiVoucher');
+		displayOneSetNotification(gosi_notifications,'#divNotiGosi');
+		displayOneSetNotification(increment_notifications,'#divNotiInc');
+		displayOneSetNotification(iqama_notifications,'#divNotiIqama');
+		displayOneSetNotification(loan_notifications,'#divNotiLoan');
+		displayOneSetNotification(vacation_notifications,'#divNotiVac');
+		displayOneSetNotification(vacation_request_notifications,'#divNotiVacReq');
 		
+		NOTIFICATIONS_LOADED = true;
 		changePageID('#pageNotifications');
 	}
 	var displayOneSetNotification = function(notifications,id){
 		if(notifications.length > 0) {
+			if(notifications.length == 1) {
+				if(notifications[0].data == "0" )
+					return true;
+			}
 			var parentDiv = $(id);
 			parentDiv.show();
+			/* display count in each module */
+			var countDiv = $("<div/>")
+				.attr("class","count")
+				.html(notifications.length);
+			
+			/* append the COUNT div to HEAD div */
+			var divHead = parentDiv.children('.notificaiton-head');
+			countDiv.appendTo(divHead);
+			
+			var childDiv = $(id + "-sub");
+			childDiv.html("");
 			$.each(notifications, function(index,value) {				
 				var div =  $("<div/>")
 					.attr('class','notificaiton-rows')
 					.text(value.data);
-				div.appendTo(parentDiv);			
+				div.appendTo(childDiv);			
 			});	
 		}
 	}
