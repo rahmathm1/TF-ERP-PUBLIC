@@ -2,7 +2,7 @@
 
 	var ALERT_TITLE	=	"Taskforces ERP";
 	//var API			= 	"http://192.168.1.188/taskforces/api/";
-	var API			= 	"http://192.168.2.20:88//taskforces/api/";
+	var API			= 	"http://192.168.2.20//taskforces/api/";
 	//var API			= 	"http://203.124.121.150:88/taskforces/api/";
 	
 	/**************************************************************
@@ -81,6 +81,34 @@
 					
 				})
 			.fail(ajaxFailed);
+			
+/*		 $.ajax({
+            beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
+            complete: function() { $.mobile.hidePageLoadingMsg() }, //Hide spinner
+            url: //url
+            dataType: 'json',
+            headers: //headers
+            success: function(data) {
+                //...
+            }
+        });*/
+	}
+	var getResponseV2 = function(data,parser) {
+		console.log("Method : getResponse");
+		console.log("DATA : " + JSON.stringify(data));
+		$.ajax({
+            beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
+            complete: function() { $.mobile.hidePageLoadingMsg() }, //Hide spinner
+            url: API,
+            dataType: 'json',
+            data:  data
+        })
+		.done(function(response){ 
+					console.log(JSON.stringify(response));
+					parser(response);					
+				})
+		.fail(ajaxFailed)
+		.always(function(){});
 	}
 	var ajaxFailed = function(res) {		
 		console.error("Network error. Please try again. Result : "+JSON.stringify(res));

@@ -11,6 +11,9 @@
 	
 	var BUSINESS_UNITS		= "BUSINESS_UNITS";
 	var NOTIFICATIONS		= "NOTIFICATIONS";
+	var API_NOTIFICATIONS		= "NOTIFICATIONCOUNT";
+	var API_SALARYSUMMARY		= "SALARYSUMMARY";
+	var API_HRNOTIFICATIONS		= "HRNOTIFICATIONS";
 	var LOGIN				= "LOGIN";
 	
 	var NOTIFICATIONS_LOADED = false;
@@ -52,9 +55,9 @@
     function onMenuKeyDown() {
 		//if($.mobile.activePage.attr("id")!= "pageLogin"){
 			if ($('.menu-button').css('display') == 'none')
-				$('.menu-button').fadeIn();
+				$('.menu-button').show();
 			else
-				$('.menu-button').fadeOut();
+				$('.menu-button').hide();
 		//}
     }
 	
@@ -90,6 +93,18 @@
 				}
 			}
 		});
+		$("#pageDashboard").on('pagecreate', function(e, ui){  
+			showSpinner();
+			getNotificationsCount();
+		});
+		$("#pageSalarySummary").on('pagecreate', function(e, ui){  
+			showSpinner();
+			getSalarySummary();
+		});
+		$("#pageHRNotifications").on('pagecreate', function(e, ui){  
+			showSpinner();
+			getHRNotifications();
+		});
 		$("#pageLogin").on('pagebeforeshow', function(e, ui){  
 			console.log("login : page before show");
 			if(localStorage.isLoggedIn == "true") {
@@ -124,6 +139,10 @@
 			getNotifications();
 		});
 		$("#subMenuPendingNotifications").on("click",function() {
+			showSpinner();
+			getNotifications();			
+		});
+		$("#viewAllNotifications").on("click",function() {
 			showSpinner();
 			getNotifications();			
 		});
@@ -214,6 +233,141 @@
 		}
 		hideSpinner();
 	};
+	/**
+	*	Name	:	getHRNotifications
+	*	Desc	:	Fetch HR notifications count from the server
+	**/
+	var getHRNotifications = function () {
+		console.log("Method : getHRNotifications");
+		if (localStorage.getItem("hrNotifications") === null) {
+			data = new Object();
+			data.module = API_HRNOTIFICATIONS;
+			data.branchFilter = localStorage.branchFilter;
+			getResponseV2(data,parseHRNotifications);
+		}else{
+			var response = JSON.parse(localStorage.hrNotifications);
+			parseHRNotifications(response);	
+		}
+	}; 
+	var parseHRNotifications = function(response) {
+		if(response.status==1) {
+			displayHRNotifications(response);	
+			localStorage.hrNotifications = JSON.stringify(response);		
+		} else {
+			ajaxFailed();
+		}
+		hideSpinner();
+	};
+	
+	var displayHRNotifications = function(response) {
+		var hrNotifications = response.hr_notifications;
+		var parent = $('#divHRNotifications');
+		for( i = 0 ; i < hrNotifications.length ; i++ ) {
+			var divName = $('<div/>');
+			var divDate = $('<div/>');
+			var divItem = $('<div/>');
+			
+			divItem.addClass('inner-list-item');
+			divName.addClass('w50');
+			divDate.addClass('w50');
+			//divDate.css('text-align','right');
+			
+			divDate.html(hrNotifications[i].EMP_NAME);
+			divName.html(hrNotifications[i].START_DATE);
+			
+			divDate.appendTo(divItem);	
+			divName.appendTo(divItem);
+			
+			divItem.appendTo(parent);
+		}
+		divItem.addClass('last');
+	}
+	/**
+	*	Name	:	getSalarySummary
+	*	Desc	:	Fetch salary summary 
+	**/
+	var getSalarySummary = function () {
+		console.log("Method : getSalarySummary");
+		if (localStorage.getItem("salarySummary") === null) {
+			data = new Object();
+			data.module = API_SALARYSUMMARY;
+			data.branchFilter = localStorage.branchFilter;
+			getResponseV2(data,parseSalarySummary);
+		}else{
+			var response = JSON.parse(localStorage.salarySummary);
+			parseSalarySummary(response);	
+		}
+	}; 
+	var parseSalarySummary = function(response) {
+		if(response.status==1) {
+			displaySalarySummary(response);	
+			localStorage.salarySummary = JSON.stringify(response);		
+		} else {
+			ajaxFailed();
+		}
+		hideSpinner();
+	};
+	
+	var displaySalarySummary = function(response) {
+		var salarySummary = response.salary_summary;
+		var parent = $('#divSalarySummary');
+		for( i = 0 ; i < salarySummary.length ; i++ ) {
+			var divMonth = $('<div/>');
+			var divSalary = $('<div/>');
+			var divItem = $('<div/>');
+			divItem.addClass('inner-list-item');
+			divMonth.addClass('w60');
+			divSalary.addClass('w40');
+			divSalary.css('text-align','right');
+			divMonth.html(salarySummary[i].MONTH);
+			divSalary.html(salarySummary[i].SALARY);
+			divMonth.appendTo(divItem);
+			divSalary.appendTo(divItem);	
+			divItem.appendTo(parent);
+		}
+		divItem.addClass('last');
+	}
+	
+	/**
+	*	Name	:	getNotificationsCount
+	*	Desc	:	Fetch notifications count from the server
+	**/
+	var getNotificationsCount = function () {
+		console.log("Method : getNotificationsCount");
+		if (localStorage.getItem("notificationsCount") === null) {
+			data = new Object();
+			data.module = API_NOTIFICATIONS;
+			data.branchFilter = localStorage.branchFilter;
+			getResponse(data,parseNotificationsCount);
+		}else{
+			var response = JSON.parse(localStorage.notificationsCount);
+			parseNotificationsCount(response);	
+		}
+	}; 
+	var parseNotificationsCount = function(response) {
+		if(response.status==1) {
+			displayNotificationsCount(response);	
+			localStorage.notificationsCount = JSON.stringify(response);		
+		} else {
+			ajaxFailed();
+		}
+		hideSpinner();
+	};
+	
+	var displayNotificationsCount = function(response) {
+		var parent = $('.dash-notifications');
+		var counts = response.notification_count;
+		for( i = 0; i < counts.length ; i++ ) {
+			/* Skip notifications with zero */
+			if( counts[i].count > 0 ) {
+				var div = $('<div/>');
+				div.html( counts[i].name + '<div class="count">'+ counts[i].count + "</div>" );
+				div.addClass('dash-noti-sub-head');
+				div.appendTo(parent);
+			}
+		}
+		div.addClass('last');
+	}
 	/**
 	*	Name	:	getNotifications
 	*	Desc	:	Fetch notifications from the server

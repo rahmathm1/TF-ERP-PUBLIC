@@ -65,6 +65,10 @@ h1,h2,h3,h4,h5,h6 {
 	width:30%;
 	float:left;
 }
+.w32 {
+	width:33.33%;
+	float:left;
+}
 .w40 {
 	width:40%;
 	float:left;
@@ -96,7 +100,7 @@ h1,h2,h3,h4,h5,h6 {
     -webkit-border-radius:6px;
     -moz-border-radius:6px;
 	padding:6px 10px;
-	margin:-2px -7px;
+	margin:-3px -7px;
 	border:1px solid #ccc;
 	background: rgb(214,214,214); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(214,214,214,1) 1%, rgba(254,255,255,1) 99%); /* FF3.6+ */
@@ -109,7 +113,10 @@ h1,h2,h3,h4,h5,h6 {
 	 border-radius:6px;
    -webkit-border-radius:6px;
    -moz-border-radius:6px;
-   font-size:10px;
+   font-size:11px;
+}
+.small-btn:active {
+	border:1px solid #aaa;
 }
 .content-wrapper {
 	padding:6px;
@@ -118,7 +125,7 @@ h1,h2,h3,h4,h5,h6 {
 /* Sub option for dash board */
 .dash-notifications {
 	
-	margin:10px 5px 0 5px;
+	margin:3px 5px 0 5px;
 	box-shadow:1px 1px 5px #666666;
 	 border-radius:6px;
    -webkit-border-radius:6px;
@@ -143,6 +150,7 @@ h1,h2,h3,h4,h5,h6 {
    -webkit-border-radius:6px 6px 0 0;
    -moz-border-radius:6px 6px 0 0;
    height:auto;
+   
  }
  .dash-notifications .dash-noti-sub-head {
 	 overflow:hidden;
@@ -150,13 +158,81 @@ h1,h2,h3,h4,h5,h6 {
 	 padding:5px 10px;
 	 border-bottom:1px solid #FFF;
 	 border-top:1px solid #ddd;
-	 font-size:15px;
+	 font-size:14px;
+	 
+ }
+  .dash-notifications .dash-noti-sub-head .count {
+	  float:right;
+	  font-weight:bold;
+  }
+  .dash-notifications .dash-noti-sub-head.last {
+	  border-radius:0 0 6px 6px ;
+   -webkit-border-radius:0 0 6px 6px;
+   -moz-border-radius:0 0 6px 6px;
  }
  .dash-notifications .dash-noti-content {
 	 overflow:hidden;
 	 padding:5px 10px;
 	 font-size:14px;
  }
+ /* inner page titles */
+ .inner-page-titles {
+	
+	margin:0 1px -2px -2px ;
+	box-shadow:0px 0px 3px #777;
+	 border-radius:5px;
+   -webkit-border-radius:5px;
+   -moz-border-radius:5px;
+}
+ .inner-page-titles .dash-noti-head .btn-back {
+	 background:url(../images/btn-arrow.png) no-repeat center;
+	 width:7px;
+ }
+ .inner-page-titles .dash-noti-head {
+	 background: rgb(254,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(254,255,255,1) 0%, rgba(214,214,214,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,255,255,1)), color-stop(100%,rgba(214,214,214,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(214,214,214,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(214,214,214,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(254,255,255,1) 0%,rgba(214,214,214,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(254,255,255,1) 0%,rgba(214,214,214,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d6d6d6',GradientType=0 ); /* IE6-9 */
+	font-size:16px;
+	padding:5px 10px;
+	overflow:hidden;
+	border=bottom:1px solid #ccc;
+	
+	 border-radius:6px 6px 0 0;
+   -webkit-border-radius:6px 6px 0 0;
+   -moz-border-radius:6px 6px 0 0;
+   height:auto;
+   
+ }
+ .inner-page-titles .inner-list-item {
+	 overflow:hidden;
+	 background:#eee;
+	 padding:5px 10px;
+	 border-bottom:1px solid #FFF;
+	 border-top:1px solid #ddd;
+	 font-size:14px;
+	 
+ }
+  .inner-page-titles .inner-list-item .count {
+	  float:right;
+	  font-weight:bold;
+  }
+ .inner-page-titles .inner-list-item.last {
+	  border-radius:0 0 5px 5px ;
+   -webkit-border-radius:0 0 5px 5px;
+   -moz-border-radius:0 0 5px 5px;
+ }
+ .inner-page-titles .dash-noti-content {
+	 overflow:hidden;
+	 padding:5px 10px;
+	 font-size:14px;
+ }
+ /* inner page titles ends ehre*/
+ 
 .sub-button-wrapper {
 	overflow:none;
 	display:none;
@@ -172,6 +248,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 .sub-button-wrapper .arrow#right {
 	float:right;
+}
+.sub-button-wrapper .arrow#center {
+	margin:auto;
 }
 .buttons-wrapper .sub-btn-ul-wrapper {
 	overflow:hidden;clear:both;
@@ -286,7 +365,7 @@ ul.sub-options li:active {
 	
 }
 .buttons  {
-	height:80px;
+	height:70px;
 	background-position:center;
 	background-repeat:repeat-x;
 	position:relative;
@@ -354,7 +433,7 @@ ul.sub-options li:active {
 	background-image:url(../images/ico-profile.png)
 }
 .logged-in-as {
-	position:absolute;
+	position:fixed;
 	bottom:0;
 	left:0;
 	right:0;
@@ -374,7 +453,8 @@ ul.sub-options li:active {
 	background:#9f2323;
 	color:#FFF;
 	font-size:14px;
-	padding:4px 15px;
+	padding:6px 17px;
+	margin:-2px;
 }
 .logged-in-as .log-out:active {
 	background:#af3434;
@@ -523,6 +603,9 @@ ul.sub-options li:active {
 }
 .inner-page .content .notifications {
 	background-color:#c22d2d;
+}
+.inner-page .content .hr {
+	background-color:#FFA600;
 }
 
 .inner-page .content .head .title{
