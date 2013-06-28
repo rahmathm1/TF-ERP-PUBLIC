@@ -14,6 +14,8 @@
 	var API_NOTIFICATIONS		= "NOTIFICATIONCOUNT";
 	var API_SALARYSUMMARY		= "SALARYSUMMARY";
 	var API_HRNOTIFICATIONS		= "HRNOTIFICATIONS";
+	var API_SELLING			= "TOP10SELLING";
+	var API_NONSELLING			= "TOP10NONSELLING";
 	var LOGIN				= "LOGIN";
 	
 	var NOTIFICATIONS_LOADED = false;
@@ -134,6 +136,18 @@
 		/*$("#pageNotifications").on("pageshow",function(event){
 			showSpinner();
 		});*/
+		$("#subMenuSelling").on("click",function() {
+			showSpinner();
+			getSellingItems();
+		});
+		$("#subMenuNonSelling").on("click",function() {
+			showSpinner();
+			getNonSellingItems();
+		});
+		$("#subMenuNonSelling").on("click",function() {
+			showSpinner();
+			getNonSellingItems();
+		});
 		$("#subMenuAllNotifications").on("click",function() {
 			showSpinner();
 			getNotifications();
@@ -234,6 +248,121 @@
 		hideSpinner();
 	};
 	/**
+	*	Name	:	getNonSellingItems
+	*	Desc	:	Fetch HR notifications count from the server
+	**/
+	var getNonSellingItems = function () {
+		console.log("Method : getNonSellingItems");
+		if (localStorage.getItem("nonSellingItems") === null) {
+			data = new Object();
+			data.module = API_NONSELLING;
+			data.branchFilter = localStorage.branchFilter;
+			getResponseV2(data,parseNonSellingItems);
+		}else{
+			var response = JSON.parse(localStorage.nonSellingItems);
+			parseNonSellingItems(response);	
+		}
+	}; 
+	var parseNonSellingItems = function(response) {
+		if(response.status==1) {
+			displayNonSellingItems(response);	
+			localStorage.nonSellingItems = JSON.stringify(response);		
+		} else {
+			ajaxFailed();
+		}
+		hideSpinner();
+	};
+	
+	var displayNonSellingItems = function(response) {
+		var nonSellingItems = response.non_selling;
+		var parent = $('#divSalesItems');
+		parent.html("");
+		var title = $('#pageSales .pageTitle');
+		var head1 = $('#pageSales .head1');
+		var head2 = $('#pageSales .head2');
+		head1.html('Item Code');
+		head2.html('Item Name');
+		head2.css('text-align','left');
+		title.html('TOP 10 Non-selling items');
+		for( i = 0 ; i < nonSellingItems.length ; i++ ) {
+			var divName = $('<div/>');
+			var divCode = $('<div/>');
+			var divItem = $('<div/>');
+			
+			divItem.addClass('inner-list-item');
+			divName.addClass('w50');
+			divCode.addClass('w50');
+			
+			divCode.html(nonSellingItems[i].ITEM_CODE);
+			divName.html(nonSellingItems[i].ITEM_NAME);
+			
+			divCode.appendTo(divItem);	
+			divName.appendTo(divItem);
+			
+			divItem.appendTo(parent);
+		}
+		divItem.addClass('last');
+		changePageID('#pageSales');
+	}
+	/**
+	*	Name	:	getSellingItems
+	*	Desc	:	Fetch HR notifications count from the server
+	**/
+	var getSellingItems = function () {
+		console.log("Method : getSellingItems");
+		if (localStorage.getItem("sellingItems") === null) {
+			data = new Object();
+			data.module = API_SELLING;
+			data.branchFilter = localStorage.branchFilter;
+			getResponseV2(data,parseSellingItems);
+		}else{
+			var response = JSON.parse(localStorage.sellingItems);
+			parseSellingItems(response);	
+		}
+	}; 
+	var parseSellingItems = function(response) {
+		if(response.status==1) {
+			displaySellingItems(response);	
+			localStorage.sellingItems = JSON.stringify(response);		
+		} else {
+			ajaxFailed();
+		}
+		hideSpinner();
+	};
+	
+	var displaySellingItems = function(response) {
+		var sellingItems = response.selling;
+		var parent = $('#divSalesItems');
+		parent.html("");
+		var title = $('#pageSales .pageTitle');
+		title.html('TOP 10 Selling items');
+		var head1 = $('#pageSales .head1');
+		var head2 = $('#pageSales .head2');
+		head1.html('Name');
+		head2.html('Quantity');
+		head2.css('text-align','right');
+		for( i = 0 ; i < sellingItems.length ; i++ ) {
+			var divName = $('<div/>');
+			var divQty = $('<div/>');
+			var divItem = $('<div/>');
+			
+			divItem.addClass('inner-list-item');
+			divName.addClass('w70');
+			divQty.addClass('w30');
+			divQty.css('text-align','right');
+			
+			divQty.html(sellingItems[i].QTY);
+			divName.html(sellingItems[i].ITEM_NAME);
+			
+			divName.appendTo(divItem);
+			divQty.appendTo(divItem);	
+			
+			divItem.appendTo(parent);
+		}
+		divItem.addClass('last');
+		changePageID('#pageSales');
+	}
+	/**
 	*	Name	:	getHRNotifications
 	*	Desc	:	Fetch HR notifications count from the server
 	**/
@@ -273,7 +402,7 @@
 			//divDate.css('text-align','right');
 			
 			divDate.html(hrNotifications[i].EMP_NAME);
-			divName.html(hrNotifications[i].START_DATE);
+			divName.html(hrNotifications[i].DATE);
 			
 			divDate.appendTo(divItem);	
 			divName.appendTo(divItem);

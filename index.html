@@ -121,9 +121,9 @@
         <div class="arrow" id="center"></div>
         <div class="sub-btn-ul-wrapper">
           <ul class="sub-options">
-            <li class="sub-option"><a href="#pageSales">Top 10 Selling items</a></li>
-            <li class="sub-option"><a href="#pageSales">Top 10 Non-selling items</a></li>
-            <li class="sub-option"><a href="#pageSales">Top 10 Customers</a></li>
+            <li class="sub-option" id="subMenuSelling">Top 10 Selling items</li>
+            <li class="sub-option"  id="subMenuNonSelling">Top 10 Non-selling items</li>
+            <li class="sub-option"  id="subMenuCustomers"><a href="#pageSales">Top 10 Customers</a></li>
           </ul>
         </div>
       </div>
@@ -205,7 +205,7 @@
 
 <!-- 
 
-	Sales
+	pageSales
 
 -->
 <div data-role="page" data-theme="a" id="pageSales">
@@ -216,7 +216,7 @@
       </div>
     </div>
     <div class="w25">
-      <div class="tabs tabNoti" id="tabNoti">
+      <div class="tabs selected" id="tabNoti">
         <div class="caption">Notifications</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
@@ -234,55 +234,48 @@
   </div>
   <!-- /header  -->
   
-  <div data-role="content">
+  <div data-role="content"> 
+    <!-- <div class="head hr">
+            <div class="square-buttons" id="btn-fav"></div>
+            <div class="square-buttons" id="btn-reload"></div>
+            <a  data-rel="back" href="#">
+            <div class="square-buttons" id="btn-back"></div>
+            </a>
+            <div class="title">Notifications</div>
+          </div>-->
+    
     <div class="inner-page">
       <div class="side-tabs">
         <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="FInance"> </div>
         <div class="sidetab"> <img class="sideMenuHR" src="images/ico_side_HR.png"  alt="HR"> </div>
-        <div class="sidetab"> <img src="images/ico_side_sales.png"  alt="Sales"> </div>
+        <div class="sidetab"> <img class="sideMenuSales" src="images/ico_side_sales.png"  alt="Sales"> </div>
         <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"> </div>
+        <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"> </div>
       </div>
       <div class="content">
-        <div class="gradient">
-          <div class="head sales">
-            <div class="square-buttons" id="btn-fav"></div>
-            <a  data-rel="back" href="#">
-            <div class="square-buttons" id="btn-back"></div>
-            </a>
-            <div class="title">Sales</div>
+        <div class="inner-page-titles">
+          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; <span class="pageTitle"></span>
+            <div class="small-btn btn-back" style="float:left" id="viewAllNotifications">&nbsp;</div>
           </div>
-          <div class="side-content-body">
-            <div class="sub-menu-head">Top 10 Selling items</div>
-            <div class="dateSaleFromTo">Period : From <span id="dateFrom">Apr 2012</span> to <span id="dateTo">Apr 2013</span></div>
-            <div class="sub-menu-content">
-              <table data-role="table"  data-mode="normal" class="ui-body-d ui-shadow table-stripe table-font-size" >
-                <thead>
-                  <tr class="ui-bar-d">
-                    <th data-priority="1" width="70%">Item name</th>
-                    <th data-priority="1" width="30%">Value</th>
-                  </tr>
-                </thead>
-                <tbody id="tblSales">
-                  <tr>
-                    <td>Iten name 1</td>
-                    <td>170</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- <div class="sub-menu-head">Top 10 Non-Selling items</div>
-                    <div class="sub-menu-head">Top 10 Customers</div>            --> 
+          <div class="inner-list-item">
+            <div class="w50"><strong><div class="head1">Item Code</div></strong></div>
+            <div class="w50"><strong><div class="head2">Item Name</div></strong></div>
           </div>
+           <div id="divSalesItems">
+           </div>
+          
+         
+          
         </div>
       </div>
     </div>
     <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
-      <div class="log-out">Logout</div>
+      <div class="log-out menuLogout">Logout</div>
     </div>
   </div>
   <!-- /content --> 
 </div>
+
 <!-- 
 
 	Notificaitn
@@ -438,12 +431,12 @@
         <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"> </div>
       </div>
       <div class="content">
-        <div class="inner-page-titles" id="divSalarySummary">
+        <div class="inner-page-titles">
           <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; Salary Summary
             <div class="small-btn btn-back" style="float:left" id="viewAllNotifications">&nbsp;</div>
           </div>
           <div class="inner-list-item">
-            <div class="w50"><strong>Moth</strong></div>
+            <div class="w50"><strong>Month</strong></div>
             <div class="w50" style="text-align:right"><strong>Salary Summary</strong></div>
           </div>
            <div id="divSalarySummary">
