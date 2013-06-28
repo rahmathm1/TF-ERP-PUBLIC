@@ -661,6 +661,7 @@
 				parseNotifications(response);	
 			}else{
 				changePageID('#pageNotifications');
+				hideSpinner();
 			}
 		}
 	}; 
@@ -671,6 +672,7 @@
 		} else {
 			ajaxFailed();
 		}
+		hideSpinner();
 	};
 	
 	var displayNotifications = function(response) {
@@ -701,6 +703,7 @@
 		
 		NOTIFICATIONS_LOADED = true;
 		changePageID('#pageNotifications');
+		hideSpinner();
 	}
 	var displayOneSetNotification = function(notifications,id){
 		if(notifications.length > 0) {
