@@ -112,8 +112,8 @@
         <div class="arrow" id="left"></div>
         <div class="sub-btn-ul-wrapper">
           <ul class="sub-options">
-            <li class="sub-option"><a href="#pageSalarySummary">Salary Summary</a></li>
-            <li class="sub-option"><a href="#pageHRNotifications">HR Notifications</a></li>
+            <li class="sub-option" id="subMenuSalarySummary">Salary Summary</li>
+            <li class="sub-option" id="subMenuHRNotifications">HR Notifications</li>
           </ul>
         </div>
       </div>
@@ -123,7 +123,7 @@
           <ul class="sub-options">
             <li class="sub-option" id="subMenuSelling">Top 10 Selling items</li>
             <li class="sub-option"  id="subMenuNonSelling">Top 10 Non-selling items</li>
-            <li class="sub-option"  id="subMenuCustomers"><a href="#pageSales">Top 10 Customers</a></li>
+            <li class="sub-option"  id="subMenuCustomers">Top 10 Customers</li>
           </ul>
         </div>
       </div>
@@ -162,8 +162,8 @@
         <div class="arrow" id="left"></div>
         <div class="sub-btn-ul-wrapper">
           <ul class="sub-options">
-            <li class="sub-option">Top 10 Accounts Receivable</li>
-            <li class="sub-option">Top 10 Accounts Payable</li>
+            <li class="sub-option" id="subMenuAccReceibales">Top 10 Accounts Receivables</li>
+            <li class="sub-option" id="subMenuAccPayables">Top 10 Accounts Payables</li>
           </ul>
         </div>
       </div>
@@ -195,9 +195,9 @@
       <!-- <div class="dash-noti-sub-head">Absent Notifications </div>--> 
       
     </div>
-    <div style="height:30px;"></div>
+    <div style="height:20px;"></div>
     <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
-      <div class="log-out" id="menuLogout">Logout</div>
+      <div class="log-out">Logout</div>
     </div>
   </div>
   <!-- /content --> 
@@ -216,7 +216,7 @@
       </div>
     </div>
     <div class="w25">
-      <div class="tabs selected" id="tabNoti">
+      <div class="tabs" id="tabNoti">
         <div class="caption">Notifications</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
@@ -234,43 +234,98 @@
   </div>
   <!-- /header  -->
   
-  <div data-role="content"> 
-    <!-- <div class="head hr">
-            <div class="square-buttons" id="btn-fav"></div>
-            <div class="square-buttons" id="btn-reload"></div>
-            <a  data-rel="back" href="#">
-            <div class="square-buttons" id="btn-back"></div>
-            </a>
-            <div class="title">Notifications</div>
-          </div>-->
-    
+  <div data-role="content">
     <div class="inner-page">
       <div class="side-tabs">
-        <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="FInance"> </div>
+        <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="Finance"> </div>
+        <div class="sidetab"> <img class="sideMenuHR" src="images/ico_side_HR.png"  alt="HR"> </div>
+        <div class="sidetab"> <img src="images/ico_side_sales.png"  alt="Sales"> </div>
+        <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"> </div>
+      </div>
+      <div class="content">
+        <div class="inner-page-titles">
+          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; <span class="pageTitle">Sales</span>
+             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left">&nbsp;</div></a>
+          </div>
+          <div class="inner-list-item">
+            <div class="w50"><strong>
+              <div class="head1">Item Code</div>
+              </strong></div>
+            <div class="w50"><strong>
+              <div class="head2">Item Name</div>
+              </strong></div>
+          </div>
+          <div id="divSalesItems"> </div>
+        </div>
+      </div>
+    </div>
+     <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
+      <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+  </div>
+  <!-- /content --> 
+</div>
+
+<!-- 
+
+	pageFinance
+
+-->
+<div data-role="page" data-theme="a" id="pageFinance">
+  <div data-role="header" data-theme="none" class="header-bg">
+    <div class="w25">
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabNoti">
+        <div class="caption">Notifications</div>
+        <!--<div class="noti-count">3</div>--> 
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabReq">
+        <div class="caption">Service Request</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabMore">
+        <div class="caption">More</div>
+      </div>
+    </div>
+  </div>
+  <!-- /header  -->
+  
+  <div data-role="content">
+    <div class="inner-page">
+      <div class="side-tabs">
+        <div class="sidetab"> <img src="images/ico_side_finance.png"  alt="FInance"> </div>
         <div class="sidetab"> <img class="sideMenuHR" src="images/ico_side_HR.png"  alt="HR"> </div>
         <div class="sidetab"> <img class="sideMenuSales" src="images/ico_side_sales.png"  alt="Sales"> </div>
         <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-        <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"> </div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"> </div>
       </div>
       <div class="content">
         <div class="inner-page-titles">
           <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; <span class="pageTitle"></span>
-            <div class="small-btn btn-back" style="float:left" id="viewAllNotifications">&nbsp;</div>
+             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left">&nbsp;</div></a>
           </div>
           <div class="inner-list-item">
-            <div class="w50"><strong><div class="head1">Item Code</div></strong></div>
-            <div class="w50"><strong><div class="head2">Item Name</div></strong></div>
+            <div class="w50"><strong>
+              <div class="head1">Item Code</div>
+              </strong></div>
+            <div class="w50"><strong>
+              <div class="head2">Item Name</div>
+              </strong></div>
           </div>
-           <div id="divSalesItems">
-           </div>
-          
-         
-          
+          <div id="divFinance"> </div>
         </div>
       </div>
     </div>
-    <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
-      <div class="log-out menuLogout">Logout</div>
+     <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
+      <div class="log-out">Logout</div>
     </div>
   </div>
   <!-- /content --> 
@@ -306,25 +361,19 @@
     </div>
   </div>
   <!-- /header  -->
-  
   <div data-role="content">
     <div class="inner-page">
       <div class="side-tabs">
-        <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="FInance"> </div>
+        <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="Finance"> </div>
         <div class="sidetab"> <img class="sideMenuHR" src="images/ico_side_HR.png"  alt="HR"> </div>
         <div class="sidetab"> <img class="sideMenuSales" src="images/ico_side_sales.png"  alt="Sales"> </div>
         <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
         <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"> </div>
       </div>
       <div class="content">
-        <div class="gradient">
-          <div class="head notifications">
-            <div class="square-buttons" id="btn-fav"></div>
-            <div class="square-buttons" id="btn-reload"></div>
-            <a  data-rel="back" href="#">
-            <div class="square-buttons" id="btn-back"></div>
-            </a>
-            <div class="title">Notifications</div>
+        <div class="inner-page-titles">
+          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; <span class="pageTitle">Notifications</span>
+             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left" >&nbsp;</div></a>
           </div>
           <div class="side-content-body"> 
             <!-- <div class="sub-menu-head">Top 10 Selling items</div>     -->
@@ -351,6 +400,10 @@
                 <div class="notificaiton-head"> Increment Notifications </div>
                 <div id="divNotiInc-sub" class="notificaiton-sub"></div>
               </div>
+              <div class="notificaiton-block" id="divNotiInv">
+                <div class="notificaiton-head"> Invoice Notifications </div>
+                <div id="divNotiInv-sub" class="notificaiton-sub"></div>
+              </div>
               <div class="notificaiton-block" id="divNotiIqama">
                 <div class="notificaiton-head"> Iqama Notifications </div>
                 <div id="divNotiIqama-sub" class="notificaiton-sub"></div>
@@ -358,6 +411,10 @@
               <div class="notificaiton-block" id="divNotiLoan">
                 <div class="notificaiton-head"> Loan Notifications </div>
                 <div id="divNotiLoan-sub" class="notificaiton-sub"></div>
+              </div>
+              <div class="notificaiton-block" id="divNotiShip">
+                <div class="notificaiton-head"> Shipment Notifications </div>
+                <div id="divNotiShip-sub" class="notificaiton-sub"></div>
               </div>
               <div class="notificaiton-block" id="divNotiVac">
                 <div class="notificaiton-head"> Vacation Notifications </div>
@@ -367,6 +424,7 @@
                 <div class="notificaiton-head"> Vacation Request Notifications </div>
                 <div id="divNotiVacReq-sub" class="notificaiton-sub"></div>
               </div>
+              
             </div>
             <!-- <div class="sub-menu-head">Top 10 Non-Selling items</div>
                     <div class="sub-menu-head">Top 10 Customers</div>            --> 
@@ -394,7 +452,7 @@
       </div>
     </div>
     <div class="w25">
-      <div class="tabs selected" id="tabNoti">
+      <div class="tabs" id="tabNoti">
         <div class="caption">Notifications</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
@@ -413,37 +471,24 @@
   <!-- /header  -->
   
   <div data-role="content"> 
-    <!-- <div class="head hr">
-            <div class="square-buttons" id="btn-fav"></div>
-            <div class="square-buttons" id="btn-reload"></div>
-            <a  data-rel="back" href="#">
-            <div class="square-buttons" id="btn-back"></div>
-            </a>
-            <div class="title">Notifications</div>
-          </div>-->
-    
     <div class="inner-page">
       <div class="side-tabs">
         <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="FInance"> </div>
-        <div class="sidetab"> <img class="sideMenuHR" src="images/ico_side_HR.png"  alt="HR"> </div>
+        <div class="sidetab"> <img src="images/ico_side_HR.png"  alt="HR"> </div>
         <div class="sidetab"> <img class="sideMenuSales" src="images/ico_side_sales.png"  alt="Sales"> </div>
         <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-        <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"> </div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"> </div>
       </div>
       <div class="content">
         <div class="inner-page-titles">
           <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; Salary Summary
-            <div class="small-btn btn-back" style="float:left" id="viewAllNotifications">&nbsp;</div>
+             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left">&nbsp;</div></a>
           </div>
           <div class="inner-list-item">
             <div class="w50"><strong>Month</strong></div>
             <div class="w50" style="text-align:right"><strong>Salary Summary</strong></div>
           </div>
-           <div id="divSalarySummary">
-           </div>
-          
-         
-          
+          <div id="divSalarySummary"> </div>
         </div>
       </div>
     </div>
@@ -484,38 +529,25 @@
   <!-- /header  -->
   
   <div data-role="content"> 
-    <!-- <div class="head hr">
-            <div class="square-buttons" id="btn-fav"></div>
-            <div class="square-buttons" id="btn-reload"></div>
-            <a  data-rel="back" href="#">
-            <div class="square-buttons" id="btn-back"></div>
-            </a>
-            <div class="title">Notifications</div>
-          </div>-->
-    
     <div class="inner-page">
       <div class="side-tabs">
         <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="FInance"> </div>
-        <div class="sidetab"> <img class="sideMenuHR" src="images/ico_side_HR.png"  alt="HR"> </div>
+        <div class="sidetab"> <img src="images/ico_side_HR.png"  alt="HR"> </div>
         <div class="sidetab"> <img class="sideMenuSales" src="images/ico_side_sales.png"  alt="Sales"> </div>
         <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-        <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"> </div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"> </div>
       </div>
       <div class="content">
         <div class="inner-page-titles" id="divSalarySummary">
           <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; HR Notifications
-            <div class="small-btn btn-back" style="float:left" id="viewAllNotifications">&nbsp;</div>
+             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left">&nbsp;</div></a>
           </div>
-          <div class="inner-list-item">
+          <div class="inner-list-item"> 
             <!--<div class="w20"><strong>Doc No</strong></div>-->
             <div class="w50"><strong>Name</strong></div>
             <div class="w50"><strong>Date</strong></div>
           </div>
-           <div id="divHRNotifications">
-           </div>
-          
-         
-          
+          <div id="divHRNotifications"> </div>
         </div>
       </div>
     </div>

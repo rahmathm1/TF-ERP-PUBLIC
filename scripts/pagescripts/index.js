@@ -16,6 +16,8 @@
 	var API_HRNOTIFICATIONS		= "HRNOTIFICATIONS";
 	var API_SELLING			= "TOP10SELLING";
 	var API_NONSELLING			= "TOP10NONSELLING";
+	var API_ACCPAYABLES			= "TOP10ACCPAYABLES";
+	var API_ACCRECEIVABLES			= "TOP10ACCRECEIVABLES";
 	var LOGIN				= "LOGIN";
 	
 	var NOTIFICATIONS_LOADED = false;
@@ -99,14 +101,12 @@
 			showSpinner();
 			getNotificationsCount();
 		});
-		$("#pageSalarySummary").on('pagecreate', function(e, ui){  
-			showSpinner();
-			getSalarySummary();
+		/*$("#pageSalarySummary").on('pagecreate', function(e, ui){  
+			
 		});
 		$("#pageHRNotifications").on('pagecreate', function(e, ui){  
-			showSpinner();
-			getHRNotifications();
-		});
+			
+		});*/
 		$("#pageLogin").on('pagebeforeshow', function(e, ui){  
 			console.log("login : page before show");
 			if(localStorage.isLoggedIn == "true") {
@@ -116,7 +116,7 @@
 			}
 		});
 		
-		$("#menuLogout").on('click', function(){  
+		$(".log-out").on('click', function(){  
 			console.log("clicked menu>logout");
 			showSpinner();
 			logout();
@@ -136,13 +136,27 @@
 		/*$("#pageNotifications").on("pageshow",function(event){
 			showSpinner();
 		});*/
+		$("#subMenuSalarySummary").on("click",function() {
+			showSpinner();
+			getSalarySummary();
+		});
+		$("#subMenuHRNotifications").on("click",function() {
+			showSpinner();
+			getHRNotifications();
+		});
+		$("#subMenuAccReceibales").on("click",function() {
+			showSpinner();
+			getAccReceivables();
+		});
+		$("#subMenuAccPayables").on("click",function() {
+			showSpinner();
+			getAccPayables();
+		});
+		
+		
 		$("#subMenuSelling").on("click",function() {
 			showSpinner();
 			getSellingItems();
-		});
-		$("#subMenuNonSelling").on("click",function() {
-			showSpinner();
-			getNonSellingItems();
 		});
 		$("#subMenuNonSelling").on("click",function() {
 			showSpinner();
@@ -179,10 +193,23 @@
 				block.slideDown();
 		});
 		$(".sideMenuNotificaitons").on("click",function() {
-			changePageID("#pageNotifications");
+			showSpinner();
+			getNotifications();
 		});
 		$(".sideMenuSales").on("click",function() {
-			changePageID("#pageSales");
+			showSpinner();
+			getSellingItems();
+		});
+		$(".sideMenuFinance").on("click",function() {
+			showSpinner();
+			getAccReceivables();
+		});
+		$(".sideMenuPurchase").on("click",function() {
+			alert('Page is under construction');
+		});
+		$(".sideMenuHR").on("click",function() {
+			showSpinner();
+			getSalarySummary();
 		});
 		
 		
@@ -247,7 +274,123 @@
 		}
 		hideSpinner();
 	};
-	/**
+	/******************************************************************
+	*	Name	:	getAccReceivables
+	*	Desc	:	Fetch HR notifications count from the server
+	**/
+	var getAccReceivables = function () {
+		console.log("Method : getAccReceivables");
+		if (localStorage.getItem("accReceivables") === null) {
+			data = new Object();
+			data.module = API_ACCRECEIVABLES;
+			data.branchFilter = localStorage.branchFilter;
+			getResponseV2(data,parseAccReceivables);
+		}else{
+			var response = JSON.parse(localStorage.accReceivables);
+			parseAccReceivables(response);	
+		}
+	}; 
+	var parseAccReceivables = function(response) {
+		if(response.status==1) {
+			displayAccReceivables(response);	
+			localStorage.accReceivables = JSON.stringify(response);		
+		} else {
+			ajaxFailed();
+		}
+		hideSpinner();
+	};
+	
+	var displayAccReceivables = function(response) {
+		var accReceivables = response.acc_receivables;
+		var parent = $('#divFinance');
+		parent.html("");
+		var title = $('#pageFinance .pageTitle');
+		title.html('TOP 10 Account Receivables');
+		var head1 = $('#pageFinance .head1');
+		var head2 = $('#pageFinance .head2');
+		head1.html('Customer');
+		head2.html('Balance');
+		head2.css('text-align','right');
+		for( i = 0 ; i < accReceivables.length ; i++ ) {
+			var divName = $('<div/>');
+			var divBal = $('<div/>');
+			var divItem = $('<div/>');
+			
+			divItem.addClass('inner-list-item');
+			divName.addClass('w60');
+			divBal.addClass('w40');
+			divBal.css('text-align','right');
+			
+			divBal.html(accReceivables[i].CUSTOMER_BALANCE);
+			divName.html(accReceivables[i].CUSTOMER_NAME);
+			
+			divName.appendTo(divItem);
+			divBal.appendTo(divItem);	
+			
+			divItem.appendTo(parent);
+		}
+		divItem.addClass('last');
+		changePageID('#pageFinance');
+	}
+	/******************************************************************
+	*	Name	:	getAccPayables
+	*	Desc	:	Fetch HR notifications count from the server
+	**/
+	var getAccPayables = function () {
+		console.log("Method : getAccPayables");
+		if (localStorage.getItem("accPayables") === null) {
+			data = new Object();
+			data.module = API_ACCPAYABLES;
+			data.branchFilter = localStorage.branchFilter;
+			getResponseV2(data,parseAccPayables);
+		}else{
+			var response = JSON.parse(localStorage.accPayables);
+			parseAccPayables(response);	
+		}
+	}; 
+	var parseAccPayables = function(response) {
+		if(response.status==1) {
+			displayAccPayables(response);	
+			localStorage.accPayables = JSON.stringify(response);		
+		} else {
+			ajaxFailed();
+		}
+		hideSpinner();
+	};
+	
+	var displayAccPayables = function(response) {
+		var accPayables = response.acc_payables;
+		var parent = $('#divFinance');
+		parent.html("");
+		var title = $('#pageFinance .pageTitle');
+		title.html('TOP 10 Account Payables');
+		var head1 = $('#pageFinance .head1');
+		var head2 = $('#pageFinance .head2');
+		head1.html('Suppplier');
+		head2.html('Balance');
+		head2.css('text-align','right');
+		for( i = 0 ; i < accPayables.length ; i++ ) {
+			var divName = $('<div/>');
+			var divBal = $('<div/>');
+			var divItem = $('<div/>');
+			
+			divItem.addClass('inner-list-item');
+			divName.addClass('w60');
+			divBal.addClass('w40');
+			divBal.css('text-align','right');
+			
+			divBal.html(accPayables[i].SUPPLIER_BALANCE);
+			divName.html(accPayables[i].SUPPLIER_NAME);
+			
+			divName.appendTo(divItem);
+			divBal.appendTo(divItem);	
+			
+			divItem.appendTo(parent);
+		}
+		divItem.addClass('last');
+		changePageID('#pageFinance');
+	}
+	/***********************************************	
 	*	Name	:	getNonSellingItems
 	*	Desc	:	Fetch HR notifications count from the server
 	**/
@@ -303,8 +446,8 @@
 		}
 		divItem.addClass('last');
 		changePageID('#pageSales');
-	}
-	/**
+	}	
+	/*****************************************************************
 	*	Name	:	getSellingItems
 	*	Desc	:	Fetch HR notifications count from the server
 	**/
@@ -391,6 +534,7 @@
 	var displayHRNotifications = function(response) {
 		var hrNotifications = response.hr_notifications;
 		var parent = $('#divHRNotifications');
+		parent.html(" ");
 		for( i = 0 ; i < hrNotifications.length ; i++ ) {
 			var divName = $('<div/>');
 			var divDate = $('<div/>');
@@ -410,6 +554,7 @@
 			divItem.appendTo(parent);
 		}
 		divItem.addClass('last');
+		changePageID('#pageHRNotifications');
 	}
 	/**
 	*	Name	:	getSalarySummary
@@ -440,6 +585,7 @@
 	var displaySalarySummary = function(response) {
 		var salarySummary = response.salary_summary;
 		var parent = $('#divSalarySummary');
+		parent.html("");
 		for( i = 0 ; i < salarySummary.length ; i++ ) {
 			var divMonth = $('<div/>');
 			var divSalary = $('<div/>');
@@ -455,6 +601,7 @@
 			divItem.appendTo(parent);
 		}
 		divItem.addClass('last');
+		changePageID('#pageSalarySummary');
 	}
 	
 	/**
@@ -535,8 +682,10 @@
 		increment_notifications = response.increment_notifications;
 		iqama_notifications = response.iqama_notifications;
 		loan_notifications = response.loan_notifications;
+		shipment_notifications = response.shipment_notifications;
 		vacation_notifications = response.vacation_notifications;
 		vacation_request_notifications = response.vacation_request_notifications;
+		invoice_notifications = response.invoice_notifications;
 			
 		displayOneSetNotification(absent_notifications,'#divNotiAbsent');
 		displayOneSetNotification(delivery_notifications,'#divNotiDeli');
@@ -547,6 +696,8 @@
 		displayOneSetNotification(loan_notifications,'#divNotiLoan');
 		displayOneSetNotification(vacation_notifications,'#divNotiVac');
 		displayOneSetNotification(vacation_request_notifications,'#divNotiVacReq');
+		displayOneSetNotification(shipment_notifications,'#divNotiShip');
+		displayOneSetNotification(invoice_notifications,'#divNotiInv');
 		
 		NOTIFICATIONS_LOADED = true;
 		changePageID('#pageNotifications');
