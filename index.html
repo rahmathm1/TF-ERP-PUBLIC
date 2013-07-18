@@ -8,9 +8,12 @@
 <link rel="stylesheet" href="styles/jquery.mobile.structure-1.3.0.css" />
 <link rel="stylesheet" href="styles/common.css" />
 <link rel="stylesheet" href="styles/pagestyles/index.css" />
+<link rel="stylesheet" href="styles/mobiscroll.custom-2.5.0.min.css" />
+<script src="scripts/cordova-1.9.0.js" charset="utf-8"></script>
 <script src="phonegap.js"></script>
 <script src="scripts/jquery-1.9.1.min" charset="utf-8"></script>
 <script src="scripts/jquery.mobile-1.3.0.min" charset="utf-8"></script>
+<script src="scripts/mobiscroll.custom-2.5.0.min.js" charset="utf-8"></script>
 <script src="scripts/common.js" charset="utf-8"></script>
 <script src="scripts/pagescripts/index.js" charset="utf-8"></script>
 </head>
@@ -54,25 +57,24 @@
     </div>
   </div>
 </div>
-
 <!-- 
-        dashboard
- -->
-<div data-role="page" data-theme="a" id="pageDashboard">
+        Home
+-->
+<div data-role="page" data-theme="a" id="pageHome">
   <div data-role="header" data-theme="none" class="header-bg">
     <div class="w25">
-      <div class="tabs selected" id="tabDash">
-        <div class="caption">Dashboard</div>
+      <div class="tabs selected" id="tabHome">
+        <div class="caption">Home</div>
       </div>
     </div>
     <div class="w25">
-      <div class="tabs tabNoti" id="tabNoti">
-        <div class="caption">Notifications</div>
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabReq">
+      <div class="tabs tabReq" id="tabReq">
         <div class="caption">Service Request</div>
       </div>
     </div>
@@ -87,141 +89,215 @@
   <div data-role="content">
     <div class="buttons-wrapper">
       <div class="row">
-        <div class="w32">
+        <div class="w32"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" >
           <div class="buttons  bg-orange" id="Hr">
             <div class="icon hr"  id="btnHr"></div>
             <div class="caption" id="btnCaption">HR</div>
           </div>
-        </div>
-        <div class="w32">
+          </a> </div>
+        <div class="w32"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" >
           <div class="buttons bg-purple" id="Sales">
             <div class="icon sales"></div>
             <div class="caption">Sales</div>
           </div>
-        </div>
-        <div class="w32">
+          </a> </div>
+        <div class="w32"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" >
           <div class="buttons bg-blue" id="Purchase">
             <div class="icon purchase"></div>
             <div class="caption">Purchase</div>
           </div>
-        </div>
+          </a> </div>
       </div>
-      <!-- sub menu -->
-      <div id="subOptionsHr" class="sub-button-wrapper">
-        <div class="arrow" id="left"></div>
-        <div class="sub-btn-ul-wrapper">
-          <ul class="sub-options">
-            <li class="sub-option" id="subMenuSalarySummary">Salary Summary</li>
-            <li class="sub-option" id="subMenuHRNotifications">HR Notifications</li>
-          </ul>
-        </div>
-      </div>
-      <div id="subOptionsSales" class="sub-button-wrapper">
-        <div class="arrow" id="center"></div>
-        <div class="sub-btn-ul-wrapper">
-          <ul class="sub-options">
-            <li class="sub-option" id="subMenuSelling">Top 10 Selling items</li>
-            <li class="sub-option"  id="subMenuNonSelling">Top 10 Non-selling items</li>
-            <li class="sub-option"  id="subMenuCustomers">Top 10 Customers</li>
-          </ul>
-        </div>
-      </div>
-      <div id="subOptionsPurchase" class="sub-button-wrapper">
-        <div class="arrow" id="right"></div>
-        <div class="sub-btn-ul-wrapper">
-          <ul class="sub-options">
-            <li class="sub-option">Upcoming shipments Amounts</li>
-          </ul>
-        </div>
-      </div>
-      <!--  / sub menu -->
       <div class="row">
-        <div class="w32">
+        <div class="w32"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" >
           <div class="buttons bg-green" id="Finance">
             <div class="icon finance"></div>
             <div class="caption">Finance</div>
           </div>
-        </div>
+          </a> </div>
         <div class="w32">
-          <div class="buttons bg-red" id="Notifications">
+          <div class="buttons bg-red" id="notifications">
             <div class="icon notifications"></div>
             <div class="caption">Notifications</div>
           </div>
         </div>
-        <div class="w32">
+        <div class="w32"> <a href="#pageProfile">
           <div class="buttons bg-orange" id="Profile">
             <div class="icon profile"></div>
             <div class="caption">My Profile</div>
           </div>
-        </div>
+          </a> </div>
       </div>
-      <!-- sub menu -->
-      
-      <div id="subOptionsFinance" class="sub-button-wrapper">
-        <div class="arrow" id="left"></div>
-        <div class="sub-btn-ul-wrapper">
-          <ul class="sub-options">
-            <li class="sub-option" id="subMenuAccReceibales">Top 10 Accounts Receivables</li>
-            <li class="sub-option" id="subMenuAccPayables">Top 10 Accounts Payables</li>
-          </ul>
-        </div>
-      </div>
-      <div id="subOptionsNotifications" class="sub-button-wrapper">
-        <div class="arrow" id="center"></div>
-        <div class="sub-btn-ul-wrapper">
-          <ul class="sub-options">
-            <li id="subMenuAllNotifications">All notifications for approval</li>
-            <li id="subMenuPendingNotifications">All pending notifications</li>
-          </ul>
-        </div>
-      </div>
-      <div id="subOptionsProfile" class="sub-button-wrapper">
-        <div class="arrow" id="right"></div>
-        <div class="sub-btn-ul-wrapper">
-          <ul class="sub-options">
-            <li>Change password</li>
-            <li>Edit profile</li>
-          </ul>
-        </div>
-      </div>
-      <!--  / sub menu --> 
-      
     </div>
-    <div class="dash-notifications">
-      <div class="dash-noti-head">Notifications
-        <div class="small-btn" style="float:right" id="viewAllNotifications">View all</div>
+    <!-- Pop up menus for sub pages -->
+    <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <h4>Human Resource</h4>
+      <ul data-role="listview" data-inset="true">
+        <li class="popMenuSalarySummary">Salary Summary</li>
+        <li class="popMenuHRNotifications">HR Notifications</li>
+      </ul>
+    </div>
+    <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <h4>Sales</h4>
+      <ul data-role="listview" data-inset="true">
+        <li class="popMenuSelling">Top 10 Selling Items</li>
+        <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+      </ul>
+    </div>
+    <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <h4>Purchase</h4>
+      <h3>Page is under construction</h3>
+    </div>
+    <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <h4>Finance</h4>
+      <ul data-role="listview" data-inset="true">
+        <li class="popMenuAccPayables">Top 10 Account Payables</li>
+        <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
+        <li class="sideMenuBalanceSheet">Balance Sheet</li>
+        <li class="sideMenuProfitLoss">Profit & Loss</li>
+      </ul>
+    </div>
+    <div data-role="popup" id="popupSubProfile" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <h4>Account</h4>
+      <h3>Page is under construction</h3>
+    </div>
+    <div class="dash-notifications" style="min-height:270px">
+      <div class="dash-noti-head">Notifications</div>
+      <div class="home-filter-wrapper">
+        <div class="w20">
+          <div class="filter-tabs selected" data-tag="all">All</div>
+        </div>
+        <div class="w20">
+          <div class="filter-tabs" data-tag="purchase">Purchase</div>
+        </div>
+        <div class="w20">
+          <div class="filter-tabs" data-tag="sales">Sales</div>
+        </div>
+        <div class="w20">
+          <div class="filter-tabs" data-tag="hr">HR</div>
+        </div>
+        <div class="w20">
+          <div class="filter-tabs" data-tag="finance">Finance</div>
+        </div>
       </div>
+      <div class="home-notification-count"></div>
       <!-- <div class="dash-noti-sub-head">Absent Notifications </div>--> 
       
     </div>
     <div style="height:20px;"></div>
-    <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
-      <div class="log-out">Logout</div>
+    <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
     </div>
   </div>
   <!-- /content --> 
 </div>
-
 <!-- 
-
-	pageSales
-
--->
-<div data-role="page" data-theme="a" id="pageSales">
+        dashboard
+ -->
+<div data-role="page" data-theme="a" id="pageDashboard">
   <div data-role="header" data-theme="none" class="header-bg">
     <div class="w25">
-      <div class="tabs tabDash" id="tabDash">
-        <div class="caption">Dashboard</div>
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabNoti">
-        <div class="caption">Notifications</div>
+      <div class="tabs selected" id="tabDash">
+        <div class="caption">Dashboard</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabReq">
+      <div class="tabs tabReq" id="tabReq">
+        <div class="caption">Service Request</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabMore">
+        <div class="caption">More</div>
+      </div>
+    </div>
+  </div>
+  <!-- /header  -->
+  
+  <div data-role="content">
+    <div class="side-tabs">
+      <div class="sidetab"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" > <img src="images/ico_side_finance.png"  alt="Finance"></a> </div>
+      <div class="sidetab"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_HR.png"  alt="HR"></a> </div>
+      <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
+      <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
+      <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
+      <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <h4>Human Resource</h4>
+        <ul data-role="listview" data-inset="true">
+          <li class="popMenuSalarySummary">Salary Summary</li>
+          <li class="popMenuHRNotifications">HR Notifications</li>
+        </ul>
+      </div>
+      <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <h4>Sales</h4>
+        <ul data-role="listview" data-inset="true">
+          <li class="popMenuSelling">Top 10 Selling Items</li>
+          <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+        </ul>
+      </div>
+      <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <h4>Purchase</h4>
+        <h3>Page is under construction</h3>
+      </div>
+      <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <h4>Finance</h4>
+        <ul data-role="listview" data-inset="true">
+          	<li class="popMenuAccPayables">Top 10 Account Payables</li>
+          	<li class="popMenuAccReceibales">Top 10 Account Receivables</li>
+          	<li class="sideMenuBalanceSheet">Balance Sheet</li>
+        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+        </ul>
+      </div>
+    </div>
+    <div class="summary">
+      <div class="w100">
+        <div style="padding:0 5px ;margin-top:-7px;">
+          <select id="selTenure">
+            <option value="0">Last Day</option>
+            <option value="1">Last Week</option>
+            <option value="2">Last Month</option>
+            <option value="3">Last Year</option>
+          </select>
+        </div>
+      </div>
+      <div id="dashSummaryParent"> </div>
+    </div>
+    <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+  </div>
+  <!-- /content --> 
+</div>
+<!-- 
+
+	pageProfile
+
+-->
+<div data-role="page" data-theme="a" id="pageProfile">
+  <div data-role="header" data-theme="none" class="header-bg">
+    <div class="w25">
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
+        <!--<div class="noti-count">3</div>--> 
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs tabReq" id="tabReq">
         <div class="caption">Service Request</div>
       </div>
     </div>
@@ -236,17 +312,148 @@
   <div data-role="content">
     <div class="inner-page">
       <div class="side-tabs">
-        <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="Finance"> </div>
-        <div class="sidetab"> <img class="sideMenuHR" src="images/ico_side_HR.png"  alt="HR"> </div>
-        <div class="sidetab"> <img src="images/ico_side_sales.png"  alt="Sales"> </div>
-        <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"> </div>
+        <div class="sidetab"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" > <img src="images/ico_side_finance.png"  alt="Finance"></a> </div>
+        <div class="sidetab"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_HR.png"  alt="HR"></a> </div>
+        <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
+        <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
+        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Human Resource</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSalarySummary">Salary Summary</li>
+            <li class="popMenuHRNotifications">HR Notifications</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Sales</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSelling">Top 10 Selling Items</li>
+            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Purchase</h4>
+          <h3>Page is under construction</h3>
+        </div>
+        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Finance</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuAccPayables">Top 10 Account Payables</li>
+            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
+            <li class="">Balance Sheet</li>
+            <li class="">Profit & Loss</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <div class="inner-page-wrapper">
+          <div class="inner-page-head"> <a  data-rel="back" href="#">
+            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+            </a> &nbsp;&nbsp; Account Details </div>
+          <div class="side-content-body">
+            <div class="personal-info"> 
+              <!--<div class="profile-ico"><img src="images/ico-profile.png" width="81" height="74"></div>-->
+              <div style="height:70px;">
+                <h5>Logged in as</h5>
+                <h4 id="userInfoName">Rahmathullah M</h4>
+                <h5 id="userInfoBranch">Branch : Jeddah</h5>
+              </div>
+              <h5>Last logged in</h5>
+              <h4 id="userInfoLogin">2nd decemebr, 2013</h4>
+              <h5>Last logged out</h5>
+              <h4 id="userInfoLogout">2nd decemebr, 2013</h4>
+              <a href="#popupChangePassword" style="margin:auto;position:absolute;bottom:5px;left:0;right:0" data-rel="popup" data-icon="gear"  data-role="button" data-position-to="window" data-inline="true" >Change Password</a> </div>
+          </div>
+          <div data-role="popup" id="popupChangePassword" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+            <h4>Change Password</h4>
+            <input type="password" id="txtCurrentPassword" placeholder="Current Password" />
+            <input type="password" id="txtNewPassword" placeholder="New Password" />
+            <input type="password" id="txtConfirmPassword" placeholder="Confirm Password" />
+            <input type="button"  class="blue-btn" id="btnSavePassword" value="Save" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+  </div>
+  <!-- /content --> 
+</div>
+<!-- 
+
+	pageSales
+
+-->
+<div data-role="page" data-theme="a" id="pageSales">
+  <div data-role="header" data-theme="none" class="header-bg">
+    <div class="w25">
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
+        <!--<div class="noti-count">3</div>--> 
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs tabReq" id="tabReq">
+        <div class="caption">Service Request</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabMore">
+        <div class="caption">More</div>
+      </div>
+    </div>
+  </div>
+  <!-- /header  -->
+  
+  <div data-role="content">
+    <div class="inner-page">
+      <div class="side-tabs">
+        <div class="sidetab"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" > <img src="images/ico_side_finance.png"  alt="Finance"></a> </div>
+        <div class="sidetab"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_HR.png"  alt="HR"></a> </div>
+        <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
+        <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
+        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Human Resource</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSalarySummary">Salary Summary</li>
+            <li class="popMenuHRNotifications">HR Notifications</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Sales</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSelling">Top 10 Selling Items</li>
+            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Purchase</h4>
+          <h3>Page is under construction</h3>
+        </div>
+        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Finance</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuAccPayables">Top 10 Account Payables</li>
+            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
+            <li class="sideMenuBalanceSheet">Balance Sheet</li>
+        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+          </ul>
+        </div>
       </div>
       <div class="content">
         <div class="inner-page-titles">
-          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; <span class="pageTitle">Sales</span>
-             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left">&nbsp;</div></a>
-          </div>
+          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; <span class="pageTitle">Sales</span> <a  data-rel="back" href="#">
+            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+            </a> </div>
           <div class="inner-list-item">
             <div class="w50"><strong>
               <div class="head1">Item Code</div>
@@ -259,7 +466,120 @@
         </div>
       </div>
     </div>
-     <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
+    <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+  </div>
+  <!-- /content --> 
+</div>
+<!-- 
+
+	pageServiceRequest
+
+-->
+<div data-role="page" data-theme="a" id="pageServiceRequest">
+  <div data-role="header" data-theme="none" class="header-bg">
+    <div class="w25">
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
+        <!--<div class="noti-count">3</div>--> 
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs selected" id="tabReq">
+        <div class="caption">Service Request</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabMore">
+        <div class="caption">More</div>
+      </div>
+    </div>
+  </div>
+  <!-- /header  -->
+  
+  <div data-role="content">
+    <div class="inner-page">
+      <div class="side-tabs">
+        <div class="sidetab"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" > <img src="images/ico_side_finance.png"  alt="Finance"></a> </div>
+        <div class="sidetab"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_HR.png"  alt="HR"></a> </div>
+        <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
+        <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
+        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Human Resource</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSalarySummary">Salary Summary</li>
+            <li class="popMenuHRNotifications">HR Notifications</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Sales</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSelling">Top 10 Selling Items</li>
+            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Purchase</h4>
+          <h3>Page is under construction</h3>
+        </div>
+        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Finance</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuAccPayables">Top 10 Account Payables</li>
+            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
+            <li class="sideMenuBalanceSheet">Balance Sheet</li>
+        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <div class="inner-page-wrapper">
+          <div class="inner-page-head">Service Requests</div>
+          <div class="side-content-body">
+            <ul data-role="listview" data-inset="true">
+              <li> <a href="#popupLoanReq" data-rel="popup" data-position-to="window" data-inline="true" data-icon="check" data-theme="a" >Loan Request</a> </li>
+              <li> <a href="#popupLeaveReq" data-rel="popup" data-position-to="window"  data-inline="true" data-icon="check" data-theme="a" >Leave Request</a> </li>
+            </ul>
+            <!--  Pop up 2-->
+            
+            <div data-role="popup" id="popupLoanReq" data-theme="a" class="ui-corner-all">
+              <div style="padding:10px 10px;width:260px">
+                <h3>Loan Request Form</h3>
+                <select id="selLoanTypes">
+                  <option value="">Loan Type</option>
+                </select>
+                <input id="txtLoanAmount" type="tel" value="" placeholder="Loan Amount" data-theme="a" />
+                <input id="txtMonthlyDeduction" type="tel" value="" placeholder="Monthly Deduction Amount" data-theme="a" />
+                <input id="txtDeductionStartDate" type="date"  value="" placeholder="Deduction Start Date" data-theme="a" />
+                <textarea id="txtRemarks" placeholder="Remarks" ></textarea>
+                <!--name="datePicker"-->
+                <button type="button" data-theme="a" id="btnRequestLoan" data-icon="check">Request</button>
+              </div>
+            </div>
+            <!-- Pop 1 -->
+            
+              <div data-role="popup" id="popupLeaveReq" data-theme="a" class="ui-corner-all">
+              	<div style="padding:10px 10px;width:260px">
+                <h3>Leave Request</h3>
+                <h4>Not Available</h4>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
   </div>
@@ -274,18 +594,18 @@
 <div data-role="page" data-theme="a" id="pageFinance">
   <div data-role="header" data-theme="none" class="header-bg">
     <div class="w25">
-      <div class="tabs tabDash" id="tabDash">
-        <div class="caption">Dashboard</div>
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabNoti">
-        <div class="caption">Notifications</div>
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabReq">
+      <div class="tabs tabReq" id="tabReq">
         <div class="caption">Service Request</div>
       </div>
     </div>
@@ -300,17 +620,52 @@
   <div data-role="content">
     <div class="inner-page">
       <div class="side-tabs">
-        <div class="sidetab"> <img src="images/ico_side_finance.png"  alt="FInance"> </div>
-        <div class="sidetab"> <img class="sideMenuHR" src="images/ico_side_HR.png"  alt="HR"> </div>
-        <div class="sidetab"> <img class="sideMenuSales" src="images/ico_side_sales.png"  alt="Sales"> </div>
-        <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"> </div>
+        <div class="sidetab"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" > <img src="images/ico_side_finance.png"  alt="Finance"></a> </div>
+        <div class="sidetab"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_HR.png"  alt="HR"></a> </div>
+        <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
+        <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
+        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Human Resource</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSalarySummary">Salary Summary</li>
+            <li class="popMenuHRNotifications">HR Notifications</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Sales</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSelling">Top 10 Selling Items</li>
+            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Purchase</h4>
+          <h3>Page is under construction</h3>
+        </div>
+        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Finance</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuAccPayables">Top 10 Account Payables</li>
+            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
+            <li class="sideMenuBalanceSheet">Balance Sheet</li>
+            <li class="sideMenuProfitLoss">Profit & Loss</li>
+          </ul>
+        </div>
       </div>
-      <div class="content">
+      <div class="content"> 
+        <!--<div class="inner-page-wrapper">
+      <div class="inner-page-head">Balance Sheet</div>
+      <div class="side-content-body">
+      	
+        
+        
+      </div>
+    </div>-->
         <div class="inner-page-titles">
-          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; <span class="pageTitle"></span>
-             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left">&nbsp;</div></a>
-          </div>
+          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; <span class="pageTitle"></span> <a  data-rel="back" href="#">
+            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+            </a> </div>
           <div class="inner-list-item">
             <div class="w50"><strong>
               <div class="head1">Item Code</div>
@@ -323,8 +678,10 @@
         </div>
       </div>
     </div>
-     <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
-      <div class="log-out">Logout</div>
+    <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
     </div>
   </div>
   <!-- /content --> 
@@ -338,18 +695,18 @@
 <div data-role="page" data-theme="a" id="pageNotifications">
   <div data-role="header" data-theme="none" class="header-bg">
     <div class="w25">
-      <div class="tabs tabDash" id="tabDash">
-        <div class="caption">Dashboard</div>
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
       </div>
     </div>
     <div class="w25">
-      <div class="tabs selected" id="tabNoti">
-        <div class="caption">Notifications</div>
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabReq">
+      <div class="tabs tabReq" id="tabReq">
         <div class="caption">Service Request</div>
       </div>
     </div>
@@ -363,101 +720,95 @@
   <div data-role="content">
     <div class="inner-page">
       <div class="side-tabs">
-        <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="Finance"> </div>
-        <div class="sidetab"> <img class="sideMenuHR" src="images/ico_side_HR.png"  alt="HR"> </div>
-        <div class="sidetab"> <img class="sideMenuSales" src="images/ico_side_sales.png"  alt="Sales"> </div>
-        <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-        <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"> </div>
-      </div>
-      <div class="content">
-        <div class="inner-page-titles">
-          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; <span class="pageTitle">Notifications</span>
-             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left" >&nbsp;</div></a>
-          </div>
-          <div class="side-content-body"> 
-            <!-- <div class="sub-menu-head">Top 10 Selling items</div>     -->
-            <div class="sub-menu-content">
-              <div class="notificaiton-block" id="divNotiAbsent">
-                <div class="notificaiton-head"> Absent Notifications 
-                  <!--<div class="count">3</div> --> 
-                </div>
-                <div id="divNotiAbsent-sub"  class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiDeli">
-                <div class="notificaiton-head"> Delivery Notifications </div>
-                <div id="divNotiDeli-sub" class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiVoucher">
-                <div class="notificaiton-head"> GL Voucher notifications </div>
-                <div id="divNotiVoucher-sub" class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiGosi">
-                <div class="notificaiton-head"> Gosi Notifications </div>
-                <div id="divNotiGosi-sub" class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiInc">
-                <div class="notificaiton-head"> Increment Notifications </div>
-                <div id="divNotiInc-sub" class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiInv">
-                <div class="notificaiton-head"> Invoice Notifications </div>
-                <div id="divNotiInv-sub" class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiIqama">
-                <div class="notificaiton-head"> Iqama Notifications </div>
-                <div id="divNotiIqama-sub" class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiLoan">
-                <div class="notificaiton-head"> Loan Notifications </div>
-                <div id="divNotiLoan-sub" class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiShip">
-                <div class="notificaiton-head"> Shipment Notifications </div>
-                <div id="divNotiShip-sub" class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiVac">
-                <div class="notificaiton-head"> Vacation Notifications </div>
-                <div id="divNotiVac-sub" class="notificaiton-sub"></div>
-              </div>
-              <div class="notificaiton-block" id="divNotiVacReq">
-                <div class="notificaiton-head"> Vacation Req. Notifications </div>
-                <div id="divNotiVacReq-sub" class="notificaiton-sub"></div>
-              </div>
-              
-            </div>
-            <!-- <div class="sub-menu-head">Top 10 Non-Selling items</div>
-                    <div class="sub-menu-head">Top 10 Customers</div>            --> 
-          </div>
+        <div class="sidetab"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" > <img src="images/ico_side_finance.png"  alt="Finance"></a> </div>
+        <div class="sidetab"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_HR.png"  alt="HR"></a> </div>
+        <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
+        <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
+        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Human Resource</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSalarySummary">Salary Summary</li>
+            <li class="popMenuHRNotifications">HR Notifications</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Sales</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSelling">Top 10 Selling Items</li>
+            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Purchase</h4>
+          <h3>Page is under construction</h3>
+        </div>
+        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Finance</h4>
+          <ul data-role="listview" data-inset="true">
+            	<li class="popMenuAccPayables">Top 10 Account Payables</li>
+            	<li class="popMenuAccReceibales">Top 10 Account Receivables</li>
+            	<li class="sideMenuBalanceSheet">Balance Sheet</li>
+        		<li class="sideMenuProfitLoss">Profit & Loss</li>
+          </ul>
         </div>
       </div>
+      <div class="content"> 
+      <div class="inner-page-wrapper">
+          <div class="inner-page-head"> &nbsp;&nbsp;&nbsp; Notifications 
+          		<a  data-rel="back" href="#">
+                <div class="small-btn btn-back" style="float:left" >&nbsp;</div>
+                </a>
+          </div>
+          <div style="margin:0 10px;">
+          		
+          		    <select id="selNotificationCategory">
+          		      	
+          		    </select>
+       		     
+          </div>
+          <div class="side-content-body" style="margin:-7px" id="notificationsWrapper">            	
+                    <div class="inner-list-item" style="border-bottom:1px solid #ccc">
+                    	<div class="w50" style="font-weight:bold" id="col1">Month</div>
+                    	<div class="w50" style="text-align:right;font-weight:bold" id="col2">Date</div>
+                    </div>
+                    
+                    <div class="notificationsItems">
+                        
+                    </div>
+          </div>
     </div>
-    <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
-      <div class="log-out menuLogout">Logout</div>
+        
+      </div>
+    </div>
+    <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
     </div>
   </div>
   <!-- /content --> 
 </div>
 
 <!-- 
-
 	salary summary
 
 -->
 <div data-role="page" data-theme="a" id="pageSalarySummary">
   <div data-role="header" data-theme="none" class="header-bg">
     <div class="w25">
-      <div class="tabs tabDash" id="tabDash">
-        <div class="caption">Dashboard</div>
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabNoti">
-        <div class="caption">Notifications</div>
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabReq">
+      <div class="tabs tabReq" id="tabReq">
         <div class="caption">Service Request</div>
       </div>
     </div>
@@ -469,20 +820,47 @@
   </div>
   <!-- /header  -->
   
-  <div data-role="content"> 
+  <div data-role="content">
     <div class="inner-page">
       <div class="side-tabs">
-        <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="FInance"> </div>
-        <div class="sidetab"> <img src="images/ico_side_HR.png"  alt="HR"> </div>
-        <div class="sidetab"> <img class="sideMenuSales" src="images/ico_side_sales.png"  alt="Sales"> </div>
-        <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"> </div>
+        <div class="sidetab"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" > <img src="images/ico_side_finance.png"  alt="Finance"></a> </div>
+        <div class="sidetab"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_HR.png"  alt="HR"></a> </div>
+        <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
+        <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
+        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Human Resource</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSalarySummary">Salary Summary</li>
+            <li class="popMenuHRNotifications">HR Notifications</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Sales</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSelling">Top 10 Selling Items</li>
+            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Purchase</h4>
+          <h3>Page is under construction</h3>
+        </div>
+        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Finance</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuAccPayables">Top 10 Account Payables</li>
+            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
+            <li class="sideMenuBalanceSheet">Balance Sheet</li>
+        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+          </ul>
+        </div>
       </div>
       <div class="content">
         <div class="inner-page-titles">
-          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; Salary Summary
-             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left">&nbsp;</div></a>
-          </div>
+          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; Salary Summary <a  data-rel="back" href="#">
+            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+            </a> </div>
           <div class="inner-list-item">
             <div class="w50"><strong>Month</strong></div>
             <div class="w50" style="text-align:right"><strong>Salary Summary</strong></div>
@@ -491,31 +869,205 @@
         </div>
       </div>
     </div>
-    <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
-      <div class="log-out menuLogout">Logout</div>
+    <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
     </div>
   </div>
   <!-- /content --> 
 </div>
-
 <!-- 
-  pageHRNotifications
+        Balance Sheet Details
 -->
-<div data-role="page" data-theme="a" id="pageHRNotifications">
+
+<div data-role="page" data-theme="a" id="pageBalanceSheetDetails">
   <div data-role="header" data-theme="none" class="header-bg">
     <div class="w25">
-      <div class="tabs tabDash" id="tabDash">
-        <div class="caption">Dashboard</div>
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
       </div>
     </div>
     <div class="w25">
-      <div class="tabs selected" id="tabNoti">
-        <div class="caption">Notifications</div>
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
         <!--<div class="noti-count">3</div>--> 
       </div>
     </div>
     <div class="w25">
-      <div class="tabs" id="tabReq">
+      <div class="tabs tabReq" id="tabReq">
+        <div class="caption">Service Request</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabMore">
+        <div class="caption">More</div>
+      </div>
+    </div>
+  </div>
+  <!-- /tabs -->
+  
+  <div data-role="content">
+    <div class="margin-out">
+      <div class="inner-page-wrapper">
+        <div class="inner-page-head">Balance Sheet</div>
+        <div class="side-content-body">
+          <div class="balance-profit">
+            <div class="w50" >
+              <div class="w95">
+                <select class="selLevel" id="selLevelBL">
+                  <option value="FIRST LEVEL">FIRST LEVEL</option>
+                  <option value="SECOND LEVEL">SECOND LEVEL</option>
+                </select>
+              </div>
+            </div>
+            <div class="w50">
+              <div class="w95" style="float:right;">
+                <select class="selBranch" id="selBranchBL" >
+                  <option value="">ALL BRANCHES</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <table data-role="table"  data-mode="normal" class="ui-body-d ui-shadow table-stripe table-font-size" >
+            <thead>
+              <tr class="ui-bar-d">
+                <th data-priority="1" width="15%">Code</th>
+                <th data-priority="1" width="25%">Ac Name</th>
+                <th data-priority="1" width="20%">Debit</th>
+                <th data-priority="1" width="20%">Credit</th>
+                <!-- <th data-priority="1" width="20%">Desc(Ar)</th>--> 
+              </tr>
+            </thead>
+            <tbody id="tblBalanceSheet">
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <!--<td>1</td>--> 
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /content -->
+  <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+  <!-- /menu button --> 
+</div>
+
+<!-- 
+
+        ProfitLoss Details
+        
+-->
+
+<div data-role="page" data-theme="a" id="pageProfitLossDetails">
+  <div data-role="header" data-theme="none" class="header-bg">
+    <div class="w25">
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
+        <!--<div class="noti-count">3</div>--> 
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs tabReq" id="tabReq">
+        <div class="caption">Service Request</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs" id="tabMore">
+        <div class="caption">More</div>
+      </div>
+    </div>
+  </div>
+  <!-- /tabs -->
+  
+  <div data-role="content">
+    <div class="margin-out">
+      <div class="inner-page-wrapper">
+        <div class="inner-page-head">Profit & Loss Account</div>
+        <div class="side-content-body">
+          <div class="balance-profit">
+            <div class="w50" >
+              <div class="w95">
+                <select class="selLevel" id="selLevelPL">
+                  <option value="FIRST LEVEL">FIRST LEVEL</option>
+                  <option value="SECOND LEVEL">SECOND LEVEL</option>
+                </select>
+              </div>
+            </div>
+            <div class="w50">
+              <div class="w95" style="float:right;">
+                <select class="selBranch" id="selBranchPL">
+                  <option value="">ALL BRANCHES</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <table data-role="table"  data-mode="normal" class="ui-body-d ui-shadow table-stripe table-font-size" >
+            <thead>
+              <tr class="ui-bar-d">
+                <th data-priority="1" width="15%">Code</th>
+                <th data-priority="1" width="25%">Ac Name</th>
+                <th data-priority="1" width="20%">Debit</th>
+                <th data-priority="1" width="20%">Credit</th>
+                <!-- <th data-priority="1" width="20%">Desc(Ar)</th>--> 
+              </tr>
+            </thead>
+            <tbody id="tblProfitLoss">
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <!--<td>1</td>--> 
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /content -->
+  <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+  <!-- /menu button --> 
+</div>
+<!-- 
+
+  pageHRNotifications
+  
+-->
+<div data-role="page" data-theme="a" id="pageHRNotifications">
+  <div data-role="header" data-theme="none" class="header-bg">
+    <div class="w25">
+      <div class="tabs tabHome" id="tabHome">
+        <div class="caption">Home</div>
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs tabDash" id="tabDash">
+        <div class="caption">Dashboard</div>
+        <!--<div class="noti-count">3</div>--> 
+      </div>
+    </div>
+    <div class="w25">
+      <div class="tabs tabReq" id="tabReq">
         <div class="caption">Service Request</div>
       </div>
     </div>
@@ -527,20 +1079,47 @@
   </div>
   <!-- /header  -->
   
-  <div data-role="content"> 
+  <div data-role="content">
     <div class="inner-page">
       <div class="side-tabs">
-        <div class="sidetab"> <img class="sideMenuFinance" src="images/ico_side_finance.png"  alt="FInance"> </div>
-        <div class="sidetab"> <img src="images/ico_side_HR.png"  alt="HR"> </div>
-        <div class="sidetab"> <img class="sideMenuSales" src="images/ico_side_sales.png"  alt="Sales"> </div>
-        <div class="sidetab"> <img class="sideMenuPurchase" src="images/ico_side_Purchase.png"  alt="Purchase"> </div>
-        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"> </div>
+        <div class="sidetab"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" > <img src="images/ico_side_finance.png"  alt="Finance"></a> </div>
+        <div class="sidetab"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_HR.png"  alt="HR"></a> </div>
+        <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
+        <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
+        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
+        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Human Resource</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSalarySummary">Salary Summary</li>
+            <li class="popMenuHRNotifications">HR Notifications</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Sales</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuSelling">Top 10 Selling Items</li>
+            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Purchase</h4>
+          <h3>Page is under construction</h3>
+        </div>
+        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <h4>Finance</h4>
+          <ul data-role="listview" data-inset="true">
+            <li class="popMenuAccPayables">Top 10 Account Payables</li>
+            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
+            <li class="sideMenuBalanceSheet">Balance Sheet</li>
+        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+          </ul>
+        </div>
       </div>
       <div class="content">
         <div class="inner-page-titles" id="divSalarySummary">
-          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; HR Notifications
-             <a  data-rel="back" href="#"><div class="small-btn btn-back" style="float:left">&nbsp;</div></a>
-          </div>
+          <div class="dash-noti-head">&nbsp;&nbsp;&nbsp; HR Notifications <a  data-rel="back" href="#">
+            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+            </a> </div>
           <div class="inner-list-item"> 
             <!--<div class="w20"><strong>Doc No</strong></div>-->
             <div class="w50"><strong>Name</strong></div>
@@ -550,8 +1129,10 @@
         </div>
       </div>
     </div>
-    <div class="menu-button logged-in-as"><span style="font-size:12px;">Logged in as,</span> Administrator
-      <div class="log-out menuLogout">Logout</div>
+    <div class="menu-button logged-in-as">
+      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
     </div>
   </div>
   <!-- /content --> 

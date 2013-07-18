@@ -1,9 +1,8 @@
 // JavaScript Document
 
 	var ALERT_TITLE	=	"Taskforces ERP";
-	//var API			= 	"http://192.168.1.188/taskforces/api/";
-	//var API			= 	"http://192.168.2.20//taskforces/api/";
-	var API			= 	"http://203.124.121.150:88/taskforces/api/";
+	var API			= 	"http://192.168.2.29:88/taskforces/api/";
+	//var API			= 	"http://203.124.121.150:88/taskforces/api/";
 	
 	/**************************************************************
 	*			GENERAL FUNCTIONS	
@@ -80,18 +79,8 @@
 					parser(response);
 					
 				})
-			.fail(ajaxFailed);
-			
-/*		 $.ajax({
-            beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
-            complete: function() { $.mobile.hidePageLoadingMsg() }, //Hide spinner
-            url: //url
-            dataType: 'json',
-            headers: //headers
-            success: function(data) {
-                //...
-            }
-        });*/
+			.fail(ajaxFailed);			
+
 	}
 	var getResponseV2 = function(data,parser) {
 		console.log("Method : getResponse");
@@ -115,29 +104,26 @@
 		showAlert("Network error, please try again.");
 		hideSpinner();
 	}
+	function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 		/* bind drop down */
 	var bindSelect = function(selectId,data) {
 		var sel = $(selectId);	
-		sel.html("");	
-		$.each(data, function(index,value) {
-			var option =  $("<option/>")
-				.attr("value",value.id)
-				.text(value.text);
-			option.appendTo(sel);
-		});	
-		sel.selectmenu("refresh");
+		//alert($('select'+selectId+' option').length);
+		//;
+		if($("selectId option").length  <= 1 ) {
+			//sel.html("");	
+			$.each(data, function(index,value) {
+				var option =  $("<option/>")
+					.attr("value",value.id)
+					.text(value.text);
+				option.appendTo(sel);
+			});	
+			sel.selectmenu("refresh");
+		}else{
+			console.log('select, ' + selectId + ' already generated');
+		}
 	};
-	/*  log out */
-	var logout = function() {
-		localStorage.clear();
-		localStorage.isLoggedIn = "false";	
-		
-		data = new Object();		
-		data.module = "LOGOUT";
-		getResponse(data,parseLogout);
-	}
-	var parseLogout = function(response) {
-		showAlert("You've been logged out.");
-		window.location = "index.html";
-	};
+	
 	

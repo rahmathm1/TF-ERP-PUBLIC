@@ -70,7 +70,7 @@
 	var bindEvents = function() {
 		
 		/* Page : Balance Sheet Home */
-		$("#btnDisplay").on("click",displayProfitLoss);
+		$("#btnDisplay").on("click",getProfitLoss);
 
 		$(function(){
 			$("input[name=datePicker]").mobiscroll().date({
@@ -125,12 +125,12 @@
 			dateToDate = true;
 	}
 	/*
-	*	Name	:	displayBalanceSheet
+	*	Name	:	getProfitLoss
 	*	Desc	:	to display balance sheet.
 	*/
-	var displayProfitLoss = function() {
+	var getProfitLoss = function() {
 		showSpinner();
-		console.log("Method : displayProfitLoss");
+		console.log("Method : getProfitLoss");
 		var level = $("#selLevel option:selected").text();
 		var displayCriteria = $("#selDisplayCriteria").val().trim();
 		var type = $("#selType").val().trim();

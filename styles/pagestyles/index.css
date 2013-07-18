@@ -112,3 +112,11 @@
    -webkit-border-radius:5px;
    -moz-border-radius:5px;
 }
+/* balance sheet */
+.table-font-size {
+	font-size:12px;
+}
+.balance-profit {
+	margin-top:-5px;
+
+}

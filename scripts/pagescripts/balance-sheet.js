@@ -58,7 +58,7 @@
 	var bindEvents = function() {
 		
 		/* Page : Balance Sheet Home */
-		$("#btnDisplay").on("click",displayBalanceSheet);
+		$("#btnDisplay").on("click",getBalanceSheet);
 
 		$(function(){
 			$("input[name=datePicker]").mobiscroll().date({
@@ -92,12 +92,12 @@
 			dateToDate = true;
 	}
 	/*
-	*	Name	:	displayBalanceSheet
+	*	Name	:	getBalanceSheet
 	*	Desc	:	to display balance sheet.
 	*/
-	var displayBalanceSheet = function() {
+	var getBalanceSheet = function() {
 		showSpinner();
-		console.log("Method : displayBalanceSheet");
+		console.log("Method : getBalanceSheet");
 		var level = $("#selLevel option:selected").text();
 		var branch = $("#selBranch").val().trim();
 		var type = $("#selType").val().trim();
