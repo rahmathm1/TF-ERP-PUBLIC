@@ -17,16 +17,15 @@
 
 #pageLogin .login-footer {
 	color:#FFF;
-	text-shadow:0px 1px 1px #333;
-	margin:10px 0;
+	text-shadow:0px 1px 1px #333;	
 	text-align:center;
-	padding:0 20px;
+	padding: 10px 20px;
+	font-size:12px;
 }
 #pageLogin .login-footer a {
 	color:#FFF;
 	font-weight:normal;
 	text-decoration:none;
-	font-size:11px;
 }
 #pageLogin .footer-bg {
 	background-image:url(../../images/bg-login-bottom-bar.png);
@@ -118,5 +117,66 @@
 }
 .balance-profit {
 	margin-top:-5px;
+	overflow:hidden;
+	clear:both;
+}
 
+#popupAbout .enterprise {
+	font-style:italic;
+	font-weight:normal;
+	font-size:13px;
+	color:#666
+}
+
+/* date picker */
+.date-mask {
+	position:fixed;
+	top:0;
+	bottom:0;
+	right:0;
+	left:0;
+	background:rgba(0,0,0,0.9);
+	display:none;
+	z-index:10000;
+}
+
+.date-wrapper {
+	margin:150px auto;
+	width:220px;
+		z-index:10001;
+	font-family:Arial, Helvetica, sans-serif;
+	 border:1px #666 solid;
+	 background:#000;
+	 box-shadow:0px 0px 5px #000;
+}
+.date-wrapper #dStr {
+	font-size:14px;
+}
+.date-wrapper .maintable{
+	font-size: 30px;
+	margin: 5px;
+	background-color: #222;
+	color: #fff;
+	width:200px;
+}
+.date-wrapper input {
+	font-size: 20px;
+	text-align: center;
+	border-radius:0;
+}
+.date-wrapper .disp {
+	width: 44px;
+padding: 7px 8px;
+float: left;
+height: 22px;
+margin:2px 5px;
+background: #ccc;
+font-size: 21px;
+text-align: center;
+color: #333;
+font-weight: bold;
+}
+#txtDeductionStartDate {
+	color: #555;
+font-size: 13px;
 }

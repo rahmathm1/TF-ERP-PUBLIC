@@ -12,6 +12,7 @@
 	var BUSINESS_UNITS		= "BUSINESS_UNITS";
 	var NOTIFICATIONS		 = "NOTIFICATIONS";
 	var API_NOTIFICATIONSCOUNT= "NOTIFICATIONCOUNT";
+	var API_TOTALNOTIFICATIONCOUNT= "TOTALNOTIFICATIONCOUNT";
 	var API_SALARYSUMMARY	 = "SALARYSUMMARY";
 	var API_HRNOTIFICATIONS   = "HRNOTIFICATIONS";
 	var API_SELLING		   = "TOP10SELLING";
@@ -27,7 +28,9 @@
 	var API_BRANCHES 		  = "BRANCHES";
 	var API_CHANGEPASSWORD 	= "CHANGEPASSWORD";
 	
-	var NOTIFICATIONS_LOADED = false;
+	
+	
+	//var NOTIFICATIONS_LOADED = false;
 	//var  
 
 	/** event that fires when document is loaded & ready **/
@@ -36,26 +39,29 @@
 	function onDeviceReady() {
 		console.log("Invoked: onDeviceReady");
 		bindEvents();
+		
+		document.addEventListener("searchbutton", onSearchKeyDown, false);
+		document.addEventListener("menubutton", onMenuKeyDown, false);
+		
 		if(!checkConnection()){
 			disableLogin();
 			//return;
 		}else {
 			enableLogin();
 			if(localStorage.isLoggedIn == "true") {
-				if (localStorage.getItem("userInfo") === null) {
+				if (localStorage.getItem("userInfo") != null) {
 					var userInfo = JSON.parse(localStorage.getItem("userInfo"));
 					$('.menuUserName').text(userInfo.user_name);
 					$('.menuLastLogin').text('Last Login : ' + userInfo.last_logged_in);
 				}
 				changePageID("#pageHome");								
-			}		
-			showSpinner();
+			}else{
+				showSpinner();
+				getBusinessUnits();
+			}
 			
-			 
-			document.addEventListener("searchbutton", onSearchKeyDown, false);
-			document.addEventListener("menubutton", onMenuKeyDown, false);
-			getBusinessUnits();
-						
+			
+									
 			/* clear history after log out */ 
 			$.mobile.urlHistory.clearForward() 			
 			navigator.splashscreen.hide();
@@ -93,6 +99,9 @@
 			showSpinner();
 			getBusinessUnits();
 		});
+		$("#aboutTaskforces").on("click",function() {						
+			$( "#popupAbout" ).popup("open");
+		});	
 		
 		$("#pageHome").on('pagebeforehide', function(e, ui){  
 			console.log("Hiding page");
@@ -105,7 +114,13 @@
 		});
 		$("#pageHome").on('pageshow', function(e, ui){  
 			showSpinner();
-			getNotificationsCount();
+			getNotiTotalCount();
+		});		
+		$("#pageHome").on('pagecreate', function(e, ui){
+			$("#homeIconProfile").on("click",function() {
+					showSpinner();
+					changePageID('#pageProfile');		
+			}); 			
 		});
 		$("#pageBalanceSheetDetails").on('pageshow', function(e, ui){  
 			showSpinner();
@@ -156,24 +171,23 @@
 					
 		});
 		
-		$("#pageNotifications").on('pagecreate', function(e, ui){  
+		$("#pageNotifications").on('pagecreate', function(e, ui){
 			$("#selNotificationCategory").on("change",function() {
 				showSpinner();
 				var category = $('#selNotificationCategory').val();
-				//alert(category);
-				localStorage.lastClickedCategory = category;
-				getNotifications(category);
+				if(category == 'ALL') {
+					showSpinner();
+					$('#notificationsWrapper .inner-list-item').hide();
+					getNotificationsCount();
+				}else{
+					localStorage.lastClickedCategory = category;
+					getNotifications(category);
+				}
 			});
-			
 			bindNotificationCategory();			
 		});
 		
-		/*$("#pageSalarySummary").on('pagecreate', function(e, ui){  
-			
-		});
-		$("#pageHRNotifications").on('pagecreate', function(e, ui){  
-			
-		});*/
+		
 		$("#pageLogin").on('pagebeforeshow', function(e, ui){  
 			console.log("login : page before show");
 			if(localStorage.isLoggedIn == "true") {
@@ -183,23 +197,13 @@
 			}
 		});
 		
+		
 		$(".log-out").on('click', function(){  
 			console.log("clicked menu>logout");
 			showSpinner();
 			logout();
 		});
-		/*$(".menuExit").on('click', exitApplication);*/
 		
-		/* dashboard buttons */
-		$(".buttons").on("click",function() {
-			var id = $(this).attr("id");
-			/*if($("#subOptions"+id).css("display") == "none" ) {
-				$(".sub-button-wrapper").slideUp();
-				$("#subOptions"+id).slideToggle();
-			} else {
-				$("#subOptions"+id).slideUp();
-			}*/
-		});
 		/* Load dashboard summary */
 		$("#pageDashboard").on("pageshow",function(event){
 			showSpinner();
@@ -208,18 +212,41 @@
 		$("#pageServiceRequest").on("pageshow",function(event){
 			if($("#selLoanTypes").length == 1) {
 				showSpinner();
-				getLoanTypes();
-				$("input[name=datePicker]").mobiscroll().date({
-					theme: 'android-ics',
-					display: 'top',
-					mode: 'scroller'
-				}); 
-			}
-				
+				getLoanTypes();								
+			}				
 		});
-		/*$("#pageNotifications").on("pageshow",function(event){
-			showSpinner();
-		});*/
+		$("#pageServiceRequest").on("pagecreate",function(event){		
+			genDatePicker();	
+			$("#txtDeductionStartDate").on("click",function(){
+				$( "#popupLoanReq" ).popup("close");				
+				$('#myDatePicker').show();
+			});
+			$("#btnDateSet").on("click",function(){	
+			$( "#popupLoanReq" ).popup("open");
+				var cd = localStorage.selectedDate;
+				var cdd = Date.parse(cd);
+				var today = new Date();
+				if(cdd < today ) {
+					showAlert('Select a date afte today');
+					$("#btnDateSet").focus();
+				}
+				else {
+					$("#txtDeductionStartDate").val(cd);							
+					$('#myDatePicker').hide();
+				}
+			});
+			$("#btnDateClear").on("click",function(){
+				$( "#popupLoanReq" ).popup("open");				
+				//$("#txtDeductionStartDate").val('');
+				$('#myDatePicker').hide();
+				$("#txtDeductionStartDate").blur();
+				
+			});			
+		});
+		/* TO HIDE MENU BUTTON LOGGED IN AS */		
+		$(document).on('pagebeforechange', function(e, data){  
+			$('.menu-button').hide();
+		});		
 		$(".popMenuSalarySummary").on("click",function() {
 			showSpinner();
 			getSalarySummary();
@@ -246,31 +273,14 @@
 			showSpinner();
 			getNonSellingItems();
 		});
-		$(".notifications").on("click",function() {
+		$("#homeIconNotifications").on("click",function() {
 			showSpinner();
-			localStorage.lastClickedCategory = 'ABSENT';
-			getNotifications('ABSENT');
-		});
-		/*$(".popMenuPendingNotifications").on("click",function() {
-			showSpinner();
-			getNotifications();			
-		});*/
-		$(".filter-tabs").on("click",function() {
-			$('.dash-noti-sub-head-big').hide();
-			$(".filter-tabs").removeClass('selected');
-			$(this).addClass('selected');
-			var tag = $(this).attr('data-tag');
-			if( tag == 'all')
-				$('.dash-noti-sub-head-big').show();
-			else {
-				$('.dash-noti-sub-head-big[data-tag='+tag+']').show();
-			}
-		});
+			//localStorage.lastClickedCategory = 'ALL';
+			//getNotifications('ALL');
+			getNotificationsCount();
+		});		
 		
-		/*$("#viewAllNotifications").on("click",function() {
-			showSpinner();
-			getNotifications();			
-		});*/
+		
 		$(".tabDash").on("click",function() {
 			showSpinner();
 			changePageID('#pageDashboard');
@@ -282,8 +292,8 @@
 		});
 		$(".sideMenuNotificaitons").on("click",function() {
 			showSpinner();
-			localStorage.lastClickedCategory = 'ABSENT';
-			getNotifications('ABSENT');
+			//localStorage.lastClickedCategory = 'ALL';
+			getNotificationsCount();
 		});
 		$(".sideMenuBalanceSheet").on("click",function() {
 			showSpinner();
@@ -300,10 +310,7 @@
 			if(block.css("display") == "none" )
 				block.show();
 		});
-		/*$(".sideMenuNotificaitons").on("click",function() {
-			showSpinner();
-			getNotifications();
-		});*/
+		
 		$(".sideMenuSales").on("click",function() {
 			showSpinner();
 			getSellingItems();
@@ -312,9 +319,7 @@
 			showSpinner();
 			getAccReceivables();
 		});
-		/*$(".sideMenuPurchase").on("click",function() {
-			alert('Page is under construction');
-		});*/
+		
 		$(".sideMenuHR").on("click",function() {
 			showSpinner();
 			getSalarySummary();
@@ -332,11 +337,9 @@
 			changePageID('#pageServiceRequest');
 		});
 		$("#btnRequestLoan").on("click",requestLoan);
-		
-	};
-	$("#pageLogin").on("pageinit",function(event){
-		console.log("pageinit : pageLogin");
-	});
+				
+	}
+	
 	
 	
 	/* disable login controls */
@@ -386,12 +389,7 @@
 			localStorage.isLoggedIn = "true";		
 			localStorage.branchFilter = response.userInfo.branch_filter;
 			localStorage.branchCode = response.userInfo.branch_code+"";
-			localStorage.userInfo = JSON.stringify(response.userInfo);
-			/*localStorage.lastLogin = response.userInfo.last_logged_in;
-			localStorage.lastLogout = response.userInfo.last_logged_out;
-			localStorage.userName = response.userInfo.user_name;
-			localStorage.branchName = response.userInfo.branch_name;*/
-			//alert(localStorage.branchCode);
+			localStorage.userInfo = JSON.stringify(response.userInfo);			
 			localStorage.userCode = response.userInfo.user_code;
 			$('.menuUserName').text(response.userInfo.user_name);
 			$('.menuLastLogin').text('Last Login : ' + response.userInfo.last_logged_in);
@@ -403,6 +401,52 @@
 		} 
 		hideSpinner();
 	};
+	/* */
+	
+	var genDatePicker = function() {		  
+		  var cd = new Date();
+		 
+		  var d = dateFormat(cd, "dd");
+		  var y = dateFormat(cd, "yyyy");
+		  localStorage.selectedDate = dateFormat(cd, "mm")+'/'+d+'/'+y;
+		  $('#dStr').html(dateFormat(cd, "fullDate"));
+		  $('#mon').html(dateFormat(cd, "mmm"));
+		  $('#day').html(d);
+		  $('#year').html(y);
+		  $('#pyear').click(function () {
+			  cd.setYear(cd.getFullYear() + 1);
+			  updateF();
+		  });
+		  $('#pmon').click(function () {
+			  cd.setMonth(cd.getMonth() + 1);
+			  updateF();
+		  });
+		  $('#pday').click(function () {
+			  cd.setDate(cd.getDate() + 1);
+			  updateF();
+		  });
+		  $('#myear').click(function () {
+			  cd.setYear(cd.getFullYear() - 1);
+			  updateF();
+		  });
+		  $('#mmon').click(function () {
+			  cd.setMonth(cd.getMonth() - 1);
+			  updateF();
+		  });
+		  $('#mday').click(function () {
+			  cd.setDate(cd.getDate() - 1);
+			  updateF();
+		  });
+		  function updateF() {
+			  var d = dateFormat(cd, "dd");
+			  var y = dateFormat(cd, "yyyy");
+			  $('#year').html(y);
+			  $('#mon').html(dateFormat(cd, "mmm"));
+			  $('#day').html(d);
+			  $('#dStr').html(dateFormat(cd, "fullDate"));			 
+			 localStorage.selectedDate = dateFormat(cd, "mm")+'/'+d+'/'+y;			
+		  }
+	}
 	
 	/*  log out */
 	var logout = function() {
@@ -418,9 +462,13 @@
 		window.location = "index.html";
 	};
 	var bindNotificationCategory = function() {
-		var sel = $('#selNotificationCategory');
+		var sel = $('#selNotificationCategory');		
 		var response = JSON.parse(localStorage.notificationsCount);
-		sel.html("");	
+		sel.html("");
+		var option =  $("<option/>")
+				.attr("value",'ALL')
+				.text('All');
+			option.appendTo(sel);
 		if($("selectId option").length  <= 1 ) {
 			$.each(response.notification_count, function(index,value) {
 				var option =  $("<option/>")
@@ -428,7 +476,6 @@
 					.text(value.name);
 				option.appendTo(sel);
 			});	
-			//sel.selectmenu("refresh");
 		}else{
 			console.log('select, ' + selectId + ' already generated');
 		}
@@ -448,8 +495,6 @@
 			data.displayCriteria=branch;
 			data.displayBy='BRANCH';
 		}
-		/*if(branch != '') 
-			data.branch=branch;*/
 		getResponse(data,parseProfitLoss);
 	}
 	var parseProfitLoss = function(response) {
@@ -488,7 +533,6 @@
 				td2.appendTo(tr);
 				td3.appendTo(tr);
 				td4.appendTo(tr);
-				//td5.appendTo(tr);		
 				
 				if(value.Accode == "Income" || value.Accode == "Expense")
 					tr.addClass("highlighted1");
@@ -517,15 +561,15 @@
 		var new_password 	 = $('#txtNewPassword').val();
 		var confirm_password = $('#txtConfirmPassword').val();
 		if( current_password == "" ) {
-			alert("Current password required.");
+			showAlert("Current password required.");
 			return;
 		}
 		if( new_password == "" ) {
-			alert("New password required.");
+			showAlert("New password required.");
 			return;
 		}
 		if( confirm_password != new_password ) {
-			alert("Password doesn't match.");
+			showAlert("Password doesn't match.");
 			return;
 		}
 		showSpinner();
@@ -538,7 +582,7 @@
 	}
 	var parseChangePassword = function(response) {
 		if( response.status == 2 ) {
-			alert("Incorrect current password");
+			showAlert("Incorrect current password");
 			$('#txtCurrentPassword').focus();	
 			$('#txtCurrentPassword').select();		
 		}else if( response.status == 1 ) {
@@ -546,7 +590,7 @@
 			$('#txtCurrentPassword').val("");
 			$('#txtNewPassword').val("");
 			$('#txtConfirmPassword').val("");
-			alert("Password changed");
+			showAlert("Password changed");
 			
 		}  else {
 			ajaxFailed();
@@ -559,12 +603,8 @@
 	*/
 	var getBalanceSheet = function(level,branch) {
 		console.log("Method : displayBalanceSheet");
-		//var level = $("#selLevel option:selected").text();
-		//var branch = $("#selBranch").val().trim();
-		//var type = $("#selType").val().trim();
 		data = new Object();
 		data.module = API_BALANCE_SHEET;
-		//data.type=type;
 		data.level=level;
 		if(branch != '') 
 			data.branch=branch;
@@ -603,8 +643,7 @@
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
-				td4.appendTo(tr);
-				//td5.appendTo(tr);		
+				td4.appendTo(tr);	
 				
 				if(value.Accode == "Asset" || value.Accode == "Liability")
 					tr.addClass("highlighted1");
@@ -656,26 +695,35 @@
 		var remarks = $('#txtRemarks').val();
 		var empCode = localStorage.userCode;
 		if( loanType == '' ) {
-			alert("Please enter loan type.");
+			showAlert("Select loan type.");			
 			return;
 		}
 		if( loanAmount.trim() == '' ) {
-			alert("Please enter loan amount.");
+			showAlert("Enter loan amount.");
+			$('#txtLoanAmount').focus();
+			return;
+		}
+		if( isNaN(loanAmount.trim()) ) {
+			showAlert("Loan amount should be numberic.");
+			$('#txtLoanAmount').focus();	
+			$('#txtLoanAmount').select();
+			return;
+		}
+		if( monthlyDeduction.trim() != ''  && isNaN(monthlyDeduction.trim()) ) {
+			showAlert("Monthly deduction amount should be numberic.");
+			$('#txtMonthlyDeduction').focus();	
+			$('#txtMonthlyDeduction').select();
 			return;
 		}
 		if( monthlyDeduction.trim() == '' ) {
-			alert("Please enter deduction monthly amount.");
+			showAlert("Please enter deduction monthly amount.");
 			return;
 		}		
 		showSpinner();
 		if(deductionStartDate == "")
 			deductionStartDate = getDateInFormat(new Date());
-		else {
-			//var dedDate = Date.parse(deductionStartDate);
-			deductionStartDate = getDateInFormatFromString(deductionStartDate);
-			/*alert(deductionStartDate);
-			return;*/
-		}	
+		
+		
 		params = new Object();
 		params.emp_code = localStorage.userCode;
 		params.branch_code = localStorage.branchCode;
@@ -703,7 +751,7 @@
 			 $('#txtMonthlyDeduction').val(""); 
 			 $('#txtDeductionStartDate').val(""); 
 			 $('#txtRemarks').val(""); 
-			alert("Loan request has been placed.");	
+			showAlert("Loan request has been placed.");	
 			localStorage.loanRequestTime = Date.now();			
 		} else {
 			ajaxFailed();
@@ -731,7 +779,6 @@
 	**/
 	var getAccReceivables = function () {
 		console.log("Method : getAccReceivables");
-		showSpinner();
 		if (localStorage.getItem("accReceivables") === null) {
 			data = new Object();
 			data.module = API_ACCRECEIVABLES;
@@ -754,34 +801,43 @@
 	
 	var displayAccReceivables = function(response) {
 		var accReceivables = response.acc_receivables;
-		var parent = $('#divFinance');
-		parent.html("");
-		var title = $('#pageFinance .pageTitle');
-		title.html('Top 10 Account Receivables');
-		var head1 = $('#pageFinance .head1');
-		var head2 = $('#pageFinance .head2');
-		head1.html('Customer');
-		head2.html('Balance');
-		head2.css('text-align','right');
-		for( i = 0 ; i < accReceivables.length ; i++ ) {
-			var divName = $('<div/>');
-			var divBal = $('<div/>');
-			var divItem = $('<div/>');
-			
-			divItem.addClass('inner-list-item');
-			divName.addClass('w60');
-			divBal.addClass('w40');
-			divBal.css('text-align','right');
-			
-			divBal.html(accReceivables[i].CUSTOMER_BALANCE);
-			divName.html(accReceivables[i].CUSTOMER_NAME);
-			
-			divName.appendTo(divItem);
-			divBal.appendTo(divItem);	
-			
-			divItem.appendTo(parent);
+		if(accReceivables.length < 1) {			
+			var parentDiv = $('#divFinance');
+			parentDiv.html("");
+			var childDiv = $('<div/>')
+				.attr('class','inner-list-item')
+				.css('text-align','center')
+				.html("No entries found!");
+			childDiv.appendTo(parentDiv);
+		} else {
+			var parent = $('#divFinance');
+			parent.html("");
+			var title = $('#pageFinance .pageTitle');
+			title.html('Top 10 Account Receivables');
+			var head1 = $('#pageFinance .head1');
+			var head2 = $('#pageFinance .head2');
+			head1.html('Customer');
+			head2.html('Balance');
+			head2.css('text-align','right');
+			for( i = 0 ; i < accReceivables.length ; i++ ) {
+				var divName = $('<div/>');
+				var divBal = $('<div/>');
+				var divItem = $('<div/>');
+				
+				divItem.addClass('inner-list-item');
+				divName.addClass('w60');
+				divBal.addClass('w40');
+				divBal.css('text-align','right');			
+				divBal.html(numberWithCommas(accReceivables[i].CUSTOMER_BALANCE));
+				divName.html(accReceivables[i].CUSTOMER_NAME);
+				
+				divName.appendTo(divItem);
+				divBal.appendTo(divItem);	
+				
+				divItem.appendTo(parent);
+			}
+			divItem.addClass('last');
 		}
-		divItem.addClass('last');
 		changePageID('#pageFinance');
 	}
 	/******************************************************************
@@ -813,34 +869,44 @@
 	
 	var displayAccPayables = function(response) {
 		var accPayables = response.acc_payables;
-		var parent = $('#divFinance');
-		parent.html("");
-		var title = $('#pageFinance .pageTitle');
-		title.html('Top 10 Account Payables');
-		var head1 = $('#pageFinance .head1');
-		var head2 = $('#pageFinance .head2');
-		head1.html('Suppplier');
-		head2.html('Balance');
-		head2.css('text-align','right');
-		for( i = 0 ; i < accPayables.length ; i++ ) {
-			var divName = $('<div/>');
-			var divBal = $('<div/>');
-			var divItem = $('<div/>');
-			
-			divItem.addClass('inner-list-item');
-			divName.addClass('w60');
-			divBal.addClass('w40');
-			divBal.css('text-align','right');
-			
-			divBal.html(accPayables[i].SUPPLIER_BALANCE);
-			divName.html(accPayables[i].SUPPLIER_NAME);
-			
-			divName.appendTo(divItem);
-			divBal.appendTo(divItem);	
-			
-			divItem.appendTo(parent);
+		if(accPayables.length < 1) {			
+			var parentDiv = $('#divFinance');
+			parentDiv.html("");
+			var childDiv = $('<div/>')
+				.attr('class','inner-list-item')
+				.css('text-align','center')
+				.html("No entries found!");
+			childDiv.appendTo(parentDiv);
+		} else {
+			var parent = $('#divFinance');
+			parent.html("");
+			var title = $('#pageFinance .pageTitle');
+			title.html('Top 10 Account Payables');
+			var head1 = $('#pageFinance .head1');
+			var head2 = $('#pageFinance .head2');
+			head1.html('Supplier');
+			head2.html('Balance');
+			head2.css('text-align','right');
+			for( i = 0 ; i < accPayables.length ; i++ ) {
+				var divName = $('<div/>');
+				var divBal = $('<div/>');
+				var divItem = $('<div/>');
+				
+				divItem.addClass('inner-list-item');
+				divName.addClass('w60');
+				divBal.addClass('w40');
+				divBal.css('text-align','right');
+				
+				divBal.html(numberWithCommas(accPayables[i].SUPPLIER_BALANCE));
+				divName.html(accPayables[i].SUPPLIER_NAME);
+				
+				divName.appendTo(divItem);
+				divBal.appendTo(divItem);	
+				
+				divItem.appendTo(parent);
+			}
+			divItem.addClass('last');
 		}
-		divItem.addClass('last');
 		changePageID('#pageFinance');
 	}
 	/***********************************************	
@@ -848,7 +914,6 @@
 	*	Desc	:	Fetch HR notifications count from the server
 	**/
 	var getNonSellingItems = function () {
-		showSpinner();
 		console.log("Method : getNonSellingItems");
 		if (localStorage.getItem("nonSellingItems") === null) {
 			data = new Object();
@@ -872,33 +937,43 @@
 	
 	var displayNonSellingItems = function(response) {
 		var nonSellingItems = response.non_selling;
-		var parent = $('#divSalesItems');
-		parent.html("");
-		var title = $('#pageSales .pageTitle');
-		var head1 = $('#pageSales .head1');
-		var head2 = $('#pageSales .head2');
-		head1.html('Item Code');
-		head2.html('Item Name');
-		head2.css('text-align','left');
-		title.html('Top 10 Non-selling items');
-		for( i = 0 ; i < nonSellingItems.length ; i++ ) {
-			var divName = $('<div/>');
-			var divCode = $('<div/>');
-			var divItem = $('<div/>');
-			
-			divItem.addClass('inner-list-item');
-			divName.addClass('w50');
-			divCode.addClass('w50');
-			
-			divCode.html(nonSellingItems[i].ITEM_CODE);
-			divName.html(nonSellingItems[i].ITEM_NAME);
-			
-			divCode.appendTo(divItem);	
-			divName.appendTo(divItem);
-			
-			divItem.appendTo(parent);
+		if(nonSellingItems.length < 1) {			
+			var parentDiv = $('#divSalesItems');
+			parentDiv.html("");
+			var childDiv = $('<div/>')
+				.attr('class','inner-list-item')
+				.css('text-align','center')
+				.html("No entries found!");
+			childDiv.appendTo(parentDiv);
+		} else {
+			var parent = $('#divSalesItems');
+			parent.html("");
+			var title = $('#pageSales .pageTitle');
+			var head1 = $('#pageSales .head1');
+			var head2 = $('#pageSales .head2');
+			head1.html('Item Code');
+			head2.html('Item Name');
+			head2.css('text-align','left');
+			title.html('Top 10 Non-selling items');
+			for( i = 0 ; i < nonSellingItems.length ; i++ ) {
+				var divName = $('<div/>');
+				var divCode = $('<div/>');
+				var divItem = $('<div/>');
+				
+				divItem.addClass('inner-list-item');
+				divName.addClass('w50');
+				divCode.addClass('w50');
+				
+				divCode.html(nonSellingItems[i].ITEM_CODE);
+				divName.html(nonSellingItems[i].ITEM_NAME);
+				
+				divCode.appendTo(divItem);	
+				divName.appendTo(divItem);
+				
+				divItem.appendTo(parent);
+			}
+			divItem.addClass('last');
 		}
-		divItem.addClass('last');
 		changePageID('#pageSales');
 	}	
 	/*****************************************************************
@@ -911,7 +986,7 @@
 			data = new Object();
 			data.module = API_SELLING;
 			data.branch_filter = localStorage.branchFilter;
-			getResponseV2(data,parseSellingItems);
+			getResponse(data,parseSellingItems);
 		}else{
 			var response = JSON.parse(localStorage.sellingItems);
 			parseSellingItems(response);	
@@ -929,34 +1004,44 @@
 	
 	var displaySellingItems = function(response) {
 		var sellingItems = response.selling;
-		var parent = $('#divSalesItems');
-		parent.html("");
-		var title = $('#pageSales .pageTitle');
-		title.html('Top 10 Selling items');
-		var head1 = $('#pageSales .head1');
-		var head2 = $('#pageSales .head2');
-		head1.html('Name');
-		head2.html('Quantity');
-		head2.css('text-align','right');
-		for( i = 0 ; i < sellingItems.length ; i++ ) {
-			var divName = $('<div/>');
-			var divQty = $('<div/>');
-			var divItem = $('<div/>');
-			
-			divItem.addClass('inner-list-item');
-			divName.addClass('w70');
-			divQty.addClass('w30');
-			divQty.css('text-align','right');
-			
-			divQty.html(sellingItems[i].QTY);
-			divName.html(sellingItems[i].ITEM_NAME);
-			
-			divName.appendTo(divItem);
-			divQty.appendTo(divItem);	
-			
-			divItem.appendTo(parent);
+		if(sellingItems.length < 1) {			
+			var parentDiv = $('#divSalesItems');
+			parentDiv.html("");
+			var childDiv = $('<div/>')
+				.attr('class','inner-list-item')
+				.css('text-align','center')
+				.html("No entries found!");
+			childDiv.appendTo(parentDiv);
+		} else {
+			var parent = $('#divSalesItems');
+			parent.html("");
+			var title = $('#pageSales .pageTitle');
+			title.html('Top 10 Selling items');
+			var head1 = $('#pageSales .head1');
+			var head2 = $('#pageSales .head2');
+			head1.html('Name');
+			head2.html('Quantity');
+			head2.css('text-align','right');
+			for( i = 0 ; i < sellingItems.length ; i++ ) {
+				var divName = $('<div/>');
+				var divQty = $('<div/>');
+				var divItem = $('<div/>');
+				
+				divItem.addClass('inner-list-item');
+				divName.addClass('w70');
+				divQty.addClass('w30');
+				divQty.css('text-align','right');
+							
+				divQty.html(numberWithCommas(sellingItems[i].QTY));
+				divName.html(sellingItems[i].ITEM_NAME);
+				
+				divName.appendTo(divItem);
+				divQty.appendTo(divItem);	
+				
+				divItem.appendTo(parent);
+			}
+			divItem.addClass('last');
 		}
-		divItem.addClass('last');
 		changePageID('#pageSales');
 	}
 	/**
@@ -988,27 +1073,35 @@
 	
 	var displayHRNotifications = function(response) {
 		var hrNotifications = response.hr_notifications;
-		var parent = $('#divHRNotifications');
-		parent.html(" ");
-		for( i = 0 ; i < hrNotifications.length ; i++ ) {
-			var divName = $('<div/>');
-			var divDate = $('<div/>');
-			var divItem = $('<div/>');
-			
-			divItem.addClass('inner-list-item');
-			divName.addClass('w50');
-			divDate.addClass('w50');
-			//divDate.css('text-align','right');
-			
-			divDate.html(hrNotifications[i].EMP_NAME);
-			divName.html(hrNotifications[i].DATE);
-			
-			divDate.appendTo(divItem);	
-			divName.appendTo(divItem);
-			
-			divItem.appendTo(parent);
+		if(hrNotifications.length < 1) {			
+			var parentDiv = $('#divHRNotifications');
+			parentDiv.html("");
+			var childDiv = $('<div/>')
+				.attr('class','inner-list-item')
+				.css('text-align','center')
+				.html("No entries found!");
+			childDiv.appendTo(parentDiv);
+		} else {
+			var parent = $('#divHRNotifications');
+			parent.html(" ");
+			for( i = 0 ; i < hrNotifications.length ; i++ ) {
+				var divName = $('<div/>');
+				var divDate = $('<div/>');
+				var divItem = $('<div/>');
+				
+				divItem.addClass('inner-list-item');
+				divName.addClass('w50');
+				divDate.addClass('w50');
+				divDate.html(hrNotifications[i].EMP_NAME);
+				divName.html(hrNotifications[i].DATE);
+				
+				divDate.appendTo(divItem);	
+				divName.appendTo(divItem);
+				
+				divItem.appendTo(parent);
+			}
+			divItem.addClass('last');
 		}
-		divItem.addClass('last');
 		changePageID('#pageHRNotifications');
 	}
 	/**
@@ -1040,23 +1133,33 @@
 	
 	var displaySalarySummary = function(response) {
 		var salarySummary = response.salary_summary;
-		var parent = $('#divSalarySummary');
-		parent.html("");
-		for( i = 0 ; i < salarySummary.length ; i++ ) {
-			var divMonth = $('<div/>');
-			var divSalary = $('<div/>');
-			var divItem = $('<div/>');
-			divItem.addClass('inner-list-item');
-			divMonth.addClass('w60');
-			divSalary.addClass('w40');
-			divSalary.css('text-align','right');
-			divMonth.html(salarySummary[i].MONTH);
-			divSalary.html(salarySummary[i].SALARY);
-			divMonth.appendTo(divItem);
-			divSalary.appendTo(divItem);	
-			divItem.appendTo(parent);
+		if(salarySummary.length < 1) {			
+			var parentDiv = $('#divSalarySummary');
+			parentDiv.html("");
+			var childDiv = $('<div/>')
+				.attr('class','inner-list-item')
+				.css('text-align','center')
+				.html("No entries found!");
+			childDiv.appendTo(parentDiv);
+		} else {
+			var parent = $('#divSalarySummary');
+			parent.html("");
+			for( i = 0 ; i < salarySummary.length ; i++ ) {
+				var divMonth = $('<div/>');
+				var divSalary = $('<div/>');
+				var divItem = $('<div/>');
+				divItem.addClass('inner-list-item');
+				divMonth.addClass('w60');
+				divSalary.addClass('w40');
+				divSalary.css('text-align','right');
+				divMonth.html(salarySummary[i].MONTH);
+				divSalary.html(salarySummary[i].SALARY);
+				divMonth.appendTo(divItem);
+				divSalary.appendTo(divItem);	
+				divItem.appendTo(parent);
+			}
+			divItem.addClass('last');
 		}
-		divItem.addClass('last');
 		changePageID('#pageSalarySummary');
 	}
 	/**
@@ -1162,6 +1265,37 @@
 		});	
 	}
 	/**
+	* get the total number of notifications
+	*/
+	var getNotiTotalCount = function() {
+		console.log("Method : getNotiTotalCount");
+		if (localStorage.getItem("notiTotalCount") === null) {
+			data = new Object();
+			data.module = API_TOTALNOTIFICATIONCOUNT;
+			data.branch_filter = localStorage.branchFilter;
+			getResponse(data,parseNotiTotalCount);
+		}else{
+			var response = JSON.parse(localStorage.notiTotalCount);
+			parseNotiTotalCount(response);	
+		}
+	}; 
+	var parseNotiTotalCount = function(response) {
+		if(response.status==1) {
+			if(parseInt(response.total_notifications) != 0 ) {
+				$('#dashNotiCount').show();
+				$('#dashNotiCount').html(response.total_notifications);
+			}else{
+				$('#dashNotiCount').html('0');
+				$('#dashNotiCount').hide();
+			}
+						
+			localStorage.notiTotalCount = JSON.stringify(response);		
+		} else {
+			ajaxFailed();
+		}
+		hideSpinner();
+	};
+	/**
 	*	Name	:	getNotificationsCount
 	*	Desc	:	Fetch notifications count from the server
 	**/
@@ -1179,8 +1313,8 @@
 	}; 
 	var parseNotificationsCount = function(response) {
 		if(response.status==1) {
+			localStorage.notificationsCount = JSON.stringify(response);
 			displayNotificationsCount(response);	
-			localStorage.notificationsCount = JSON.stringify(response);		
 		} else {
 			ajaxFailed();
 		}
@@ -1188,9 +1322,11 @@
 	};
 	
 	var displayNotificationsCount = function(response) {
-		var parent = $('.home-notification-count');
+		$('#notificationsWrapper .inner-list-item').hide();	
+		var parent = $('.notificationsItems');
 		parent.html("");
 		var counts = response.notification_count;
+		
 		for( i = 0; i < counts.length ; i++ ) {
 			/* Skip notifications with zero */
 			if( counts[i].count > 0 ) {
@@ -1198,52 +1334,35 @@
 				div.attr('data-cat',counts[i].category);
 				div.attr('data-tag',counts[i].tag);
 				div.html( counts[i].name + '<div class="count">'+ counts[i].count + "</div>" );
-				div.addClass('dash-noti-sub-head-big');
-				div.on('click',loadNotifications);				
+				div.addClass('inner-list-item');				
 				div.appendTo(parent);
 			}
 		}
-		div.addClass('last');
+		changePageID('#pageNotifications');		
 	}
-	var loadNotifications  = function(){
-		showSpinner();
-		var category = $(this).attr('data-cat');
-		//alert(category);
-		localStorage.lastClickedCategory = category;
-		getNotifications(category);
-	}
+	
 	/**
 	*	Name	:	getNotifications
 	*	Desc	:	Fetch notifications from the server
 	**/
 	var getNotifications = function(category) {
 		console.log("Method : getNotifications");
-		//var t = 'notifications_'+category;
-		//localStorage.setItem(t,null);
-		//alert(t);
 		if (localStorage.getItem('notifications') == null) {		
 			data = new Object();
 			data.module = NOTIFICATIONS;
 			data.branch_filter = localStorage.branchFilter;
 			data.category = category;
 			getResponse(data,parseNotifications);
-		}else{
-			//if(NOTIFICATIONS_LOADED == false) {				
+		}else{				
 				var response = JSON.parse(localStorage.notifications);
-				//alert('here');	
 				parseNotifications(response);	
-				//alert('here');	
-			//}else{
 				changePageID('#pageNotifications');
-				//alert('here');	
 				hideSpinner();
-			//}
 		}
 	}; 
 	var parseNotifications = function(response) {			
 		if( response.status == 1 ) {
-			displayNotifications(response);	
-			//localStorage.setItem('notifications_'+response.category, JSON.stringify(response));		
+			displayNotifications(response);			
 		} else {
 			ajaxFailed();
 		}
@@ -1251,7 +1370,7 @@
 	};
 
 	var displayNotifications = function(response){
-						
+		$('#notificationsWrapper .inner-list-item').show();		
 		var notifications = response.notifications;
 		var category = response.category;
 		if(notifications.length > 0) {
@@ -1262,12 +1381,13 @@
 			var parentDiv = $('#notificationsWrapper .notificationsItems');
 			parentDiv.html('');
 			var div1 = $("#notificationsWrapper #col1");			
-			var div2 = $("#notificationsWrapper #col2");			
-			//.show();
-			/* display count in each module */
+			var div2 = $("#notificationsWrapper #col2");
+			div1.show();			
+			div2.show();				
+			/* display count in each module */			
 			if( category == 'ABSENT' ) {
 				div1.html('Employee');
-				div2.html('Absent Date');				
+				div2.html('Doc Date');				
 			} else if( category == 'DELIVERY' ){				
 				div1.html('Supplier');
 				div2.html('Doc Date');
@@ -1298,8 +1418,7 @@
 			} else if( category == 'VACATION_REQUEST' ){
 				div1.html('Employee');
 				div2.html('Doc Date');
-			} 			
-			
+			} 
 			
 			$.each(notifications, function(index,value) {
 				var childDiv = $('<div/>')
@@ -1325,18 +1444,17 @@
 			});			
 		}
 		else {
-			var parentDiv = $('#notificationsWrapper #notificationsItems');
+			var parentDiv = $('#notificationsWrapper .notificationsItems');
+			parentDiv.html("");
 			$("#notificationsWrapper #col1").hide();			
 			$("#notificationsWrapper #col2").hide();	
 			var childDiv = $('<div/>')
 				.attr('class','inner-list-item')
-				.html("No items found");
+				.css('text-align','center')
+				.html("No items found!");
+			childDiv.appendTo(parentDiv);
 		}
-		changePageID('#pageNotifications');		
-		//alert(localStorage.lastClickedCategory);
-		$('#selNotificationCategory option[value='+localStorage.lastClickedCategory+']').attr('selected', 'selected');
-		//alert($('#selNotificationCategory').val());
-		$("#selNotificationCategory").selectmenu("refresh");
+		changePageID('#pageNotifications');
 	}
 	/**
 	*	Name	:	getBusinessUnits

@@ -8,12 +8,11 @@
 <link rel="stylesheet" href="styles/jquery.mobile.structure-1.3.0.css" />
 <link rel="stylesheet" href="styles/common.css" />
 <link rel="stylesheet" href="styles/pagestyles/index.css" />
-<link rel="stylesheet" href="styles/mobiscroll.custom-2.5.0.min.css" />
-<script src="scripts/cordova-1.9.0.js" charset="utf-8"></script>
+<!--<script src="scripts/cordova-1.9.0.js" charset="utf-8"></script>-->
 <script src="phonegap.js"></script>
 <script src="scripts/jquery-1.9.1.min" charset="utf-8"></script>
 <script src="scripts/jquery.mobile-1.3.0.min" charset="utf-8"></script>
-<script src="scripts/mobiscroll.custom-2.5.0.min.js" charset="utf-8"></script>
+<script src="scripts/dFormat.js" charset="utf-8"></script>
 <script src="scripts/common.js" charset="utf-8"></script>
 <script src="scripts/pagescripts/index.js" charset="utf-8"></script>
 </head>
@@ -28,7 +27,7 @@
     <div class="login-controls">
       <div id="divLogin">
         <select id="selLoginBUnit" >
-          <option value="NULL" >Business Unit</option>
+          <option value="NULL" >Select Business Unit</option>
         </select>
         <br />
         <input type="text"  placeholder="User ID"   id="txtUserId" />
@@ -46,15 +45,33 @@
         </div>
       </div>
     </div>
+    <div style="height:30px;"></div>
   </div>
   <!-- /content -->
-  <div data-role="footer" class="footer-bg" data-theme="none" data-position="fixed">
-    <div class="w50">
-      <div class="login-footer" style="text-align:left"><a href="#">About TaskForces&#0153; </a></div>
+  
+  <div data-role="popup" id="popupAbout" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;min-width:260px;" class="ui-corner-all"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <div data-role="header" data-theme="a" class="ui-corner-top">
+      <h1 style="margin-top: .7em;margin-bottom: .3em;"> <img src="images/logo-small.png" width="100" height="17" alt="TF"></h1>
     </div>
-    <div class="w50">
-      <div class="login-footer" style="text-align:right"><a href="#">Forgot Password?</a></div>
-    </div>
+    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="margin:15px;text-align:center">
+      <h3 class="ui-title">TaskForces&#0153; ERP<br>
+        <span class="enterprise">Enterprise Mobility</span></h3>
+      <p style="font-size:12px">Version 1.0<br>
+        <Br>
+        <br>
+        Licensed To:</p>
+      <img style="margin:0 60px" src="images/cybosol-logo.png" width="159" height="80" alt="Cybosol"> </div>
+  </div>
+  <div data-role="footer" class="footer-bg" data-theme="none" data-position="fixed"> 
+    <!--<div class="w50">--> 
+    <!--<a href="#popupAbout" data-rel="popup" data-position-to="window" data-inline="true" >-->
+    <div class="login-footer" id="aboutTaskforces" style="text-align:center">About TaskForces&#0153;</div>
+    <!-- </a>--> 
+    
+    <!-- </div>
+    <div class="w50">--> 
+    <!--<div class="login-footer" style="text-align:right"><a href="#">Forgot Password?</a></div>--> 
+    <!--  </div>--> 
   </div>
 </div>
 <!-- 
@@ -78,30 +95,38 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /header  -->
   
   <div data-role="content">
     <div class="buttons-wrapper">
       <div class="row">
-        <div class="w32"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" >
+        <div class="w50"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" >
           <div class="buttons  bg-orange" id="Hr">
             <div class="icon hr"  id="btnHr"></div>
             <div class="caption" id="btnCaption">HR</div>
           </div>
           </a> </div>
-        <div class="w32"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" >
+        <div class="w50"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" >
+          <div class="buttons bg-green" id="Finance">
+            <div class="icon finance"></div>
+            <div class="caption">Finance</div>
+          </div>
+          </a> </div>
+      </div>
+      <div class="row">
+        <div class="w50"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" >
           <div class="buttons bg-purple" id="Sales">
             <div class="icon sales"></div>
             <div class="caption">Sales</div>
           </div>
           </a> </div>
-        <div class="w32"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" >
+        <div class="w50"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" >
           <div class="buttons bg-blue" id="Purchase">
             <div class="icon purchase"></div>
             <div class="caption">Purchase</div>
@@ -109,86 +134,61 @@
           </a> </div>
       </div>
       <div class="row">
-        <div class="w32"> <a href="#popupSubFinance" data-rel="popup" data-position-to="window" data-inline="true" >
-          <div class="buttons bg-green" id="Finance">
-            <div class="icon finance"></div>
-            <div class="caption">Finance</div>
-          </div>
-          </a> </div>
-        <div class="w32">
-          <div class="buttons bg-red" id="notifications">
+        <div class="w50">
+          <div class="buttons bg-red" id="homeIconNotifications">
             <div class="icon notifications"></div>
             <div class="caption">Notifications</div>
+            <div class="count" id="dashNotiCount">123</div>
           </div>
         </div>
-        <div class="w32"> <a href="#pageProfile">
-          <div class="buttons bg-orange" id="Profile">
+        <div class="w50"> <!--<a href="#pageProfile">-->
+          <div class="buttons bg-orange" id="homeIconProfile">
             <div class="icon profile"></div>
             <div class="caption">My Profile</div>
           </div>
-          </a> </div>
+          <!-- </a>--> </div>
       </div>
     </div>
     <!-- Pop up menus for sub pages -->
-    <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+    <div data-role="popup" id="popupSubHR" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
       <h4>Human Resource</h4>
       <ul data-role="listview" data-inset="true">
-        <li class="popMenuSalarySummary">Salary Summary</li>
-        <li class="popMenuHRNotifications">HR Notifications</li>
+        <li class="popMenuSalarySummary"><a href="#" data-icon="arrow-r">Salary Summary</a></li>
+        <li class="popMenuHRNotifications"><a href="#" data-icon="arrow-r">HR Notifications</a></li>
       </ul>
     </div>
-    <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+    <div data-role="popup" id="popupSubSales" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
       <h4>Sales</h4>
       <ul data-role="listview" data-inset="true">
-        <li class="popMenuSelling">Top 10 Selling Items</li>
-        <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+        <li class="popMenuSelling"><a href="#" data-icon="arrow-r">Top 10 Selling Items</a></li>
+        <li class="popMenuNonSelling"><a href="#" data-icon="arrow-r">Top 10 Non-Selling Items</a></li>
       </ul>
     </div>
-    <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+    <div data-role="popup" id="popupSubPurchase" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
       <h4>Purchase</h4>
       <h3>Page is under construction</h3>
     </div>
-    <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+    <div data-role="popup" id="popupSubFinance" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
       <h4>Finance</h4>
       <ul data-role="listview" data-inset="true">
-        <li class="popMenuAccPayables">Top 10 Account Payables</li>
-        <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
-        <li class="sideMenuBalanceSheet">Balance Sheet</li>
-        <li class="sideMenuProfitLoss">Profit & Loss</li>
+        <li class="popMenuAccPayables"><a href="#" data-icon="arrow-r">Top 10 Account Payables</a></li>
+        <li class="popMenuAccReceibales"><a href="#" data-icon="arrow-r">Top 10 Account Receivables</a></li>
+        <li class="sideMenuBalanceSheet"><a href="#" data-icon="arrow-r">Balance Sheet</a></li>
+        <li class="sideMenuProfitLoss"><a href="#" data-icon="arrow-r">Profit & Loss</a></li>
       </ul>
     </div>
-    <div data-role="popup" id="popupSubProfile" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+    <div data-role="popup" id="popupSubProfile" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
       <h4>Account</h4>
       <h3>Page is under construction</h3>
     </div>
-    <div class="dash-notifications" style="min-height:270px">
-      <div class="dash-noti-head">Notifications</div>
-      <div class="home-filter-wrapper">
-        <div class="w20">
-          <div class="filter-tabs selected" data-tag="all">All</div>
-        </div>
-        <div class="w20">
-          <div class="filter-tabs" data-tag="purchase">Purchase</div>
-        </div>
-        <div class="w20">
-          <div class="filter-tabs" data-tag="sales">Sales</div>
-        </div>
-        <div class="w20">
-          <div class="filter-tabs" data-tag="hr">HR</div>
-        </div>
-        <div class="w20">
-          <div class="filter-tabs" data-tag="finance">Finance</div>
-        </div>
-      </div>
-      <div class="home-notification-count"></div>
-      <!-- <div class="dash-noti-sub-head">Absent Notifications </div>--> 
-      
-    </div>
-    <div style="height:20px;"></div>
     <div class="menu-button logged-in-as">
       <div style="float:left"> <span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+    <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+      <h4>More Options</h4>
+      <h3>Page is under construction</h3>
     </div>
   </div>
   <!-- /content --> 
@@ -214,11 +214,11 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /header  -->
   
@@ -229,31 +229,31 @@
       <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
       <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
       <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
-      <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <div data-role="popup" id="popupSubHR" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         <h4>Human Resource</h4>
         <ul data-role="listview" data-inset="true">
-          <li class="popMenuSalarySummary">Salary Summary</li>
-          <li class="popMenuHRNotifications">HR Notifications</li>
+          <li class="popMenuSalarySummary"><a href="#" data-icon="arrow-r">Salary Summary</a></li>
+          <li class="popMenuHRNotifications"><a href="#" data-icon="arrow-r">HR Notifications</a></li>
         </ul>
       </div>
-      <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <div data-role="popup" id="popupSubSales" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         <h4>Sales</h4>
         <ul data-role="listview" data-inset="true">
-          <li class="popMenuSelling">Top 10 Selling Items</li>
-          <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+          <li class="popMenuSelling"><a href="#" data-icon="arrow-r">Top 10 Selling Items</a></li>
+          <li class="popMenuNonSelling"><a href="#" data-icon="arrow-r">Top 10 Non-Selling Items</a></li>
         </ul>
       </div>
-      <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <div data-role="popup" id="popupSubPurchase" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         <h4>Purchase</h4>
         <h3>Page is under construction</h3>
       </div>
-      <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <div data-role="popup" id="popupSubFinance" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         <h4>Finance</h4>
         <ul data-role="listview" data-inset="true">
-          	<li class="popMenuAccPayables">Top 10 Account Payables</li>
-          	<li class="popMenuAccReceibales">Top 10 Account Receivables</li>
-          	<li class="sideMenuBalanceSheet">Balance Sheet</li>
-        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+          <li class="popMenuAccPayables"><a href="#" data-icon="arrow-r">Top 10 Account Payables</a></li>
+          <li class="popMenuAccReceibales"><a href="#" data-icon="arrow-r">Top 10 Account Receivables</a></li>
+          <li class="sideMenuBalanceSheet"><a href="#" data-icon="arrow-r">Balance Sheet</a></li>
+          <li class="sideMenuProfitLoss"><a href="#" data-icon="arrow-r">Profit & Loss</a></li>
         </ul>
       </div>
     </div>
@@ -275,6 +275,10 @@
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
+    <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+      <h4>More Options</h4>
+      <h3>Page is under construction</h3>
+    </div>
   </div>
   <!-- /content --> 
 </div>
@@ -293,7 +297,6 @@
     <div class="w25">
       <div class="tabs tabDash" id="tabDash">
         <div class="caption">Dashboard</div>
-        <!--<div class="noti-count">3</div>--> 
       </div>
     </div>
     <div class="w25">
@@ -301,11 +304,11 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /header  -->
   
@@ -317,31 +320,31 @@
         <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
         <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
         <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
-        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubHR" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Human Resource</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSalarySummary">Salary Summary</li>
-            <li class="popMenuHRNotifications">HR Notifications</li>
+            <li class="popMenuSalarySummary"><a href="#" data-icon="arrow-r">Salary Summary</a></li>
+            <li class="popMenuHRNotifications"><a href="#" data-icon="arrow-r">HR Notifications</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubSales" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Sales</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSelling">Top 10 Selling Items</li>
-            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+            <li class="popMenuSelling"><a href="#" data-icon="arrow-r">Top 10 Selling Items</a></li>
+            <li class="popMenuNonSelling"><a href="#" data-icon="arrow-r">Top 10 Non-Selling Items</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubPurchase" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Purchase</h4>
           <h3>Page is under construction</h3>
         </div>
-        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubFinance" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Finance</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuAccPayables">Top 10 Account Payables</li>
-            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
-            <li class="">Balance Sheet</li>
-            <li class="">Profit & Loss</li>
+            <li class="popMenuAccPayables"><a href="#" data-icon="arrow-r">Top 10 Account Payables</a></li>
+            <li class="popMenuAccReceibales"><a href="#" data-icon="arrow-r">Top 10 Account Receivables</a></li>
+            <li class="sideMenuBalanceSheet"><a href="#" data-icon="arrow-r">Balance Sheet</a></li>
+            <li class="sideMenuProfitLoss"><a href="#" data-icon="arrow-r">Profit & Loss</a></li>
           </ul>
         </div>
       </div>
@@ -364,7 +367,7 @@
               <h4 id="userInfoLogout">2nd decemebr, 2013</h4>
               <a href="#popupChangePassword" style="margin:auto;position:absolute;bottom:5px;left:0;right:0" data-rel="popup" data-icon="gear"  data-role="button" data-position-to="window" data-inline="true" >Change Password</a> </div>
           </div>
-          <div data-role="popup" id="popupChangePassword" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+          <div data-role="popup" id="popupChangePassword" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
             <h4>Change Password</h4>
             <input type="password" id="txtCurrentPassword" placeholder="Current Password" />
             <input type="password" id="txtNewPassword" placeholder="New Password" />
@@ -378,6 +381,10 @@
       <div style="float:left"> <span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+    <div data-role="popup" id="popupMore"  data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+      <h4>More Options</h4>
+      <h3>Page is under construction</h3>
     </div>
   </div>
   <!-- /content --> 
@@ -405,11 +412,11 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /header  -->
   
@@ -421,31 +428,31 @@
         <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
         <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
         <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
-        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubHR" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Human Resource</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSalarySummary">Salary Summary</li>
-            <li class="popMenuHRNotifications">HR Notifications</li>
+            <li class="popMenuSalarySummary"><a href="#" data-icon="arrow-r">Salary Summary</a></li>
+            <li class="popMenuHRNotifications"><a href="#" data-icon="arrow-r">HR Notifications</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubSales" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Sales</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSelling">Top 10 Selling Items</li>
-            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+            <li class="popMenuSelling"><a href="#" data-icon="arrow-r">Top 10 Selling Items</a></li>
+            <li class="popMenuNonSelling"><a href="#" data-icon="arrow-r">Top 10 Non-Selling Items</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubPurchase" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Purchase</h4>
           <h3>Page is under construction</h3>
         </div>
-        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubFinance" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Finance</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuAccPayables">Top 10 Account Payables</li>
-            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
-            <li class="sideMenuBalanceSheet">Balance Sheet</li>
-        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+            <li class="popMenuAccPayables"><a href="#" data-icon="arrow-r">Top 10 Account Payables</a></li>
+            <li class="popMenuAccReceibales"><a href="#" data-icon="arrow-r">Top 10 Account Receivables</a></li>
+            <li class="sideMenuBalanceSheet"><a href="#" data-icon="arrow-r">Balance Sheet</a></li>
+            <li class="sideMenuProfitLoss"><a href="#" data-icon="arrow-r">Profit & Loss</a></li>
           </ul>
         </div>
       </div>
@@ -470,6 +477,10 @@
       <div style="float:left"> <span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+    <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+      <h4>More Options</h4>
+      <h3>Page is under construction</h3>
     </div>
   </div>
   <!-- /content --> 
@@ -497,11 +508,11 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /header  -->
   
@@ -513,37 +524,39 @@
         <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
         <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
         <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
-        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubHR" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Human Resource</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSalarySummary">Salary Summary</li>
-            <li class="popMenuHRNotifications">HR Notifications</li>
+            <li class="popMenuSalarySummary"><a href="#" data-icon="arrow-r">Salary Summary</a></li>
+            <li class="popMenuHRNotifications"><a href="#" data-icon="arrow-r">HR Notifications</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubSales" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Sales</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSelling">Top 10 Selling Items</li>
-            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+            <li class="popMenuSelling"><a href="#" data-icon="arrow-r">Top 10 Selling Items</a></li>
+            <li class="popMenuNonSelling"><a href="#" data-icon="arrow-r">Top 10 Non-Selling Items</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubPurchase" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Purchase</h4>
           <h3>Page is under construction</h3>
         </div>
-        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubFinance" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Finance</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuAccPayables">Top 10 Account Payables</li>
-            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
-            <li class="sideMenuBalanceSheet">Balance Sheet</li>
-        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+            <li class="popMenuAccPayables"><a href="#" data-icon="arrow-r">Top 10 Account Payables</a></li>
+            <li class="popMenuAccReceibales"><a href="#" data-icon="arrow-r">Top 10 Account Receivables</a></li>
+            <li class="sideMenuBalanceSheet"><a href="#" data-icon="arrow-r">Balance Sheet</a></li>
+            <li class="sideMenuProfitLoss"><a href="#" data-icon="arrow-r">Profit & Loss</a></li>
           </ul>
         </div>
       </div>
       <div class="content">
         <div class="inner-page-wrapper">
-          <div class="inner-page-head">Service Requests</div>
+          <div class="inner-page-head">&nbsp;&nbsp;&nbsp; Service Requests<a  data-rel="back" href="#">
+            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+            </a> </div>
           <div class="side-content-body">
             <ul data-role="listview" data-inset="true">
               <li> <a href="#popupLoanReq" data-rel="popup" data-position-to="window" data-inline="true" data-icon="check" data-theme="a" >Loan Request</a> </li>
@@ -551,27 +564,62 @@
             </ul>
             <!--  Pop up 2-->
             
-            <div data-role="popup" id="popupLoanReq" data-theme="a" class="ui-corner-all">
-              <div style="padding:10px 10px;width:260px">
-                <h3>Loan Request Form</h3>
-                <select id="selLoanTypes">
-                  <option value="">Loan Type</option>
-                </select>
-                <input id="txtLoanAmount" type="tel" value="" placeholder="Loan Amount" data-theme="a" />
-                <input id="txtMonthlyDeduction" type="tel" value="" placeholder="Monthly Deduction Amount" data-theme="a" />
-                <input id="txtDeductionStartDate" type="date"  value="" placeholder="Deduction Start Date" data-theme="a" />
-                <textarea id="txtRemarks" placeholder="Remarks" ></textarea>
-                <!--name="datePicker"-->
-                <button type="button" data-theme="a" id="btnRequestLoan" data-icon="check">Request</button>
-              </div>
+            <div data-role="popup" id="popupLoanReq" data-dismissible="false" data-theme="a" class="ui-corner-all"  style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+              <h3>Loan Request Form</h3>
+              <select id="selLoanTypes">
+                <option value="">Loan Type</option>
+              </select>
+              <input id="txtLoanAmount" type="tel" placeholder="Loan Amount" data-theme="a" />
+              <input id="txtMonthlyDeduction" type="tel" placeholder="Monthly Deduction Amount" data-theme="a" />
+              <input id="txtDeductionStartDate" type="text" readonly   value="Deduction Start Date" data-theme="a" />	
+              <div class="date-mask" id="myDatePicker">
+             <div class="date-wrapper">
+        <table class="maintable" cellpadding='0' cellspacing='0' >
+          <tr>
+            <td colspan='3'><div style='border-bottom:thin solid #fff;font-size:20px;margin-bottom:5px;margin-top:10px; padding:5px;height:20px;text-align:center'>
+               
+                <div id='dStr' style='width:200px;float:left;'>Som date</div>
+              </div></td>
+          </tr>
+          <tr>
+            <td><div id="pmon"  role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">+</div></td>
+            <td><div id="pday" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;;">+</div></td>
+            <td><div id="pyear" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">+</div></td>
+          </tr>
+          <tr>
+            <td><div id="mon" class="disp">12</div></td>
+            <td><div id="day" class="disp">12</div></td>
+            <td><div id="year" class="disp" >12</div></td>
+           <!-- <td><input type="text" disabled="disabled" id="mon" style="width:56px;padding:0px;height:38px;margin:2px;" /></td>
+            <td><input type="text" disabled="disabled" id="day" style="width:56px;padding:0px;height:38px;margin:2px;" /></td>
+            <td><input type="text" disabled="disabled" id="year" style="width:56px;padding:0px;height:38px;margin:2px;" /></td>-->
+          </tr>
+          <tr>
+            <td><div id="mmon" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px 2px 2px;margin: auto;">-</div></td>
+            <td><div id="mday" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">-</div></td>
+            <td><div id="myear" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">-</div></td>
+          </tr>
+          <tr>
+            <td colspan='3' ><table width="100%" cellspacing="3" >
+                <tr>
+                <td width="50%"><div role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="border:1px solid #111; font-size:16px;text-align: center; padding: 10px 0px;margin:2px;" id="btnDateSet">Set</div></td>
+                <td><div role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="font-size:16px;text-align: center;border:1px solid #111; padding: 10px 0px;margin:2px;" id="btnDateClear">Cancel</div></td>
+              </tr>
+              </table></td>
+          </tr>
+        </table>
+      </div>
+      </div>
+              <textarea id="txtRemarks" placeholder="Remarks" ></textarea>
+              <!--name="datePicker"-->
+              <button type="button" data-theme="a" id="btnRequestLoan" data-icon="check">Request</button>
             </div>
+            
             <!-- Pop 1 -->
             
-              <div data-role="popup" id="popupLeaveReq" data-theme="a" class="ui-corner-all">
-              	<div style="padding:10px 10px;width:260px">
-                <h3>Leave Request</h3>
-                <h4>Not Available</h4>
-            </div>
+            <div data-role="popup" id="popupLeaveReq" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+              <h3>Leave Request</h3>
+              <h4>Not Available</h4>
             </div>
           </div>
         </div>
@@ -581,6 +629,10 @@
       <div style="float:left"> <span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+    <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+      <h4>More Options</h4>
+      <h3>Page is under construction</h3>
     </div>
   </div>
   <!-- /content --> 
@@ -609,11 +661,11 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /header  -->
   
@@ -625,31 +677,31 @@
         <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
         <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
         <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
-        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubHR" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Human Resource</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSalarySummary">Salary Summary</li>
-            <li class="popMenuHRNotifications">HR Notifications</li>
+            <li class="popMenuSalarySummary"><a href="#" data-icon="arrow-r">Salary Summary</a></li>
+            <li class="popMenuHRNotifications"><a href="#" data-icon="arrow-r">HR Notifications</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubSales" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Sales</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSelling">Top 10 Selling Items</li>
-            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+            <li class="popMenuSelling"><a href="#" data-icon="arrow-r">Top 10 Selling Items</a></li>
+            <li class="popMenuNonSelling"><a href="#" data-icon="arrow-r">Top 10 Non-Selling Items</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubPurchase" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Purchase</h4>
           <h3>Page is under construction</h3>
         </div>
-        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubFinance" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Finance</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuAccPayables">Top 10 Account Payables</li>
-            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
-            <li class="sideMenuBalanceSheet">Balance Sheet</li>
-            <li class="sideMenuProfitLoss">Profit & Loss</li>
+            <li class="popMenuAccPayables"><a href="#" data-icon="arrow-r">Top 10 Account Payables</a></li>
+            <li class="popMenuAccReceibales"><a href="#" data-icon="arrow-r">Top 10 Account Receivables</a></li>
+            <li class="sideMenuBalanceSheet"><a href="#" data-icon="arrow-r">Balance Sheet</a></li>
+            <li class="sideMenuProfitLoss"><a href="#" data-icon="arrow-r">Profit & Loss</a></li>
           </ul>
         </div>
       </div>
@@ -683,6 +735,10 @@
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
+    <div data-role="popup" id="popupMore"  data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+      <h4>More Options</h4>
+      <h3>Page is under construction</h3>
+    </div>
   </div>
   <!-- /content --> 
 </div>
@@ -710,11 +766,11 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /header  -->
   <div data-role="content">
@@ -724,67 +780,62 @@
         <div class="sidetab"> <a href="#popupSubHR" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_HR.png"  alt="HR"></a> </div>
         <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
         <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
-        <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
-        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div class="sidetab"> <img src="images/ico_side_noti.png"  alt="Notification"></div>
+        <div data-role="popup" id="popupSubHR" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Human Resource</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSalarySummary">Salary Summary</li>
-            <li class="popMenuHRNotifications">HR Notifications</li>
+            <li class="popMenuSalarySummary"><a href="#" data-icon="arrow-r">Salary Summary</a></li>
+            <li class="popMenuHRNotifications"><a href="#" data-icon="arrow-r">HR Notifications</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubSales" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Sales</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSelling">Top 10 Selling Items</li>
-            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+            <li class="popMenuSelling"><a href="#" data-icon="arrow-r">Top 10 Selling Items</a></li>
+            <li class="popMenuNonSelling"><a href="#" data-icon="arrow-r">Top 10 Non-Selling Items</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubPurchase" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Purchase</h4>
           <h3>Page is under construction</h3>
         </div>
-        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubFinance" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Finance</h4>
           <ul data-role="listview" data-inset="true">
-            	<li class="popMenuAccPayables">Top 10 Account Payables</li>
-            	<li class="popMenuAccReceibales">Top 10 Account Receivables</li>
-            	<li class="sideMenuBalanceSheet">Balance Sheet</li>
-        		<li class="sideMenuProfitLoss">Profit & Loss</li>
+            <li class="popMenuAccPayables"><a href="#" data-icon="arrow-r">Top 10 Account Payables</a></li>
+            <li class="popMenuAccReceibales"><a href="#" data-icon="arrow-r">Top 10 Account Receivables</a></li>
+            <li class="sideMenuBalanceSheet"><a href="#" data-icon="arrow-r">Balance Sheet</a></li>
+            <li class="sideMenuProfitLoss"><a href="#" data-icon="arrow-r">Profit & Loss</a></li>
           </ul>
         </div>
       </div>
-      <div class="content"> 
-      <div class="inner-page-wrapper">
-          <div class="inner-page-head"> &nbsp;&nbsp;&nbsp; Notifications 
-          		<a  data-rel="back" href="#">
-                <div class="small-btn btn-back" style="float:left" >&nbsp;</div>
-                </a>
-          </div>
+      <div class="content">
+        <div class="inner-page-wrapper">
+          <div class="inner-page-head"> &nbsp;&nbsp;&nbsp; Notifications <a  data-rel="back" href="#">
+            <div class="small-btn btn-back" style="float:left" >&nbsp;</div>
+            </a> </div>
           <div style="margin:0 10px;">
-          		
-          		    <select id="selNotificationCategory">
-          		      	
-          		    </select>
-       		     
+            <select id="selNotificationCategory">
+            </select>
           </div>
-          <div class="side-content-body" style="margin:-7px" id="notificationsWrapper">            	
-                    <div class="inner-list-item" style="border-bottom:1px solid #ccc">
-                    	<div class="w50" style="font-weight:bold" id="col1">Month</div>
-                    	<div class="w50" style="text-align:right;font-weight:bold" id="col2">Date</div>
-                    </div>
-                    
-                    <div class="notificationsItems">
-                        
-                    </div>
+          <div class="side-content-body" style="margin:-7px" id="notificationsWrapper">
+            <div class="inner-list-item" style="border-bottom:1px solid #ccc">
+              <div class="w50" style="font-weight:bold" id="col1">Month</div>
+              <div class="w50" style="text-align:right;font-weight:bold" id="col2">Date</div>
+            </div>
+            <div class="notificationsItems"> </div>
           </div>
-    </div>
-        
+        </div>
       </div>
     </div>
     <div class="menu-button logged-in-as">
       <div style="float:left"> <span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+    <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+      <h4>More Options</h4>
+      <h3>Page is under construction</h3>
     </div>
   </div>
   <!-- /content --> 
@@ -812,11 +863,11 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /header  -->
   
@@ -828,31 +879,31 @@
         <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
         <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
         <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
-        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubHR" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Human Resource</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSalarySummary">Salary Summary</li>
-            <li class="popMenuHRNotifications">HR Notifications</li>
+            <li class="popMenuSalarySummary"><a href="#" data-icon="arrow-r">Salary Summary</a></li>
+            <li class="popMenuHRNotifications"><a href="#" data-icon="arrow-r">HR Notifications</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubSales" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Sales</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSelling">Top 10 Selling Items</li>
-            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+            <li class="popMenuSelling"><a href="#" data-icon="arrow-r">Top 10 Selling Items</a></li>
+            <li class="popMenuNonSelling"><a href="#" data-icon="arrow-r">Top 10 Non-Selling Items</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubPurchase" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Purchase</h4>
           <h3>Page is under construction</h3>
         </div>
-        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubFinance" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Finance</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuAccPayables">Top 10 Account Payables</li>
-            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
-            <li class="sideMenuBalanceSheet">Balance Sheet</li>
-        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+            <li class="popMenuAccPayables"><a href="#" data-icon="arrow-r">Top 10 Account Payables</a></li>
+            <li class="popMenuAccReceibales"><a href="#" data-icon="arrow-r">Top 10 Account Receivables</a></li>
+            <li class="sideMenuBalanceSheet"><a href="#" data-icon="arrow-r">Balance Sheet</a></li>
+            <li class="sideMenuProfitLoss"><a href="#" data-icon="arrow-r">Profit & Loss</a></li>
           </ul>
         </div>
       </div>
@@ -873,6 +924,10 @@
       <div style="float:left"> <span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+    <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+      <h4>More Options</h4>
+      <h3>Page is under construction</h3>
     </div>
   </div>
   <!-- /content --> 
@@ -899,18 +954,20 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /tabs -->
   
   <div data-role="content">
     <div class="margin-out">
       <div class="inner-page-wrapper">
-        <div class="inner-page-head">Balance Sheet</div>
+        <div class="inner-page-head">&nbsp;&nbsp;&nbsp; Balance Sheet <a  data-rel="back" href="#">
+            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+            </a> </div>
         <div class="side-content-body">
           <div class="balance-profit">
             <div class="w50" >
@@ -955,10 +1012,14 @@
   </div>
   <!-- /content -->
   <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
-        <span class="menuLastLogin">asdfsd</span> </div>
-      <div class="log-out" id="menuLogout">Logout</div>
-    </div>
+    <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <span class="menuLastLogin">asdfsd</span> </div>
+    <div class="log-out" id="menuLogout">Logout</div>
+  </div>
+  <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <h4>More Options</h4>
+    <h3>Page is under construction</h3>
+  </div>
   <!-- /menu button --> 
 </div>
 
@@ -986,18 +1047,20 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /tabs -->
   
   <div data-role="content">
     <div class="margin-out">
       <div class="inner-page-wrapper">
-        <div class="inner-page-head">Profit & Loss Account</div>
+        <div class="inner-page-head">&nbsp;&nbsp;&nbsp; Profit &amp; Loss Account <a  data-rel="back" href="#">
+            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+            </a> </div>
         <div class="side-content-body">
           <div class="balance-profit">
             <div class="w50" >
@@ -1016,36 +1079,42 @@
               </div>
             </div>
           </div>
-          <table data-role="table"  data-mode="normal" class="ui-body-d ui-shadow table-stripe table-font-size" >
-            <thead>
-              <tr class="ui-bar-d">
-                <th data-priority="1" width="15%">Code</th>
-                <th data-priority="1" width="25%">Ac Name</th>
-                <th data-priority="1" width="20%">Debit</th>
-                <th data-priority="1" width="20%">Credit</th>
-                <!-- <th data-priority="1" width="20%">Desc(Ar)</th>--> 
-              </tr>
-            </thead>
-            <tbody id="tblProfitLoss">
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <!--<td>1</td>--> 
-              </tr>
-            </tbody>
-          </table>
+          <div>
+            <table data-role="table"  data-mode="normal" class="ui-body-d ui-shadow table-stripe table-font-size" >
+              <thead>
+                <tr class="ui-bar-d">
+                  <th data-priority="1" width="15%">Code</th>
+                  <th data-priority="1" width="25%">Ac Name</th>
+                  <th data-priority="1" width="20%">Debit</th>
+                  <th data-priority="1" width="20%">Credit</th>
+                  <!-- <th data-priority="1" width="20%">Desc(Ar)</th>--> 
+                </tr>
+              </thead>
+              <tbody id="tblProfitLoss">
+                <tr>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <!--<td>1</td>--> 
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <!-- /content -->
   <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
-        <span class="menuLastLogin">asdfsd</span> </div>
-      <div class="log-out" id="menuLogout">Logout</div>
-    </div>
+    <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <span class="menuLastLogin">asdfsd</span> </div>
+    <div class="log-out" id="menuLogout">Logout</div>
+  </div>
+  <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <h4>More Options</h4>
+    <h3>Page is under construction</h3>
+  </div>
   <!-- /menu button --> 
 </div>
 <!-- 
@@ -1071,11 +1140,11 @@
         <div class="caption">Service Request</div>
       </div>
     </div>
-    <div class="w25">
-      <div class="tabs" id="tabMore">
+    <div class="w25"> <a href="#popupMore" data-rel="popup" data-position-to="window" data-inline="true" >
+      <div class="tabs tabMore" id="tabMore">
         <div class="caption">More</div>
       </div>
-    </div>
+      </a> </div>
   </div>
   <!-- /header  -->
   
@@ -1087,31 +1156,31 @@
         <div class="sidetab"> <a href="#popupSubSales" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_sales.png"  alt="Sales"></a> </div>
         <div class="sidetab"> <a href="#popupSubPurchase" data-rel="popup" data-position-to="window" data-inline="true" ><img src="images/ico_side_Purchase.png"  alt="Purchase"> </a></div>
         <div class="sidetab"> <img class="sideMenuNotificaitons" src="images/ico_side_noti.png"  alt="Notification"></div>
-        <div data-role="popup" id="popupSubHR" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubHR" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Human Resource</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSalarySummary">Salary Summary</li>
-            <li class="popMenuHRNotifications">HR Notifications</li>
+            <li class="popMenuSalarySummary"><a href="#" data-icon="arrow-r">Salary Summary</a></li>
+            <li class="popMenuHRNotifications"><a href="#" data-icon="arrow-r">HR Notifications</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubSales" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubSales" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Sales</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuSelling">Top 10 Selling Items</li>
-            <li class="popMenuNonSelling">Top 10 Non-Selling Items</li>
+            <li class="popMenuSelling"><a href="#" data-icon="arrow-r">Top 10 Selling Items</a></li>
+            <li class="popMenuNonSelling"><a href="#" data-icon="arrow-r">Top 10 Non-Selling Items</a></li>
           </ul>
         </div>
-        <div data-role="popup" id="popupSubPurchase" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubPurchase" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Purchase</h4>
           <h3>Page is under construction</h3>
         </div>
-        <div data-role="popup" id="popupSubFinance" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px">
+        <div data-role="popup" id="popupSubFinance" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
           <h4>Finance</h4>
           <ul data-role="listview" data-inset="true">
-            <li class="popMenuAccPayables">Top 10 Account Payables</li>
-            <li class="popMenuAccReceibales">Top 10 Account Receivables</li>
-            <li class="sideMenuBalanceSheet">Balance Sheet</li>
-        	<li class="sideMenuProfitLoss">Profit & Loss</li>
+            <li class="popMenuAccPayables"><a href="#" data-icon="arrow-r">Top 10 Account Payables</a></li>
+            <li class="popMenuAccReceibales"><a href="#" data-icon="arrow-r">Top 10 Account Receivables</a></li>
+            <li class="sideMenuBalanceSheet"><a href="#" data-icon="arrow-r">Balance Sheet</a></li>
+            <li class="sideMenuProfitLoss"><a href="#" data-icon="arrow-r">Profit & Loss</a></li>
           </ul>
         </div>
       </div>
@@ -1133,6 +1202,10 @@
       <div style="float:left"> <span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
+    </div>
+    <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+      <h4>More Options</h4>
+      <h3>Page is under construction</h3>
     </div>
   </div>
   <!-- /content --> 

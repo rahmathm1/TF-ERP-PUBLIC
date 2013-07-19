@@ -1,8 +1,8 @@
 // JavaScript Document
 
 	var ALERT_TITLE	=	"Taskforces ERP";
-	var API			= 	"http://192.168.2.29:88/taskforces/api/";
-	//var API			= 	"http://203.124.121.150:88/taskforces/api/";
+	//var API			= 	"http://192.168.2.29:88/taskforces/api/";
+	var API			= 	"http://203.124.121.150:88/taskforces/api/";
 	
 	/**************************************************************
 	*			GENERAL FUNCTIONS	
