@@ -227,7 +227,7 @@
 				var cdd = Date.parse(cd);
 				var today = new Date();
 				if(cdd < today ) {
-					showAlert('Select a date afte today');
+					showAlert('Select a date after today');
 					$("#btnDateSet").focus();
 				}
 				else {
@@ -749,7 +749,7 @@
 			 // $('#selLoanTypes').val(""); 
 			 $('#txtLoanAmount').val(""); 
 			 $('#txtMonthlyDeduction').val(""); 
-			 $('#txtDeductionStartDate').val(""); 
+			 $('#txtDeductionStartDate').val("Deduction Start Date"); 
 			 $('#txtRemarks').val(""); 
 			showAlert("Loan request has been placed.");	
 			localStorage.loanRequestTime = Date.now();			
