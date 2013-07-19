@@ -213,7 +213,9 @@
 			if($("#selLoanTypes").length == 1) {
 				showSpinner();
 				getLoanTypes();								
-			}				
+			}	
+			$('#myDatePicker').hide();
+			$( "#popupLoanReq" ).popup("close");						
 		});
 		$("#pageServiceRequest").on("pagecreate",function(event){		
 			genDatePicker();	
