@@ -52,7 +52,7 @@ Nuevalgo Solutions
 			
 <preference name="webviewbounce" value="false" />
 <preference name="orientation" value="portrait" />
-<preference name="fullscreen" value="true" />
+<preference name="fullscreen" value="false" />
 <preference name="exit-on-suspend" value="false" />
 <preference name="prerendered-icon" value="true" />
 <preference name="auto-hide-splash-screen" value="false" />
