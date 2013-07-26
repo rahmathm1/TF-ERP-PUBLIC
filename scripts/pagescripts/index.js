@@ -8,33 +8,31 @@
 *			-	
 */
 
+	var BUSINESS_UNITS		= "BUSINESS_UNITS";
+	var NOTIFICATIONS		 = "NOTIFICATIONS";
+	var API_NOTIFICATIONSCOUNT= "NOTIFICATIONCOUNT";
+	var API_TOTALNOTIFICATIONCOUNT= "TOTALNOTIFICATIONCOUNT";
+	var API_SALARYSUMMARY	 = "SALARYSUMMARY";
+	var API_HRNOTIFICATIONS   = "HRNOTIFICATIONS";
+	var API_SELLING		   = "TOP10SELLING";
+	var API_NONSELLING	    = "TOP10NONSELLING";
+	var API_ACCPAYABLES	   = "TOP10ACCPAYABLES";
+	var API_ACCRECEIVABLES    = "TOP10ACCRECEIVABLES";
+	var LOGIN				 = "LOGIN";
+	var API_DASHSUMMARY	   = "DASHSUMMARY";
+	var API_LOANTYPES	   	 = "LOANTYPES";
+	var API_LOANREQUEST	   = "LOANREQUEST";
+	var API_BALANCE_SHEET 	 = "BALANCESHEET";
+	var API_PROFIT_LOSS 	   = "PROFIT_LOSS";
+	var API_BRANCHES 		  = "BRANCHES";
+	var API_CHANGEPASSWORD 	= "CHANGEPASSWORD";
+	var API_PROFILEINFO 	   = "PROFILEINFO";
+	
 	/** event that fires when document is loaded & ready **/
 	document.addEventListener("deviceready", onDeviceReady, false);
 	//document.addEventListener("searchbutton", onSearchKeyDown, false);
 	
-	/* menu button press */
-    function onMenuKeyDown() {
-		//if($.mobile.activePage.attr("id")!= "pageLogin"){
-			if ($('.menu-button').css('display') == 'none')
-				$('.menu-button').show();
-			else
-				$('.menu-button').hide();
-		//}
-    }
-	function onBackKeyDown() {		
-		if($.mobile.activePage.attr('id') == 'pageLogin'){
-			if ($.mobile.activePage.find("#popupAbout").parent().hasClass("ui-popup-active")){
-			    $( "#popupAbout" ).popup("close");
-			}else{
-				exitApplication();	
-			}
-		}else{
-			if ($('.menu-button').css('display') == 'none')
-				history.go(-1);
-			else
-				$('.menu-button').hide();			
-		}
-	}	
+	
 	function onDeviceReady() {
 		console.log("Invoked: onDeviceReady");		
 		console.log("-------------------------------------------------");
@@ -69,7 +67,29 @@
 			navigator.splashscreen.hide();
 		}		
 	}
-	
+	/* menu button press */
+    function onMenuKeyDown() {
+		//if($.mobile.activePage.attr("id")!= "pageLogin"){
+			if ($('.menu-button').css('display') == 'none')
+				$('.menu-button').show();
+			else
+				$('.menu-button').hide();
+		//}
+    }
+	function onBackKeyDown() {		
+		if($.mobile.activePage.attr('id') == 'pageLogin'){
+			if ($.mobile.activePage.find("#popupAbout").parent().hasClass("ui-popup-active")){
+			    $( "#popupAbout" ).popup("close");
+			}else{
+				exitApplication();	
+			}
+		}else{
+			if ($('.menu-button').css('display') == 'none')
+				history.go(-1);
+			else
+				$('.menu-button').hide();			
+		}
+	}	
 	/* search button press */
    /* function onSearchKeyDown() {
         // do something
