@@ -11,14 +11,14 @@
 	/** event that fires when document is loaded & ready **/
 	document.addEventListener("deviceready", onDeviceReady, false);
 	//document.addEventListener("searchbutton", onSearchKeyDown, false);
-	document.addEventListener("menubutton", onMenuKeyDown, false);
-	document.addEventListener("backbutton", onBackKeyDown, false);
+	
 		
 	function onDeviceReady() {
 		console.log("Invoked: onDeviceReady");		
 		console.log("-------------------------------------------------");
 		
-		
+		document.addEventListener("menubutton", onMenuKeyDown, false);
+		document.addEventListener("backbutton", onBackKeyDown, false);
 		
 			
 		bindEvents();
