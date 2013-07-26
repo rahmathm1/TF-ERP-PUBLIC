@@ -12,7 +12,29 @@
 	document.addEventListener("deviceready", onDeviceReady, false);
 	//document.addEventListener("searchbutton", onSearchKeyDown, false);
 	
-		
+	/* menu button press */
+    function onMenuKeyDown() {
+		//if($.mobile.activePage.attr("id")!= "pageLogin"){
+			if ($('.menu-button').css('display') == 'none')
+				$('.menu-button').show();
+			else
+				$('.menu-button').hide();
+		//}
+    }
+	function onBackKeyDown() {		
+		if($.mobile.activePage.attr('id') == 'pageLogin'){
+			if ($.mobile.activePage.find("#popupAbout").parent().hasClass("ui-popup-active")){
+			    $( "#popupAbout" ).popup("close");
+			}else{
+				exitApplication();	
+			}
+		}else{
+			if ($('.menu-button').css('display') == 'none')
+				history.go(-1);
+			else
+				$('.menu-button').hide();			
+		}
+	}	
 	function onDeviceReady() {
 		console.log("Invoked: onDeviceReady");		
 		console.log("-------------------------------------------------");
@@ -53,31 +75,6 @@
         // do something
     }*/
 
-    /* menu button press */
-    function onMenuKeyDown() {
-		//if($.mobile.activePage.attr("id")!= "pageLogin"){
-			if ($('.menu-button').css('display') == 'none')
-				$('.menu-button').show();
-			else
-				$('.menu-button').hide();
-		//}
-    }
-	function onBackKeyDown() {		
-		if($.mobile.activePage.attr('id') == 'pageLogin'){
-			if ($.mobile.activePage.find("#popupAbout").parent().hasClass("ui-popup-active")){
-			    $( "#popupAbout" ).popup("close");
-			}else{
-				exitApplication();	
-			}
-		}else{
-			if ($('.menu-button').css('display') == 'none')
-				history.go(-1);
-			else
-				$('.menu-button').hide();			
-		}
-	}
-	
-	
 	/****************************************************************************************/
 	
 	
