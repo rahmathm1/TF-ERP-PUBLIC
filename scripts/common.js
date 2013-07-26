@@ -1,8 +1,28 @@
 // JavaScript Document
 
 	var ALERT_TITLE	=	"Taskforces ERP";
-	var API			= 	"http://192.168.2.29:88/taskforces/api/";
-	//var API			= 	"http://203.124.121.150:88/taskforces/api/";
+	//var API			= 	"http://192.168.2.29:88/taskforces/api/";
+	var API			= 	"http://203.124.121.150:88/taskforces/api/";
+	
+	var BUSINESS_UNITS		= "BUSINESS_UNITS";
+	var NOTIFICATIONS		 = "NOTIFICATIONS";
+	var API_NOTIFICATIONSCOUNT= "NOTIFICATIONCOUNT";
+	var API_TOTALNOTIFICATIONCOUNT= "TOTALNOTIFICATIONCOUNT";
+	var API_SALARYSUMMARY	 = "SALARYSUMMARY";
+	var API_HRNOTIFICATIONS   = "HRNOTIFICATIONS";
+	var API_SELLING		   = "TOP10SELLING";
+	var API_NONSELLING	    = "TOP10NONSELLING";
+	var API_ACCPAYABLES	   = "TOP10ACCPAYABLES";
+	var API_ACCRECEIVABLES    = "TOP10ACCRECEIVABLES";
+	var LOGIN				 = "LOGIN";
+	var API_DASHSUMMARY	   = "DASHSUMMARY";
+	var API_LOANTYPES	   	 = "LOANTYPES";
+	var API_LOANREQUEST	   = "LOANREQUEST";
+	var API_BALANCE_SHEET 	 = "BALANCESHEET";
+	var API_PROFIT_LOSS 	   = "PROFIT_LOSS";
+	var API_BRANCHES 		  = "BRANCHES";
+	var API_CHANGEPASSWORD 	= "CHANGEPASSWORD";
+	var API_PROFILEINFO 	   = "PROFILEINFO";
 	
 	/**************************************************************
 	*			GENERAL FUNCTIONS	
@@ -112,7 +132,7 @@
 		var sel = $(selectId);	
 		//alert($('select'+selectId+' option').length);
 		//;
-		if($("selectId option").length  <= 1 ) {
+		if($(selectId +" option").length  <= 1 ) {
 			//sel.html("");	
 			$.each(data, function(index,value) {
 				var option =  $("<option/>")
