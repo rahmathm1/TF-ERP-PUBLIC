@@ -459,6 +459,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efaf30', end
 	font-family:arial;
 	font-size:15px;
 	font-weight:normal;
+	min-width:22px;
+	text-align:center;
 	padding:8px 4px;
 	text-decoration:none;
 	text-shadow:1px 1px 0px #4d362d;
@@ -503,24 +505,42 @@ a {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin: 2px;
-	padding: 5px 5px 5px 40px;
-	background-color: #2d2534;
-	background-image: url(../images/ico-profile.png);
-	background-size: 20px 20px;
-	background-position: 10px 10px;
-	background-repeat: no-repeat;
+	margin: 5px;
+	padding: 5px 5px 5px 5px;
+	display:none;
 	color: #ccc;
 	text-shadow: 1px 1px 1px #000;
 	overflow: hidden;
+	
+	
+	-webkit-box-shadow:inset 0px 1px 0px 0px #612961;
+	box-shadow:inset 0px 1px 0px 0px #612961;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #471c47), color-stop(1, #2e092e) );
+	background:-moz-linear-gradient( center top, #471c47 5%, #2e092e 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#471c47', endColorstr='#2e092e');
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #4f174f;
+	color:#eee;
 }
 .logged-in-as .log-out {
-	float: right;
-	background: #c21b1b;
+	position:absolute;
+	right:0;
+	top:0;	
 	color: #FFF;
 	font-size: 14px;
 	padding: 8px 17px;
-	margin: 3px;
+	margin: 5px;
+	border-radius:6px;
+	box-shadow:inset 0px 1px 0px 0px #4a1818;
+	border:1px solid #612e2e;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e6122b), color-stop(1, #630c0c) );
+	background:-moz-linear-gradient( center top, #e6122b 5%, #630c0c 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6122b', endColorstr='#630c0c');
+}
+.logged-in-as .ico {
+	float: left;
+	margin: 5px 5px 5px 5px;	
 }
 .logged-in-as .menuLastLogin {
 	line-height: 14px;
@@ -530,7 +550,7 @@ a {
 	background: #af3434;
 }
 .menu-button {
-	display: none;
+	/*display: none;*/
 }
 /*.buttons-wrapper .profile {
 	background-image:url(../images/ico-profile.png);
@@ -855,17 +875,36 @@ border-bottom:1px solid #666;
 	min-height:  280px;
 	position: relative;
 }
+#pageProfile .personal-info .sub-head {
+	border-bottom:1px solid #bbb;
+	margin:5px -2px;;
+	padding:3px 5px;
+	background:#ccc;
+	border-radius:5px;
+}
+#pageProfile .personal-info .row {
+	overflow:hidden;
+	margin-bottom:10px;
+	font-size:12px;
+}
 #pageProfile .personal-info .profile-ico {
 	height: 54px;
 	width: 54px;
 	margin: 5px;
 	border-radius: 5px;
 	float: left;
-	background: #fff;
+	background: #666;
+	padding:1px;
 }
 #pageProfile .personal-info .profile-ico img {
 	height: 50px;
 	width: 50px;
 	float: left;
 	margin: 2px;
+	background:url(../images/ico-profile.png) ;
 }
+#pageProfile .personal-info .numerics {
+	font-weight:bold;
+	text-align:right;
+}
+

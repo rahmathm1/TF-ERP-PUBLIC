@@ -27,21 +27,22 @@
 	var API_PROFIT_LOSS 	   = "PROFIT_LOSS";
 	var API_BRANCHES 		  = "BRANCHES";
 	var API_CHANGEPASSWORD 	= "CHANGEPASSWORD";
+	var API_PROFILEINFO 	   = "PROFILEINFO";
 	
 	
-	
-	//var NOTIFICATIONS_LOADED = false;
-	//var  
 
 	/** event that fires when document is loaded & ready **/
 	document.addEventListener("deviceready", onDeviceReady, false);
 		
 	function onDeviceReady() {
-		console.log("Invoked: onDeviceReady");
+		console.log("Invoked: onDeviceReady");		
+		console.log("-------------------------------------------------");
+			
 		bindEvents();
 		
-		document.addEventListener("searchbutton", onSearchKeyDown, false);
+		//document.addEventListener("searchbutton", onSearchKeyDown, false);
 		document.addEventListener("menubutton", onMenuKeyDown, false);
+		document.addEventListener("backbutton", onBackKeyDown, false);
 		
 		if(!checkConnection()){
 			disableLogin();
@@ -59,11 +60,9 @@
 				showSpinner();
 				getBusinessUnits();
 			}
-			
-			
 									
 			/* clear history after log out */ 
-			$.mobile.urlHistory.clearForward() 			
+			$.mobile.urlHistory.clearForward();		
 			navigator.splashscreen.hide();
 		}		
 	}
@@ -82,266 +81,23 @@
 				$('.menu-button').hide();
 		//}
     }
-	
-	
-
-	
-	
-	/*************************************************************
-	*			EVENTS	
-	**************************************************************/	
-	var bindEvents = function() {
-		/* button login click */
-		$("#btnLogin").on("click",login);
-	
-		$("#btnRetry").on("click",function() {
-			console.log("Retrying");
-			showSpinner();
-			getBusinessUnits();
-		});
-		$("#aboutTaskforces").on("click",function() {						
-			$( "#popupAbout" ).popup("open");
-		});	
-		
-		$("#pageHome").on('pagebeforehide', function(e, ui){  
-			console.log("Hiding page");
-			if(ui.nextPage.attr("id") == "pageLogin"){
-				if( localStorage.isLoggedIn == "true" )
-				{			
-					exitApplication();		
-				}
+	function onBackKeyDown() {		
+		if($.mobile.activePage.attr('id') == 'pageLogin'){
+			if ($.mobile.activePage.find("#popupAbout").parent().hasClass("ui-popup-active")){
+			    $( "#popupAbout" ).popup("close");
+			}else{
+				exitApplication();	
 			}
-		});
-		$("#pageHome").on('pageshow', function(e, ui){  
-			showSpinner();
-			getNotiTotalCount();
-		});		
-		$("#pageHome").on('pagecreate', function(e, ui){
-			$("#homeIconProfile").on("click",function() {
-					showSpinner();
-					changePageID('#pageProfile');		
-			}); 			
-		});
-		$("#pageBalanceSheetDetails").on('pageshow', function(e, ui){  
-			showSpinner();
-			getBraches();
-		});
-		$("#pageBalanceSheetDetails").on('pagecreate', function(e, ui){  
-			$("#selLevelBL").on("change",function() {
-				showSpinner();
-				var level = $('#selLevelBL').val();
-				var branch = $("#selBranchBL").val().trim();
-				getBalanceSheet(level,branch);
-			});
-			$("#selBranchBL").on("change",function() {
-				showSpinner();				
-				var level = $('#selLevelBL').val();
-				var branch = $("#selBranchBL").val().trim();
-				getBalanceSheet(level,branch);
-			});
-		});
-		$("#pageProfitLossDetails").on('pageshow', function(e, ui){  
-			showSpinner();
-			getBraches();
-		});
-		$("#pageProfitLossDetails").on('pagecreate', function(e, ui){  
-			$("#selLevelPL").on("change",function() {
-				showSpinner();
-				var level = $('#selLevelPL').val();
-				var branch = $("#selBranchPL").val().trim();
-				getProfitLoss(level,branch);
-			});
-			$("#selBranchPL").on("change",function() {
-				showSpinner();				
-				var level = $('#selLevelPL').val();
-				var branch = $("#selBranchPL").val().trim();
-				getProfitLoss(level,branch);
-			});
-		});
-		$("#pageProfile").on('pagecreate', function(e, ui){  
-			$("#btnSavePassword").on("click",changePassword);	
-			
-			var userInfo = JSON.parse(localStorage.userInfo);
-			
-			$('#userInfoName').text(userInfo.user_name);
-			$('#userInfoBranch').text('Branch : ' + userInfo.branch_name);
-			$('#userInfoLogin').text(userInfo.last_logged_in);
-			$('#userInfoLogout').text(userInfo.last_logged_out);
-			
-					
-		});
-		
-		$("#pageNotifications").on('pagecreate', function(e, ui){
-			$("#selNotificationCategory").on("change",function() {
-				showSpinner();
-				var category = $('#selNotificationCategory').val();
-				if(category == 'ALL') {
-					showSpinner();
-					$('#notificationsWrapper .inner-list-item').hide();
-					getNotificationsCount();
-				}else{
-					localStorage.lastClickedCategory = category;
-					getNotifications(category);
-				}
-			});
-			bindNotificationCategory();			
-		});
-		
-		
-		$("#pageLogin").on('pagebeforeshow', function(e, ui){  
-			console.log("login : page before show");
-			if(localStorage.isLoggedIn == "true") {
-				e.preventDefault();
-				e.stopPropagation();			
-				changePageID("#pageHome");
-			}
-		});
-		
-		
-		$(".log-out").on('click', function(){  
-			console.log("clicked menu>logout");
-			showSpinner();
-			logout();
-		});
-		
-		/* Load dashboard summary */
-		$("#pageDashboard").on("pageshow",function(event){
-			showSpinner();
-			getDashSummary();
-		});
-		$("#pageServiceRequest").on("pageshow",function(event){
-			if($("#selLoanTypes").length == 1) {
-				showSpinner();
-				getLoanTypes();								
-			}	
-			$('#myDatePicker').hide();
-			$( "#popupLoanReq" ).popup("close");						
-		});
-		$("#pageServiceRequest").on("pagecreate",function(event){		
-			genDatePicker();	
-			$("#txtDeductionStartDate").on("click",function(){
-				$( "#popupLoanReq" ).popup("close");				
-				$('#myDatePicker').show();
-			});
-			$("#btnDateSet").on("click",function(){	
-			$( "#popupLoanReq" ).popup("open");
-				var cd = localStorage.selectedDate;
-				var cdd = Date.parse(cd);
-				var today = new Date();
-				if(cdd < today ) {
-					showAlert('Select a date after today');
-					$("#btnDateSet").focus();
-				}
-				else {
-					$("#txtDeductionStartDate").val(cd);							
-					$('#myDatePicker').hide();
-				}
-			});
-			$("#btnDateClear").on("click",function(){
-				$( "#popupLoanReq" ).popup("open");				
-				//$("#txtDeductionStartDate").val('');
-				$('#myDatePicker').hide();
-				$("#txtDeductionStartDate").blur();
-				
-			});			
-		});
-		/* TO HIDE MENU BUTTON LOGGED IN AS */		
-		$(document).on('pagebeforechange', function(e, data){  
-			$('.menu-button').hide();
-		});		
-		$(".popMenuSalarySummary").on("click",function() {
-			showSpinner();
-			getSalarySummary();
-		});
-		$(".popMenuHRNotifications").on("click",function() {
-			showSpinner();
-			getHRNotifications();
-		});
-		$(".popMenuAccReceibales").on("click",function() {
-			showSpinner();
-			getAccReceivables();
-		});
-		$(".popMenuAccPayables").on("click",function() {
-			showSpinner();
-			getAccPayables();
-		});
-		
-		
-		$(".popMenuSelling").on("click",function() {
-			showSpinner();
-			getSellingItems();
-		});
-		$(".popMenuNonSelling").on("click",function() {
-			showSpinner();
-			getNonSellingItems();
-		});
-		$("#homeIconNotifications").on("click",function() {
-			showSpinner();
-			//localStorage.lastClickedCategory = 'ALL';
-			//getNotifications('ALL');
-			getNotificationsCount();
-		});		
-		
-		
-		$(".tabDash").on("click",function() {
-			showSpinner();
-			changePageID('#pageDashboard');
-			//getNotifications();
-		});
-		$(".tabHome").on("click",function() {
-			showSpinner();
-			changePageID('#pageHome');
-		});
-		$(".sideMenuNotificaitons").on("click",function() {
-			showSpinner();
-			//localStorage.lastClickedCategory = 'ALL';
-			getNotificationsCount();
-		});
-		$(".sideMenuBalanceSheet").on("click",function() {
-			showSpinner();
-			getBalanceSheet('FIRST LEVEL','');
-		});
-		$(".sideMenuProfitLoss").on("click",function() {
-			showSpinner();
-			getProfitLoss('FIRST LEVEL','');
-		});
-		$(".notificaiton-head").on("click",function() {
-			$(".notificaiton-sub").hide();			
-			var parent = $(this).parent();
-			var block = parent.children('.notificaiton-sub');
-			if(block.css("display") == "none" )
-				block.show();
-		});
-		
-		$(".sideMenuSales").on("click",function() {
-			showSpinner();
-			getSellingItems();
-		});
-		$(".sideMenuFinance").on("click",function() {
-			showSpinner();
-			getAccReceivables();
-		});
-		
-		$(".sideMenuHR").on("click",function() {
-			showSpinner();
-			getSalarySummary();
-		});
-		
-		$("#selTenure").on("change",function() {
-			showSpinner();
-			var index = $("#selTenure option:selected").val();
-			var response = JSON.parse(localStorage.dashSummary);
-			displayDashSummary(response,index);	
-			hideSpinner();
-		});
-		$(".tabReq").on("click",function() {
-			showSpinner();
-			changePageID('#pageServiceRequest');
-		});
-		$("#btnRequestLoan").on("click",requestLoan);
-				
+		}else{
+			if ($('.menu-button').css('display') == 'none')
+				history.go(-1);
+			else
+				$('.menu-button').hide();			
+		}
 	}
 	
+	
+	/****************************************************************************************/
 	
 	
 	/* disable login controls */
@@ -388,6 +144,8 @@
 	};
 	var parseLogin = function(response) {
 		if(response.status == 1) {	
+			$('#txtUserId').val('');
+			$('#txtPassword').val('');
 			localStorage.isLoggedIn = "true";		
 			localStorage.branchFilter = response.userInfo.branch_filter;
 			localStorage.branchCode = response.userInfo.branch_code+"";
@@ -461,7 +219,11 @@
 	}
 	var parseLogout = function(response) {
 		showAlert("You've been logged out.");
-		window.location = "index.html";
+		changePageID('#pageLogin');
+		$.mobile.urlHistory.clearForward();
+		showSpinner();
+				getBusinessUnits();
+		//window.location = "index.html";
 	};
 	var bindNotificationCategory = function() {
 		var sel = $('#selNotificationCategory');		
@@ -471,7 +233,7 @@
 				.attr("value",'ALL')
 				.text('All');
 			option.appendTo(sel);
-		if($("selectId option").length  <= 1 ) {
+		if($("#selNotificationCategory option").length  <= 1 ) {
 			$.each(response.notification_count, function(index,value) {
 				var option =  $("<option/>")
 					.attr("value",value.category)
@@ -1334,15 +1096,25 @@
 			if( counts[i].count > 0 ) {
 				var div = $('<div/>');
 				div.attr('data-cat',counts[i].category);
-				div.attr('data-tag',counts[i].tag);
+				//div.attr('data-tag',counts[i].tag);
 				div.html( counts[i].name + '<div class="count">'+ counts[i].count + "</div>" );
-				div.addClass('inner-list-item');				
+				div.addClass('inner-list-item');
+				div.on('click',loadNotifications);
 				div.appendTo(parent);
 			}
 		}
-		changePageID('#pageNotifications');		
+		changePageID('#pageNotifications');
+		var el = $('#selNotificationCategory');		
+		// Select the relevant option, de-select any others
+		el.val('ALL').attr('selected', true).siblings('option').removeAttr('selected');		
+		// jQM refresh
+		el.selectmenu("refresh", true);		
 	}
-	
+	var loadNotifications = function() {
+		showSpinner();
+		var category = $(this).attr('data-cat');
+		getNotifications(category);
+	}
 	/**
 	*	Name	:	getNotifications
 	*	Desc	:	Fetch notifications from the server
@@ -1457,6 +1229,11 @@
 			childDiv.appendTo(parentDiv);
 		}
 		changePageID('#pageNotifications');
+		var el = $('#selNotificationCategory');		
+		// Select the relevant option, de-select any others
+		el.val(category).attr('selected', true).siblings('option').removeAttr('selected');		
+		// jQM refresh
+		el.selectmenu("refresh", true);
 	}
 	/**
 	*	Name	:	getBusinessUnits
@@ -1478,4 +1255,64 @@
 		}
 		hideSpinner();
 	};
+	 
+	/**
+	*	Name	:	getProfileInfo
+	*	Desc	:	get profile information for profile page
+	**/
+	var getProfileInfo = function () {
+		console.log("Method : getProfileInfo");
+		if (localStorage.getItem("profileInfo") === null) {
+			data = new Object();
+			data.module = API_PROFILEINFO;
+			var userInfo = JSON.parse(localStorage.userInfo);
+			data.emp_code = userInfo.emp_code;
+			getResponse(data,parseProfileInfo);
+		}else{
+			var response = JSON.parse(localStorage.profileInfo);
+			parseProfileInfo(response);	
+		}
+	}; 
+	var parseProfileInfo = function(response) {
+		if(response.status==1 ) {
+			displayProfileInfo(response);	
+			localStorage.profileInfo = JSON.stringify(response);		
+		} else {
+			ajaxFailed();
+			hideSpinner();
+		}
+		
+	};
+	
+	var displayProfileInfo = function(response) {
+		$('#profileInfoFullName').html(response.profile.FIRST_NAME + ' ' + response.profile.MIDDLE_NAME);
+		$('#profileInfoSex').html(response.profile.SEX);
+		$('#profileInfoStatus').html(response.profile.DOJ_GRI.date);
+		$('#profileInfoReligion').html(response.profile.RELIGION);
+		$('#profileInfoMarital').html(response.profile.MARITAL_STATUS);
+		
+		$('#profileInfoEmail').html(response.profile.EMAIL);
+		$('#profileInfoTele').html(response.profile.TELEPHONE_NO);
+		$('#profileInfoMobileNo').html(response.profile.MOBILE_NO);
+		
+		$('#profileInfoJobTitle').html(response.profile.JOB_TITLE);
+		$('#profileInfoDept').html(response.profile.DEPARTMENT);
+		$('#profileInfoDiv').html(response.profile.DIVISION);
+		$('#profileInfoWorkArea').html(response.profile.WORK_AREA);
+		$('#profileInfoPosition').html(response.profile.POSITION);
+		
+		$('#profileInfoBasic').html(response.profile.BASIC);
+		$('#profileInfoHousing').html(response.profile.HOUSING);
+		$('#profileInfoTrans').html(response.profile.TRANSPORTATION);
+		$('#profileInfoMobile').html(response.profile.MOBILE);
+		$('#profileInfoFood').html(response.profile.FOOD);
+		$('#profileInfoOther1').html(response.profile.OTHER1);
+		$('#profileInfoOther2').html(response.profile.OTHER2);
+		
+		var userInfo = JSON.parse(localStorage.userInfo);
+		$('#userInfoPic').attr('src', API + 'getPic.php?emp_code='+userInfo.emp_code);
+		
+		changePageID('#pageProfile');
+		hideSpinner();	
+	}
 	

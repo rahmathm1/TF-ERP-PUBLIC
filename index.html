@@ -182,7 +182,7 @@
       <h3>Page is under construction</h3>
     </div>
     <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
@@ -271,7 +271,7 @@
       <div id="dashSummaryParent"> </div>
     </div>
     <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
@@ -356,16 +356,138 @@
           <div class="side-content-body">
             <div class="personal-info"> 
               <!--<div class="profile-ico"><img src="images/ico-profile.png" width="81" height="74"></div>-->
-              <div style="height:70px;">
-                <h5>Logged in as</h5>
-                <h4 id="userInfoName">Rahmathullah M</h4>
-                <h5 id="userInfoBranch">Branch : Jeddah</h5>
+              <div style="overflow:hidden">
+                <div class="w25" style="height:80px;"> <img class="profile-ico" id="userInfoPic" src="images/ico-profile.png"/> </div>
+                <div class="w60" style="height:80px;">
+                  <h4 id="userInfoName">Rahmathullah M</h4>
+                  <h5 id="userInfoBranch">Branch : Jeddah</h5>
+                </div>
               </div>
-              <h5>Last logged in</h5>
-              <h4 id="userInfoLogin">2nd decemebr, 2013</h4>
-              <h5>Last logged out</h5>
-              <h4 id="userInfoLogout">2nd decemebr, 2013</h4>
-              <a href="#popupChangePassword" style="margin:auto;position:absolute;bottom:5px;left:0;right:0" data-rel="popup" data-icon="gear"  data-role="button" data-position-to="window" data-inline="true" >Change Password</a> </div>
+              <div class="row">
+                <div class="w40"> Last logged out </div>
+                <div class="w60"> <span id="userInfoLogout">2nd decemebr, 2013</span> </div>
+              </div>
+              <div class="row">
+                <div class="w40"> Last logged in </div>
+                <div class="w60"> <span id="userInfoLogin">2nd decemebr, 2013</span> </div>
+              </div>
+              <div class="row">
+                <div id="tabs_wrapper">
+                  <div id="tabs_container">
+                    <ul id="tabs">
+                      <li class="active"><a href="#tab1" class="first">Basic</a></li>
+                      <li><a href="#tab2">Contact</a></li>
+                      <li><a href="#tab3">Job</a></li>
+                      <li><a href="#tab4" class="last">Salary</a></li>
+                    </ul>
+                  </div>
+                  <!--div tabs_container ends here-->
+                  <div id="tabs_content_container">
+                    <div id="tab1" class="tab_content" style="display: block;">
+                      <div class="row">
+                        <div class="w40">Full Name</div>
+                        <div id="profileInfoFullName" class="w60" style="font-weight:bold"></div>
+                      </div>
+                      <div class="row">
+                        <div class="w40">Sex</div>
+                        <div id="profileInfoSex" class="w60" style="font-weight:bold"></div>
+                      </div>
+                      <div class="row">
+                        <div class="w40">Marital Status</div>
+                        <div id="profileInfoMarital" class="w60" style="font-weight:bold"></div>
+                      </div>
+                      <div class="row">
+                        <div class="w40">Religion</div>
+                        <div id="profileInfoReligion" class="w60" style="font-weight:bold"></div>
+                      </div>
+                    </div>
+                    <!--div #tab1 ends here-->
+                    <div id="tab2" class="tab_content">
+                      <div class="row">
+                        <div class="w40">Mobile No</div>
+                        <div id="profileInfoMobileNo" class="w60" style="font-weight:bold"></div>
+                      </div>
+                      <div class="row">
+                        <div class="w40">Tele</div>
+                        <div id="profileInfoTele" class="w60" style="font-weight:bold"></div>
+                      </div>
+                      <div class="row">
+                        <div class="w40">Email</div>
+                        <div id="profileInfoEmail" class="w60" style="font-weight:bold"></div>
+                      </div>
+                    </div>
+                    <!--div #tab2 ends here-->
+                    <div id="tab3" class="tab_content">
+                      <div  class="row">
+                        <div class="w40">Job Title</div>
+                        <div id="profileInfoJobTitle" class="w60" style="font-weight:bold"></div>
+                      </div>
+                      <div  class="row">
+                        <div class="w40">Dept</div>
+                        <div id="profileInfoDept" class="w60" style="font-weight:bold"></div>
+                      </div>
+                      <div class="row">
+                        <div class="w40">Division</div>
+                        <div id="profileInfoDiv" class="w60" style="font-weight:bold"></div>
+                      </div>
+                      <div  class="row">
+                        <div class="w40">Position</div>
+                        <div id="profileInfoPosition" class="w60" style="font-weight:bold"></div>
+                      </div>
+                      <div  class="row">
+                        <div class="w40">Work Area</div>
+                        <div id="profileInfoWorkArea" class="w60" style="font-weight:bold"></div>
+                      </div>
+                    </div>
+                    <!--div #tab3 ends here-->
+                    <div id="tab4" class="tab_content">
+                      <div class="row">
+                        <div class="w50">
+                          <div class="w40">Basic</div>
+                          <div id="profileInfoBasic" class="w50 numerics"></div>
+                        </div>
+                        <div class="w50">
+                          <div class="w40">Housing</div>
+                          <div id="profileInfoHousing" class="w40 numerics"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="w50">
+                          <div class="w40">Food</div>
+                          <div id="profileInfoFood" class="w50 numerics"></div>
+                        </div>
+                        <div class="w50">
+                          <div class="w40">Mobile</div>
+                          <div id="profileInfoMobile" class="w40 numerics"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="w50">
+                          <div class="w40">Other 1</div>
+                          <div id="profileInfoOther1" class="w50 numerics"></div>
+                        </div>
+                        <div class="w50">
+                          <div class="w40">Other 2</div>
+                          <div id="profileInfoOther2" class="w40 numerics"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                      	<div class="w50">
+                            <div class="w70">Transportation</div>
+                            <div id="profileInfoTrans" class="w30 numerics"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--div #tab4 ends here--> 
+                  </div>
+                  <!--div #tabs_content_container ends here--> 
+                </div>
+                <!--tabs_wrapper ends here--> 
+              </div>
+              <div class="row" style="width:200px;margin:auto">
+              <a href="#popupChangePassword" data-rel="popup" data-icon="gear"  data-role="button" data-position-to="window" data-inline="true" >Change Password</a> 
+              </div>
+              </div>
           </div>
           <div data-role="popup" id="popupChangePassword" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
             <h4>Change Password</h4>
@@ -378,7 +500,7 @@
       </div>
     </div>
     <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
@@ -474,7 +596,7 @@
       </div>
     </div>
     <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
@@ -571,45 +693,44 @@
               </select>
               <input id="txtLoanAmount" type="tel" placeholder="Loan Amount" data-theme="a" />
               <input id="txtMonthlyDeduction" type="tel" placeholder="Monthly Deduction Amount" data-theme="a" />
-              <input id="txtDeductionStartDate" type="text" readonly   value="Deduction Start Date" data-theme="a" />	
+              <input id="txtDeductionStartDate" type="text" readonly   value="Deduction Start Date" data-theme="a" />
               <div class="date-mask" id="myDatePicker">
-             <div class="date-wrapper">
-        <table class="maintable" cellpadding='0' cellspacing='0' >
-          <tr>
-            <td colspan='3'><div style='border-bottom:thin solid #fff;font-size:20px;margin-bottom:5px;margin-top:10px; padding:5px;height:20px;text-align:center'>
-               
-                <div id='dStr' style='width:200px;float:left;'>Som date</div>
-              </div></td>
-          </tr>
-          <tr>
-            <td><div id="pmon"  role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">+</div></td>
-            <td><div id="pday" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;;">+</div></td>
-            <td><div id="pyear" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">+</div></td>
-          </tr>
-          <tr>
-            <td><div id="mon" class="disp">12</div></td>
-            <td><div id="day" class="disp">12</div></td>
-            <td><div id="year" class="disp" >12</div></td>
-           <!-- <td><input type="text" disabled="disabled" id="mon" style="width:56px;padding:0px;height:38px;margin:2px;" /></td>
+                <div class="date-wrapper">
+                  <table class="maintable" cellpadding='0' cellspacing='0' >
+                    <tr>
+                      <td colspan='3'><div style='border-bottom:thin solid #fff;font-size:20px;margin-bottom:5px;margin-top:10px; padding:5px;height:20px;text-align:center'>
+                          <div id='dStr' style='width:200px;float:left;'>Som date</div>
+                        </div></td>
+                    </tr>
+                    <tr>
+                      <td><div id="pmon"  role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">+</div></td>
+                      <td><div id="pday" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;;">+</div></td>
+                      <td><div id="pyear" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">+</div></td>
+                    </tr>
+                    <tr>
+                      <td><div id="mon" class="disp">12</div></td>
+                      <td><div id="day" class="disp">12</div></td>
+                      <td><div id="year" class="disp" >12</div></td>
+                      <!-- <td><input type="text" disabled="disabled" id="mon" style="width:56px;padding:0px;height:38px;margin:2px;" /></td>
             <td><input type="text" disabled="disabled" id="day" style="width:56px;padding:0px;height:38px;margin:2px;" /></td>
-            <td><input type="text" disabled="disabled" id="year" style="width:56px;padding:0px;height:38px;margin:2px;" /></td>-->
-          </tr>
-          <tr>
-            <td><div id="mmon" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px 2px 2px;margin: auto;">-</div></td>
-            <td><div id="mday" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">-</div></td>
-            <td><div id="myear" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">-</div></td>
-          </tr>
-          <tr>
-            <td colspan='3' ><table width="100%" cellspacing="3" >
-                <tr>
-                <td width="50%"><div role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="border:1px solid #111; font-size:16px;text-align: center; padding: 10px 0px;margin:2px;" id="btnDateSet">Set</div></td>
-                <td><div role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="font-size:16px;text-align: center;border:1px solid #111; padding: 10px 0px;margin:2px;" id="btnDateClear">Cancel</div></td>
-              </tr>
-              </table></td>
-          </tr>
-        </table>
-      </div>
-      </div>
+            <td><input type="text" disabled="disabled" id="year" style="width:56px;padding:0px;height:38px;margin:2px;" /></td>--> 
+                    </tr>
+                    <tr>
+                      <td><div id="mmon" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px 2px 2px;margin: auto;">-</div></td>
+                      <td><div id="mday" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">-</div></td>
+                      <td><div id="myear" role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="text-align: center; width: 60px; padding: 10px 0px;margin:0px 2px;margin: auto;">-</div></td>
+                    </tr>
+                    <tr>
+                      <td colspan='3' ><table width="100%" cellspacing="3" >
+                          <tr>
+                            <td width="50%"><div role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="border:1px solid #111; font-size:16px;text-align: center; padding: 10px 0px;margin:2px;" id="btnDateSet">Set</div></td>
+                            <td><div role="main" class="ui-content ui-body-a" data-role="content" data-theme="a" style="font-size:16px;text-align: center;border:1px solid #111; padding: 10px 0px;margin:2px;" id="btnDateClear">Cancel</div></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
               <textarea id="txtRemarks" placeholder="Remarks" ></textarea>
               <!--name="datePicker"-->
               <button type="button" data-theme="a" id="btnRequestLoan" data-icon="check">Request</button>
@@ -626,7 +747,7 @@
       </div>
     </div>
     <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
@@ -731,7 +852,7 @@
       </div>
     </div>
     <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
@@ -829,7 +950,7 @@
       </div>
     </div>
     <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
@@ -921,7 +1042,7 @@
       </div>
     </div>
     <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>
@@ -966,8 +1087,8 @@
     <div class="margin-out">
       <div class="inner-page-wrapper">
         <div class="inner-page-head">&nbsp;&nbsp;&nbsp; Balance Sheet <a  data-rel="back" href="#">
-            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
-            </a> </div>
+          <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+          </a> </div>
         <div class="side-content-body">
           <div class="balance-profit">
             <div class="w50" >
@@ -1012,10 +1133,10 @@
   </div>
   <!-- /content -->
   <div class="menu-button logged-in-as">
-    <div style="float:left"> <span class="menuUserName">Administrator</span><br>
-      <span class="menuLastLogin">asdfsd</span> </div>
-    <div class="log-out" id="menuLogout">Logout</div>
-  </div>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
+    </div>
   <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <h4>More Options</h4>
     <h3>Page is under construction</h3>
@@ -1059,8 +1180,8 @@
     <div class="margin-out">
       <div class="inner-page-wrapper">
         <div class="inner-page-head">&nbsp;&nbsp;&nbsp; Profit &amp; Loss Account <a  data-rel="back" href="#">
-            <div class="small-btn btn-back" style="float:left">&nbsp;</div>
-            </a> </div>
+          <div class="small-btn btn-back" style="float:left">&nbsp;</div>
+          </a> </div>
         <div class="side-content-body">
           <div class="balance-profit">
             <div class="w50" >
@@ -1107,10 +1228,10 @@
   </div>
   <!-- /content -->
   <div class="menu-button logged-in-as">
-    <div style="float:left"> <span class="menuUserName">Administrator</span><br>
-      <span class="menuLastLogin">asdfsd</span> </div>
-    <div class="log-out" id="menuLogout">Logout</div>
-  </div>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
+        <span class="menuLastLogin">asdfsd</span> </div>
+      <div class="log-out" id="menuLogout">Logout</div>
+    </div>
   <div data-role="popup" id="popupMore" data-dismissible="false" data-theme="a" class="ui-corner-all" style="padding:10px 10px;width:260px"> <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <h4>More Options</h4>
     <h3>Page is under construction</h3>
@@ -1199,7 +1320,7 @@
       </div>
     </div>
     <div class="menu-button logged-in-as">
-      <div style="float:left"> <span class="menuUserName">Administrator</span><br>
+      <div style="float:left;width:90%;"><img  class="ico" src="images/ico-profile.png" width="30" height="30"><span class="menuUserName">Administrator</span><br>
         <span class="menuLastLogin">asdfsd</span> </div>
       <div class="log-out" id="menuLogout">Logout</div>
     </div>

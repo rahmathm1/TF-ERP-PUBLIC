@@ -49,6 +49,8 @@
 #divRetry {
 	text-align:center;
 	overflow:hidden;
+	display:none;
+	margin: 0 30px;
 }
 .no-network  {
 	padding:10px;
@@ -179,4 +181,88 @@ font-weight: bold;
 #txtDeductionStartDate {
 	color: #555;
 font-size: 13px;
+}
+/* profile page */
+#pageProfile #tabs_wrapper {
+	width: 100%;
+}
+#pageProfile #tabs_container {
+	margin-bottom: 10px;
+}
+#pageProfile #tabs {
+	list-style: none;
+	padding:0px;
+	margin:0;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+}
+#pageProfile #tabs li {
+	display: inline;
+}
+
+
+#pageProfile #tabs li a {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ededed;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ededed;
+	box-shadow:inset 0px 1px 0px 0px #ededed;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dbdbdb), color-stop(1, #ababab) );
+	background:-moz-linear-gradient( center top, #dbdbdb 5%, #ababab 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dbdbdb', endColorstr='#ababab');
+	background-color:#dbdbdb;	
+	border:1px solid #888;
+	display:inline-block;
+	color:#333;
+	font-family:arial;
+	font-size:12px;
+	font-weight:bold;
+	padding:6px 12px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+	float:left;
+}
+#pageProfile #tabs li a:active {
+	position:relative;
+	top:1px;
+}
+
+
+#pageProfile #tabs li a.first {
+	border-radius:5px 0 0 5px;
+}
+#pageProfile #tabs li a.last {
+	border-radius:0 5px 5px 0;
+}
+#pageProfile #tabs li.active a {
+	-moz-box-shadow:inset 0px 1px 0px 0px #a6c3f7;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #a6c3f7;
+	box-shadow:inset 0px 1px 0px 0px #a6c3f7;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #70a4db), color-stop(1, #43608f) );
+	background:-moz-linear-gradient( center top, #70a4db 5%, #43608f 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#70a4db', endColorstr='#43608f');
+	background-color:#70a4db;	
+	border:1px solid #12507a;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:12px;
+	font-weight:bold;
+	padding:6px 12px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #41445c;
+}
+#pageProfile #tabs li.active a:active {
+	position:relative;
+	top:1px;
+}
+
+#pageProfile #tabs_content_container {
+	margin-top: 10px;
+	float:left;
+	width:100%;
+	min-height:100px;
+}
+
+#pageProfile .tab_content {
+	display: none;
+	overflow:hidden;
 }
